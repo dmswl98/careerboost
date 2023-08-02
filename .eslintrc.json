@@ -13,9 +13,15 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "jsx-a11y", "simple-import-sort", "import"],
+  "plugins": [
+    "@typescript-eslint",
+    "jsx-a11y",
+    "prettier",
+    "simple-import-sort",
+    "import"
+  ],
   "rules": {
-    "prettier/prettier": "warn",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
     "import/no-unresolved": "off",
