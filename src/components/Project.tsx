@@ -2,6 +2,7 @@
 
 import { PlusCircle } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
+import ReactMarkdown from 'react-markdown';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -139,9 +140,15 @@ const Project = () => {
               </div>
             </TabsContent>
             <TabsContent value="preview">
-              <div className="py-10 text-center text-sm text-slate-500">
-                작성된 내용이 없어요.
-              </div>
+              {watchContent ? (
+                <ReactMarkdown className="markdown">
+                  {watchContent}
+                </ReactMarkdown>
+              ) : (
+                <div className="py-10 text-center text-sm text-slate-500">
+                  작성된 내용이 없어요.
+                </div>
+              )}
             </TabsContent>
           </Tabs>
         </div>

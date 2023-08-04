@@ -95,3 +95,34 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.markdown ul,
+.markdown ol {
+  margin-left: 1.4rem;
+}
+
+.markdown ul {
+  list-style: disc;
+}
+
+.markdown ol {
+  list-style: decimal;
+}
+
+.markdown a {
+  color: #3a86ff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.markdown a:hover {
+  color: #4361ee;
+}
+
+.markdown code {
+  @apply bg-slate-100;
+  font-family: var(--font-sourceCode);
+  font-size: 0.8rem;
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.4rem;
+}
