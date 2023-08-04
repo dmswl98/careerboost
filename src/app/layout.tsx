@@ -2,7 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
-import { pretendard } from '@/styles/font';
+import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {
   title: 'Resume with AI',
@@ -16,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>{children}</body>
+      <body className={`${pretendard.className} ${sourceCode.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
