@@ -5,20 +5,19 @@ import { cn } from '@/utils';
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   outline?: boolean;
-  fontSize?: number;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, outline = true, fontSize, ...props }, ref) => {
+  ({ className, type, outline = true, ...props }, ref) => {
+    const outlineStyles = outline
+      ? 'rounded-md border border-input'
+      : 'p-0 pl-1 text-lg font-bold text-slate-500 placeholder:text-lg placeholder:font-bold placeholder:text-slate-300';
+
     return (
       <input
         type={type}
         className={cn(
-          `flex h-10 w-full ${
-            outline ? 'rounded-md border border-input' : ''
-          } ${
-            fontSize ? `text-[${fontSize}px]` : 'text-md'
-          } bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
+          `flex h-10 w-full bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${outlineStyles}`,
           className
         )}
         ref={ref}
