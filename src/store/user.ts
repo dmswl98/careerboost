@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { PROJECT_DEFAULT } from './project';
+
 export interface UserInfo {
   name: string;
   career: string;
@@ -8,6 +10,7 @@ export interface UserInfo {
   email: string;
   blog: string;
   github: string;
+  projects: string[];
 }
 
 interface UserState extends UserInfo {
@@ -22,6 +25,8 @@ export interface ResumeActions {
   setEmail: (value: UserState['email']) => void;
   setBlog: (value: UserState['blog']) => void;
   setGithub: (value: UserState['github']) => void;
+  addProject: (value: string) => void;
+  removeProject: (value: string) => void;
 }
 
 export const resumeStore = create<UserState>((set) => ({
@@ -32,6 +37,7 @@ export const resumeStore = create<UserState>((set) => ({
   email: '',
   blog: '',
   github: '',
+  projects: [PROJECT_DEFAULT.id],
   actions: {
     setName: (value: UserState['name']) => set(() => ({ name: value })),
     setCareer: (value: UserState['career']) => set(() => ({ career: value })),
@@ -40,6 +46,14 @@ export const resumeStore = create<UserState>((set) => ({
     setEmail: (value: UserState['email']) => set(() => ({ email: value })),
     setBlog: (value: UserState['blog']) => set(() => ({ blog: value })),
     setGithub: (value: UserState['github']) => set(() => ({ github: value })),
+    addProject: (value: string) =>
+      set((prevState) => ({
+        projects: [...prevState.projects, value],
+      })),
+    removeProject: (value: string) =>
+      set((prevState) => ({
+        projects: prevState.projects.filter((project) => project !== value),
+      })),
   },
 }));
 
@@ -51,6 +65,7 @@ export const usePhone = () => resumeStore((state) => state.phone);
 export const useEmail = () => resumeStore((state) => state.email);
 export const useBlog = () => resumeStore((state) => state.blog);
 export const useGithub = () => resumeStore((state) => state.github);
+export const useProject = () => resumeStore((state) => state.projects);
 
 // Actions
 export const useResumeActions = () => resumeStore((state) => state.actions);
