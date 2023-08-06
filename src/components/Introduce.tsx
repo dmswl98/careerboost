@@ -22,7 +22,7 @@ import {
   useName,
   usePhone,
   useResumeActions,
-  UserInfo,
+  type UserInfo,
 } from '@/store/user';
 
 import { Button } from './ui/button';
