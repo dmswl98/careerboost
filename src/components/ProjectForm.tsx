@@ -52,6 +52,7 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             variant="ghost"
             size="icon"
             type="button"
+            className="mr-1"
             onClick={() => onClick(projectId)}
           >
             <TrashIcon className="m-3 text-slate-500" />
