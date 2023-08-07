@@ -1,8 +1,10 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { TrashIcon } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
+import { z } from 'zod';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { type Project, PROJECT_DEFAULT } from '@/store/project';
@@ -11,14 +13,27 @@ import IconChatGpt from './Icon/IconChatGpt';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-
 interface ProjectFromProps {
   projectId: string;
   onClick: (id: string) => void;
 }
 
+const schema = z.object({
+  title: z.string(),
+  startDate: z.string(),
+  endDate: z.string(),
+  content: z.string().min(50, { message: '50자 이상 작성해주세요.' }),
+  url: z.string().startsWith('https://'),
+});
+
 const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
-  const { watch, control, handleSubmit } = useForm<Project>({
+  const {
+    watch,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Project>({
+    resolver: zodResolver(schema),
     defaultValues: {
       ...PROJECT_DEFAULT,
       id: projectId,
@@ -60,7 +75,7 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
           <Button
             className="bg-[#75ac9d99] hover:bg-[#75ac9d]"
             size="icon"
-            type="button"
+            type="submit"
           >
             <IconChatGpt />
           </Button>
@@ -121,28 +136,37 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
               control={control}
               name="content"
               render={({ field: { ref, onChange, value } }) => (
-                <Textarea
-                  id="content"
-                  className="col-span-4"
-                  ref={ref}
-                  placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
-                  onChange={onChange}
-                  value={value || ''}
-                />
+                <div className="relative">
+                  <span className="absolute top-[-1.2rem]  mb-[-0.25rem] text-xs text-slate-300">
+                    마크다운 문법을 지원합니다.
+                  </span>
+                  <Textarea
+                    id="content"
+                    className={`col-span-4 ${
+                      errors.content?.message ? 'border-red-300' : ''
+                    }`}
+                    ref={ref}
+                    placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
+                    onChange={onChange}
+                    value={value || ''}
+                  />
+                </div>
               )}
             />
             <div className="mt-1 flex justify-between">
-              <span className="text-xs text-slate-300">
-                마크다운 문법을 지원합니다.
-              </span>
-              <span className="text-xs text-slate-300">
+              {errors.content?.message && (
+                <span className="text-xs text-red-300">
+                  {errors.content.message}
+                </span>
+              )}
+              <span className="ml-auto text-xs text-slate-300">
                 글자수 {watchContent.length || 0}
               </span>
             </div>
           </TabsContent>
           <TabsContent value="preview">
             {watchContent ? (
-              <ReactMarkdown className="markdown min-h-[100px]">
+              <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem]">
                 {watchContent}
               </ReactMarkdown>
             ) : (
