@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 import { pretendard, sourceCode } from '@/styles/font';
+import ReactQueryProvider from '@/components/Providers/ReactQueryProvider';
 
 export const metadata: Metadata = {
   title: 'Resume with AI',
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className} ${sourceCode.variable}`}>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
