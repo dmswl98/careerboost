@@ -11,6 +11,7 @@ const ReactQueryProvider = ({ children }: PropsWithChildren) => {
         defaultOptions: {
           queries: {
             retry: 0,
+            suspense: true,
             refetchOnMount: false,
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
@@ -18,6 +19,7 @@ const ReactQueryProvider = ({ children }: PropsWithChildren) => {
         },
       })
   );
+
   return (
     <QueryClientProvider client={queryClient}>
       {children}
