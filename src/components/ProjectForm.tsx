@@ -1,24 +1,34 @@
 'use client';
 
 import { TrashIcon } from 'lucide-react';
+import { Suspense } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { type Project, PROJECT_DEFAULT } from '@/store/project';
+import { useProject, useResumeActions } from '@/store/user';
 
+import Fallback from './Fallback';
 import IconChatGpt from './Icon/IconChatGpt';
+import Suggestion from './Suggestion';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-
 interface ProjectFromProps {
   projectId: string;
   onClick: (id: string) => void;
 }
 
 const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
-  const { watch, control, handleSubmit } = useForm<Project>({
+  const project = useProject(projectId);
+  const { setIsSuggested } = useResumeActions();
+  const {
+    watch,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Project>({
     defaultValues: {
       ...PROJECT_DEFAULT,
       id: projectId,
@@ -27,7 +37,13 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
 
   const watchContent = watch('content');
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: Project) => {
+    if (!data.content) {
+      return;
+    }
+
+    setIsSuggested(projectId);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +76,8 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
           <Button
             className="bg-[#75ac9d99] hover:bg-[#75ac9d]"
             size="icon"
-            type="button"
+            type="submit"
+            aria-controls="radix-:Rj9mcq:-content-edit"
           >
             <IconChatGpt />
           </Button>
@@ -121,28 +138,37 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
               control={control}
               name="content"
               render={({ field: { ref, onChange, value } }) => (
-                <Textarea
-                  id="content"
-                  className="col-span-4"
-                  ref={ref}
-                  placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
-                  onChange={onChange}
-                  value={value || ''}
-                />
+                <div className="relative">
+                  <span className="absolute top-[-1.2rem]  mb-[-0.25rem] text-xs text-slate-300">
+                    마크다운 문법을 지원합니다.
+                  </span>
+                  <Textarea
+                    id="content"
+                    className={`col-span-4 ${
+                      errors.content?.message ? 'border-red-300' : ''
+                    }`}
+                    ref={ref}
+                    placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
+                    onChange={onChange}
+                    value={value || ''}
+                  />
+                </div>
               )}
             />
             <div className="mt-1 flex justify-between">
-              <span className="text-xs text-slate-300">
-                마크다운 문법을 지원합니다.
-              </span>
-              <span className="text-xs text-slate-300">
+              {errors.content?.message && (
+                <span className="text-xs text-red-300">
+                  {errors.content.message}
+                </span>
+              )}
+              <span className="ml-auto text-xs text-slate-300">
                 글자수 {watchContent.length || 0}
               </span>
             </div>
           </TabsContent>
           <TabsContent value="preview">
             {watchContent ? (
-              <ReactMarkdown className="markdown min-h-[100px]">
+              <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem]">
                 {watchContent}
               </ReactMarkdown>
             ) : (
@@ -152,6 +178,13 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             )}
           </TabsContent>
         </Tabs>
+        {watchContent && project?.isSuggested && (
+          <div className="mt-6 rounded-md bg-[#75ac9d99] px-3 py-2">
+            <Suspense fallback={<Fallback />}>
+              <Suggestion content={watchContent} />
+            </Suspense>
+          </div>
+        )}
       </div>
     </form>
   );

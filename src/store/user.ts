@@ -1,6 +1,15 @@
+import { v4 } from 'uuid';
 import { create } from 'zustand';
 
-import { PROJECT_DEFAULT } from './project';
+const DEFAULT_PROJECT = {
+  id: v4(),
+  isSuggested: false,
+};
+
+interface Project {
+  id: string;
+  isSuggested: boolean;
+}
 
 export interface UserInfo {
   name: string;
@@ -10,7 +19,7 @@ export interface UserInfo {
   email: string;
   blog: string;
   github: string;
-  projects: string[];
+  projects: Project[];
 }
 
 interface UserState extends UserInfo {
@@ -27,6 +36,7 @@ export interface ResumeActions {
   setGithub: (value: UserState['github']) => void;
   addProject: (value: string) => void;
   removeProject: (value: string) => void;
+  setIsSuggested: (value: string) => void;
 }
 
 export const resumeStore = create<UserState>((set) => ({
@@ -37,7 +47,7 @@ export const resumeStore = create<UserState>((set) => ({
   email: '',
   blog: '',
   github: '',
-  projects: [PROJECT_DEFAULT.id],
+  projects: [DEFAULT_PROJECT],
   actions: {
     setName: (value: UserState['name']) => set(() => ({ name: value })),
     setCareer: (value: UserState['career']) => set(() => ({ career: value })),
@@ -48,11 +58,25 @@ export const resumeStore = create<UserState>((set) => ({
     setGithub: (value: UserState['github']) => set(() => ({ github: value })),
     addProject: (value: string) =>
       set((prevState) => ({
-        projects: [...prevState.projects, value],
+        projects: [
+          ...prevState.projects,
+          {
+            id: value,
+            isSuggested: false,
+            suggestion: '',
+          },
+        ],
       })),
     removeProject: (value: string) =>
       set((prevState) => ({
-        projects: prevState.projects.filter((project) => project !== value),
+        projects: prevState.projects.filter((project) => project.id !== value),
+      })),
+    setIsSuggested: (value: string) =>
+      set((prevState) => ({
+        projects: prevState.projects.map((project) => ({
+          ...project,
+          isSuggested: project.id === value ? true : project.isSuggested,
+        })),
       })),
   },
 }));
@@ -65,7 +89,9 @@ export const usePhone = () => resumeStore((state) => state.phone);
 export const useEmail = () => resumeStore((state) => state.email);
 export const useBlog = () => resumeStore((state) => state.blog);
 export const useGithub = () => resumeStore((state) => state.github);
-export const useProject = () => resumeStore((state) => state.projects);
+export const useProjects = () => resumeStore((state) => state.projects);
+export const useProject = (id: string) =>
+  resumeStore((state) => state.projects.find((proejct) => proejct.id === id));
 
 // Actions
 export const useResumeActions = () => resumeStore((state) => state.actions);
