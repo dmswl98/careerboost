@@ -1,15 +1,17 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { TrashIcon } from 'lucide-react';
+import { Suspense } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
-import { z } from 'zod';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { type Project, PROJECT_DEFAULT } from '@/store/project';
+import { useProject, useResumeActions } from '@/store/user';
 
+import Fallback from './Fallback';
 import IconChatGpt from './Icon/IconChatGpt';
+import Suggestion from './Suggestion';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -18,22 +20,15 @@ interface ProjectFromProps {
   onClick: (id: string) => void;
 }
 
-const schema = z.object({
-  title: z.string(),
-  startDate: z.string(),
-  endDate: z.string(),
-  content: z.string().min(50, { message: '50자 이상 작성해주세요.' }),
-  url: z.string().startsWith('https://'),
-});
-
 const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
+  const project = useProject(projectId);
+  const { setIsSuggested } = useResumeActions();
   const {
     watch,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<Project>({
-    resolver: zodResolver(schema),
     defaultValues: {
       ...PROJECT_DEFAULT,
       id: projectId,
@@ -42,7 +37,13 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
 
   const watchContent = watch('content');
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: Project) => {
+    if (!data.content) {
+      return;
+    }
+
+    setIsSuggested(projectId);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,6 +77,7 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             className="bg-[#75ac9d99] hover:bg-[#75ac9d]"
             size="icon"
             type="submit"
+            aria-controls="radix-:Rj9mcq:-content-edit"
           >
             <IconChatGpt />
           </Button>
@@ -176,6 +178,13 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             )}
           </TabsContent>
         </Tabs>
+        {watchContent && project?.isSuggested && (
+          <div className="mt-6 rounded-md bg-[#75ac9d99] px-3 py-2">
+            <Suspense fallback={<Fallback />}>
+              <Suggestion content={watchContent} />
+            </Suspense>
+          </div>
+        )}
       </div>
     </form>
   );
