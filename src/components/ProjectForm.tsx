@@ -74,10 +74,12 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             <TrashIcon className="m-3 text-slate-500" />
           </Button>
           <Button
-            className="bg-[#75ac9d99] hover:bg-[#75ac9d]"
+            className="bg-[#75ac9d99] hover:bg-[#75ac9d] disabled:bg-slate-300"
             size="icon"
             type="submit"
+            title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
             aria-controls="radix-:Rj9mcq:-content-edit"
+            disabled={project?.isSuggested}
           >
             <IconChatGpt />
           </Button>
