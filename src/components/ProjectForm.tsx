@@ -1,12 +1,14 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { TrashIcon } from 'lucide-react';
 import { Suspense } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
+import { z } from 'zod';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { type Project, PROJECT_DEFAULT } from '@/store/project';
+import { PROJECT_DEFAULT } from '@/store/project';
 import { useProject, useResumeActions } from '@/store/user';
 
 import Fallback from './Fallback';
@@ -20,6 +22,17 @@ interface ProjectFromProps {
   onClick: (id: string) => void;
 }
 
+const projectFormSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  startDate: z.string(),
+  endDate: z.string(),
+  content: z.string().min(50, { message: '50자 이상 작성해주세요.' }),
+  url: z.string(),
+});
+
+type ProjectFormSchema = z.infer<typeof projectFormSchema>;
+
 const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
   const project = useProject(projectId);
   const { setIsSuggested } = useResumeActions();
@@ -28,7 +41,9 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Project>({
+  } = useForm<ProjectFormSchema>({
+    mode: 'onSubmit',
+    resolver: zodResolver(projectFormSchema),
     defaultValues: {
       ...PROJECT_DEFAULT,
       id: projectId,
@@ -37,29 +52,23 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
 
   const watchContent = watch('content');
 
-  const onSubmit = async (data: Project) => {
-    if (!data.content) {
-      return;
-    }
-
+  const onSubmit: SubmitHandler<ProjectFormSchema> = async () => {
     setIsSuggested(projectId);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
       <div className="border border-x-0 py-6">
         <div className="mb-3 flex justify-between">
           <Controller
             control={control}
             name="title"
-            render={({ field: { ref, onChange, value } }) => (
+            render={({ field }) => (
               <Input
+                {...field}
                 id="title"
                 className="col-span-4"
-                ref={ref}
                 placeholder="프로젝트명"
-                onChange={onChange}
-                value={value || ''}
                 outline={false}
               />
             )}
@@ -74,10 +83,11 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             <TrashIcon className="m-3 text-slate-500" />
           </Button>
           <Button
-            className="bg-[#75ac9d99] hover:bg-[#75ac9d]"
+            className="bg-[#75ac9d99] hover:bg-[#75ac9d] disabled:bg-slate-300"
             size="icon"
             type="submit"
-            aria-controls="radix-:Rj9mcq:-content-edit"
+            title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
+            disabled={project?.isSuggested}
           >
             <IconChatGpt />
           </Button>
@@ -86,28 +96,24 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
           <Controller
             control={control}
             name="startDate"
-            render={({ field: { ref, onChange, value } }) => (
+            render={({ field }) => (
               <Input
+                {...field}
                 id="startDate"
                 className="col-span-4"
-                ref={ref}
                 placeholder="YYYY.MM"
-                onChange={onChange}
-                value={value || ''}
               />
             )}
           />
           <Controller
             control={control}
             name="endDate"
-            render={({ field: { ref, onChange, value } }) => (
+            render={({ field }) => (
               <Input
+                {...field}
                 id="endDate"
                 className="col-span-4"
-                ref={ref}
                 placeholder="YYYY.MM"
-                onChange={onChange}
-                value={value || ''}
               />
             )}
           />
@@ -116,14 +122,12 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
           <Controller
             control={control}
             name="url"
-            render={({ field: { ref, onChange, value } }) => (
+            render={({ field }) => (
               <Input
+                {...field}
                 id="url"
                 className="col-span-4"
-                ref={ref}
                 placeholder="프로젝트 주소"
-                onChange={onChange}
-                value={value || ''}
               />
             )}
           />
@@ -137,20 +141,18 @@ const ProjectForm = ({ projectId, onClick }: ProjectFromProps) => {
             <Controller
               control={control}
               name="content"
-              render={({ field: { ref, onChange, value } }) => (
+              render={({ field }) => (
                 <div className="relative">
-                  <span className="absolute top-[-1.2rem]  mb-[-0.25rem] text-xs text-slate-300">
+                  <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-slate-300">
                     마크다운 문법을 지원합니다.
                   </span>
                   <Textarea
+                    {...field}
                     id="content"
                     className={`col-span-4 ${
                       errors.content?.message ? 'border-red-300' : ''
                     }`}
-                    ref={ref}
                     placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
-                    onChange={onChange}
-                    value={value || ''}
                   />
                 </div>
               )}
