@@ -2,8 +2,8 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
-import { pretendard, sourceCode } from '@/styles/font';
 import ReactQueryProvider from '@/components/Providers/ReactQueryProvider';
+import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {
   title: 'Resume with AI',
