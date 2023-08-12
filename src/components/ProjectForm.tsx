@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { z } from 'zod';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
 import { useResumeActions } from '@/store/resume';
 
 import IconChatGpt from './Icon/IconChatGpt';
@@ -80,7 +81,7 @@ const ProjectForm = ({
             <Input
               id="title"
               className="col-span-4"
-              placeholder="프로젝트명"
+              placeholder={PROJECT_FORM_PLACEHOLDER.title}
               outline={false}
               {...field}
             />
@@ -113,7 +114,7 @@ const ProjectForm = ({
             <Input
               id="startDate"
               className="col-span-4"
-              placeholder="YYYY.MM"
+              placeholder={PROJECT_FORM_PLACEHOLDER.date}
               {...field}
             />
           )}
@@ -125,7 +126,7 @@ const ProjectForm = ({
             <Input
               id="endDate"
               className="col-span-4"
-              placeholder="YYYY.MM"
+              placeholder={PROJECT_FORM_PLACEHOLDER.date}
               {...field}
             />
           )}
@@ -139,7 +140,7 @@ const ProjectForm = ({
             <Input
               id="url"
               className="col-span-4"
-              placeholder="프로젝트 주소"
+              placeholder={PROJECT_FORM_PLACEHOLDER.url}
               {...field}
             />
           )}
@@ -164,7 +165,7 @@ const ProjectForm = ({
                   className={`col-span-4 ${
                     errors.content?.message ? 'border-red-300' : ''
                   }`}
-                  placeholder="프로젝트 내용과 본인의 역할, 기여도를 작성해보세요."
+                  placeholder={PROJECT_FORM_PLACEHOLDER.content}
                   {...field}
                 />
               </div>
