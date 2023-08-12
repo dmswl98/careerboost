@@ -3,12 +3,12 @@ import { create } from 'zustand';
 
 const DEFAULT_PROJECT = {
   id: v4(),
-  isSuggested: false,
+  content: '',
 };
 
-interface Project {
+export interface Project {
   id: string;
-  isSuggested: boolean;
+  content: string;
 }
 
 export interface UserInfo {
@@ -36,7 +36,7 @@ export interface ResumeActions {
   setGithub: (value: UserState['github']) => void;
   addProject: (value: string) => void;
   removeProject: (value: string) => void;
-  setIsSuggested: (value: string) => void;
+  setProjectContent: (value: { id: string; content: string }) => void;
 }
 
 export const resumeStore = create<UserState>((set) => ({
@@ -62,8 +62,7 @@ export const resumeStore = create<UserState>((set) => ({
           ...prevState.projects,
           {
             id: value,
-            isSuggested: false,
-            suggestion: '',
+            content: '',
           },
         ],
       })),
@@ -71,11 +70,12 @@ export const resumeStore = create<UserState>((set) => ({
       set((prevState) => ({
         projects: prevState.projects.filter((project) => project.id !== value),
       })),
-    setIsSuggested: (value: string) =>
+    setProjectContent: (value: { id: string; content: string }) =>
       set((prevState) => ({
         projects: prevState.projects.map((project) => ({
           ...project,
-          isSuggested: project.id === value ? true : project.isSuggested,
+          isSuggested:
+            project.id === value.id ? value.content : project.content,
         })),
       })),
   },

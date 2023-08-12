@@ -5,16 +5,12 @@ import { v4 } from 'uuid';
 
 import { useProjects, useResumeActions } from '@/store/user';
 
-import ProjectForm from './ProjectForm';
+import ProjectItem from './ProjectItem';
 import { Button } from './ui/button';
 
 const Project = () => {
   const projects = useProjects();
-  const { addProject, removeProject } = useResumeActions();
-
-  const handleRemoveProject = (id: string) => {
-    removeProject(id);
-  };
+  const { addProject } = useResumeActions();
 
   return (
     <div className="m-8">
@@ -30,11 +26,7 @@ const Project = () => {
         </Button>
       </div>
       {projects.map((project) => (
-        <ProjectForm
-          key={project.id}
-          projectId={project.id}
-          onClick={handleRemoveProject}
-        />
+        <ProjectItem key={project.id} project={project} />
       ))}
     </div>
   );
