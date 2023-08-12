@@ -1,17 +1,11 @@
-import { v4 } from 'uuid';
 import { create } from 'zustand';
-
-const DEFAULT_PROJECT = {
-  id: v4(),
-  content: '',
-};
 
 export interface Project {
   id: string;
   content: string;
 }
 
-export interface UserInfo {
+export interface Resume {
   name: string;
   career: string;
   brief: string;
@@ -22,24 +16,24 @@ export interface UserInfo {
   projects: Project[];
 }
 
-interface UserState extends UserInfo {
+interface ResumeState extends Resume {
   actions: ResumeActions;
 }
 
 export interface ResumeActions {
-  setName: (value: UserState['name']) => void;
-  setCareer: (value: UserState['career']) => void;
-  setBrief: (value: UserState['brief']) => void;
-  setPhone: (value: UserState['phone']) => void;
-  setEmail: (value: UserState['email']) => void;
-  setBlog: (value: UserState['blog']) => void;
-  setGithub: (value: UserState['github']) => void;
+  setName: (value: ResumeState['name']) => void;
+  setCareer: (value: ResumeState['career']) => void;
+  setBrief: (value: ResumeState['brief']) => void;
+  setPhone: (value: ResumeState['phone']) => void;
+  setEmail: (value: ResumeState['email']) => void;
+  setBlog: (value: ResumeState['blog']) => void;
+  setGithub: (value: ResumeState['github']) => void;
   addProject: (value: string) => void;
   removeProject: (value: string) => void;
   setProjectContent: (value: { id: string; content: string }) => void;
 }
 
-export const resumeStore = create<UserState>((set) => ({
+export const resumeStore = create<ResumeState>((set) => ({
   name: '',
   career: '',
   brief: '',
@@ -47,15 +41,15 @@ export const resumeStore = create<UserState>((set) => ({
   email: '',
   blog: '',
   github: '',
-  projects: [DEFAULT_PROJECT],
+  projects: [{ id: '', content: '' }],
   actions: {
-    setName: (value: UserState['name']) => set(() => ({ name: value })),
-    setCareer: (value: UserState['career']) => set(() => ({ career: value })),
-    setBrief: (value: UserState['brief']) => set(() => ({ brief: value })),
-    setPhone: (value: UserState['phone']) => set(() => ({ phone: value })),
-    setEmail: (value: UserState['email']) => set(() => ({ email: value })),
-    setBlog: (value: UserState['blog']) => set(() => ({ blog: value })),
-    setGithub: (value: UserState['github']) => set(() => ({ github: value })),
+    setName: (value: ResumeState['name']) => set(() => ({ name: value })),
+    setCareer: (value: ResumeState['career']) => set(() => ({ career: value })),
+    setBrief: (value: ResumeState['brief']) => set(() => ({ brief: value })),
+    setPhone: (value: ResumeState['phone']) => set(() => ({ phone: value })),
+    setEmail: (value: ResumeState['email']) => set(() => ({ email: value })),
+    setBlog: (value: ResumeState['blog']) => set(() => ({ blog: value })),
+    setGithub: (value: ResumeState['github']) => set(() => ({ github: value })),
     addProject: (value: string) =>
       set((prevState) => ({
         projects: [

@@ -3,7 +3,7 @@
 import { PlusCircle } from 'lucide-react';
 import { v4 } from 'uuid';
 
-import { useProjects, useResumeActions } from '@/store/user';
+import { useProjects, useResumeActions } from '@/store/resume';
 
 import ProjectItem from './ProjectItem';
 import { Button } from './ui/button';

@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 
-import { Project } from '@/store/user';
+import type { Project } from '@/store/resume';
 
 import Fallback from './Fallback';
 import ProjectForm from './ProjectForm';

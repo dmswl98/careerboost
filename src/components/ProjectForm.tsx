@@ -7,13 +7,21 @@ import ReactMarkdown from 'react-markdown';
 import { z } from 'zod';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PROJECT_DEFAULT } from '@/store/project';
-import { useResumeActions } from '@/store/user';
+import { useResumeActions } from '@/store/resume';
 
 import IconChatGpt from './Icon/IconChatGpt';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+
+const DEFAULT_PROJECT = {
+  id: '',
+  title: '',
+  startDate: '',
+  endDate: '',
+  content: '',
+  url: '',
+};
 
 const projectFormSchema = z.object({
   title: z.string(),
@@ -47,7 +55,7 @@ const ProjectForm = ({
     mode: 'onSubmit',
     resolver: zodResolver(projectFormSchema),
     defaultValues: {
-      ...PROJECT_DEFAULT,
+      ...DEFAULT_PROJECT,
     },
   });
 
