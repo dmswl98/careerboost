@@ -1,6 +1,5 @@
 'use client';
 
-import { Label } from '@radix-ui/react-label';
 import {
   Github,
   Link as LinkIcon,
@@ -14,6 +13,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import { USER_INFO } from '@/constants/user';
 import {
+  type Resume,
   useBlog,
   useBrief,
   useCareer,
@@ -22,8 +22,7 @@ import {
   useName,
   usePhone,
   useResumeActions,
-  type UserInfo,
-} from '@/store/user';
+} from '@/store/resume';
 
 import { Button } from './ui/button';
 import {
@@ -35,6 +34,7 @@ import {
   DialogTrigger,
 } from './ui/dialog';
 import { Input } from './ui/input';
+import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 
 const Introduce = () => {
@@ -68,7 +68,7 @@ const Introduce = () => {
       github: '',
     },
   });
-  const { control, handleSubmit } = useForm<UserInfo>();
+  const { control, handleSubmit } = useForm<Resume>();
 
   const submit = ({
     name,
@@ -78,7 +78,7 @@ const Introduce = () => {
     email,
     blog,
     github,
-  }: UserInfo) => {
+  }: Resume) => {
     setName(name);
     setCareer(career);
     setBrief(brief);
@@ -181,7 +181,7 @@ const Introduce = () => {
                 control={control}
                 name="brief"
                 render={({ field: { ref, onChange, value } }) => (
-                  <div className="grid grid-cols-5 gap-4">
+                  <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="brief" className="text-left">
                       소개글
                     </Label>
@@ -200,7 +200,7 @@ const Introduce = () => {
                 control={control}
                 name="phone"
                 render={({ field: { ref, onChange, value } }) => (
-                  <div className="grid grid-cols-5 gap-4">
+                  <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="phone" className="text-left">
                       전화번호
                     </Label>
@@ -219,7 +219,7 @@ const Introduce = () => {
                 control={control}
                 name="email"
                 render={({ field: { ref, onChange, value } }) => (
-                  <div className="grid grid-cols-5 gap-4">
+                  <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="email" className="text-left">
                       이메일
                     </Label>
@@ -239,7 +239,7 @@ const Introduce = () => {
                 control={control}
                 name="blog"
                 render={({ field: { ref, onChange, value } }) => (
-                  <div className="grid grid-cols-5 gap-4">
+                  <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="blog" className="text-left">
                       블로그
                     </Label>
@@ -258,7 +258,7 @@ const Introduce = () => {
                 control={control}
                 name="github"
                 render={({ field: { ref, onChange, value } }) => (
-                  <div className="grid grid-cols-5 gap-4">
+                  <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="github" className="text-left">
                       깃허브
                     </Label>
