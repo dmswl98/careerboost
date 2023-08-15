@@ -4,19 +4,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusCircle, TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import ReactMarkdown from 'react-markdown';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
 
+import ContentInput from './ContentInput';
 import IconChatGpt from './Icon/IconChatGpt';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
 
-const projectFormSchema = z.object({
+export const projectFormSchema = z.object({
   projects: z.array(
     z.object({
       id: z.string(),
@@ -28,6 +26,8 @@ const projectFormSchema = z.object({
     })
   ),
 });
+
+export type ProjectsFormSchema = z.infer<typeof projectFormSchema>;
 
 export type ProjectFormSchema = z.infer<
   typeof projectFormSchema
@@ -49,7 +49,6 @@ const ProjectForm = () => {
     useState<ProjectFormSchema[]>(DEFAULT_PROJECTS);
 
   const {
-    watch,
     control,
     handleSubmit,
     formState: { errors },
@@ -82,6 +81,8 @@ const ProjectForm = () => {
   const onSubmit = (data: { projects: ProjectFormSchema[] }) => {
     setProjects(data.projects);
   };
+
+  console.log('render');
 
   return (
     <div>
@@ -176,57 +177,7 @@ const ProjectForm = () => {
                   )}
                 />
               </div>
-              <Tabs defaultValue="edit" className="w-full">
-                <TabsList className="ml-auto grid w-[150px] grid-cols-2">
-                  <TabsTrigger value="edit">수정</TabsTrigger>
-                  <TabsTrigger value="preview">미리보기</TabsTrigger>
-                </TabsList>
-                <TabsContent value="edit">
-                  <Controller
-                    control={control}
-                    name={`projects.${index}.content`}
-                    render={({ field }) => (
-                      <div className="relative">
-                        <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-slate-300">
-                          마크다운 문법을 지원합니다.
-                        </span>
-                        <Textarea
-                          id="content"
-                          className={`col-span-4 ${
-                            errors.projects &&
-                            errors.projects[index]?.content?.message
-                              ? 'border-red-300'
-                              : ''
-                          }`}
-                          placeholder={PROJECT_FORM_PLACEHOLDER.content}
-                          {...field}
-                        />
-                      </div>
-                    )}
-                  />
-                  <div className="mt-1 flex justify-between">
-                    {errors.projects && errors.projects[index]?.content && (
-                      <span className="text-xs text-red-300">
-                        {errors.projects[index]?.content?.message}
-                      </span>
-                    )}
-                    <span className="ml-auto text-xs text-slate-300">
-                      글자수 {watch(`projects.${index}.content`).length}
-                    </span>
-                  </div>
-                </TabsContent>
-                <TabsContent value="preview">
-                  {watch(`projects.${index}.content`) ? (
-                    <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem]">
-                      {watch(`projects.${index}.content`)}
-                    </ReactMarkdown>
-                  ) : (
-                    <div className="py-10 text-center text-sm text-slate-500">
-                      작성된 내용이 없어요.
-                    </div>
-                  )}
-                </TabsContent>
-              </Tabs>
+              <ContentInput control={control} index={index} errors={errors} />
             </li>
           ))}
         </ul>
