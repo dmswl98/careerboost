@@ -1,4 +1,4 @@
-export const PROJECT_FORM_PLACEHOLDER = {
+export const PROJECT_PLACEHOLDER = {
   title: '프로젝트명',
   date: 'YYYY.MM',
   url: '프로젝트 주소',

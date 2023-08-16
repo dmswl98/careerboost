@@ -7,7 +7,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
+import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
 
 import ContentInput from './ContentInput';
 import Fallback from './Fallback';
@@ -127,7 +127,7 @@ const ProjectForm = () => {
                     <Input
                       id="title"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.title}
+                      placeholder={PROJECT_PLACEHOLDER.title}
                       outline={false}
                       {...field}
                     />
@@ -161,7 +161,7 @@ const ProjectForm = () => {
                     <Input
                       id="startDate"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.date}
+                      placeholder={PROJECT_PLACEHOLDER.date}
                       {...field}
                     />
                   )}
@@ -173,7 +173,7 @@ const ProjectForm = () => {
                     <Input
                       id="endDate"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.date}
+                      placeholder={PROJECT_PLACEHOLDER.date}
                       {...field}
                     />
                   )}
@@ -187,7 +187,7 @@ const ProjectForm = () => {
                     <Input
                       id="url"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.url}
+                      placeholder={PROJECT_PLACEHOLDER.url}
                       {...field}
                     />
                   )}

@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
+import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
 
 import { ProjectsFormSchema } from './ProjectForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
@@ -51,7 +51,7 @@ const ContentInput = ({
                     ? 'border-red-300'
                     : ''
                 }`}
-                placeholder={PROJECT_FORM_PLACEHOLDER.content}
+                placeholder={PROJECT_PLACEHOLDER.content}
                 {...field}
               />
             </div>
