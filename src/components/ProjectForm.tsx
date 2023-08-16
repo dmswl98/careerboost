@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusCircle, TrashIcon } from 'lucide-react';
+import { TrashIcon } from 'lucide-react';
 import { Suspense, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
@@ -11,6 +11,7 @@ import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
 
 import ContentInput from './ContentInput';
 import Fallback from './Fallback';
+import FormCard from './Form/FormCard';
 import IconChatGpt from './Icon/IconChatGpt';
 import Suggestion from './Suggestion';
 import { Button } from './ui/button';
@@ -113,21 +114,7 @@ const ProjectForm = () => {
   };
 
   return (
-    <div className="m-8">
-      <div className="mb-4 flex items-center justify-between text-slate-500">
-        <h1 className="text-xl font-bold">프로젝트</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {
-            handleProjectFormAppend();
-            console.log(projects);
-          }}
-          aria-controls="radix-:R1mcq:"
-        >
-          <PlusCircle className="m-3" />
-        </Button>
-      </div>
+    <FormCard title="프로젝트" onAppendForm={handleProjectFormAppend}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ul>
           {fields.map((item, index) => (
@@ -221,7 +208,7 @@ const ProjectForm = () => {
           ))}
         </ul>
       </form>
-    </div>
+    </FormCard>
   );
 };
 
