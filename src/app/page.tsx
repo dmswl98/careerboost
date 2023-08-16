@@ -1,7 +1,8 @@
 'use client';
 
+import ActivityForm from '@/components/ActivityForm';
 import Introduce from '@/components/Introduce';
-import Footer from '@/components/layout/Footer';
+import Footer from '@/components/Layout/Footer';
 import ProjectForm from '@/components/ProjectForm';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 
@@ -12,6 +13,7 @@ export default function Home() {
     <main>
       <Introduce />
       <ProjectForm />
+      <ActivityForm />
       <Footer />
     </main>
   );

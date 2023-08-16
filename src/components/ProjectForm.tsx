@@ -1,16 +1,17 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusCircle, TrashIcon } from 'lucide-react';
+import { TrashIcon } from 'lucide-react';
 import { Suspense, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
+import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
 
 import ContentInput from './ContentInput';
 import Fallback from './Fallback';
+import FormCard from './Form/FormCard';
 import IconChatGpt from './Icon/IconChatGpt';
 import Suggestion from './Suggestion';
 import { Button } from './ui/button';
@@ -113,21 +114,7 @@ const ProjectForm = () => {
   };
 
   return (
-    <div className="m-8">
-      <div className="mb-4 flex items-center justify-between text-slate-500">
-        <h1 className="text-xl font-bold">프로젝트</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {
-            handleProjectFormAppend();
-            console.log(projects);
-          }}
-          aria-controls="radix-:R1mcq:"
-        >
-          <PlusCircle className="m-3" />
-        </Button>
-      </div>
+    <FormCard title="프로젝트" onAppendForm={handleProjectFormAppend}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ul>
           {fields.map((item, index) => (
@@ -140,7 +127,7 @@ const ProjectForm = () => {
                     <Input
                       id="title"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.title}
+                      placeholder={PROJECT_PLACEHOLDER.title}
                       outline={false}
                       {...field}
                     />
@@ -174,7 +161,7 @@ const ProjectForm = () => {
                     <Input
                       id="startDate"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.date}
+                      placeholder={PROJECT_PLACEHOLDER.date}
                       {...field}
                     />
                   )}
@@ -186,7 +173,7 @@ const ProjectForm = () => {
                     <Input
                       id="endDate"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.date}
+                      placeholder={PROJECT_PLACEHOLDER.date}
                       {...field}
                     />
                   )}
@@ -200,13 +187,19 @@ const ProjectForm = () => {
                     <Input
                       id="url"
                       className="col-span-4"
-                      placeholder={PROJECT_FORM_PLACEHOLDER.url}
+                      placeholder={PROJECT_PLACEHOLDER.url}
                       {...field}
                     />
                   )}
                 />
               </div>
-              <ContentInput control={control} index={index} errors={errors} />
+              <ContentInput<ProjectsFormSchema>
+                control={control}
+                formName="projects"
+                index={index}
+                placeholder={PROJECT_PLACEHOLDER.content}
+                error={errors.projects?.[index]?.content?.message}
+              />
               {isSuggest[index] && (
                 <div className="mt-6 rounded-md bg-[#75ac9d80] px-3 py-2">
                   <Suspense fallback={<Fallback />}>
@@ -221,7 +214,7 @@ const ProjectForm = () => {
           ))}
         </ul>
       </form>
-    </div>
+    </FormCard>
   );
 };
 
