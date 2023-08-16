@@ -1,31 +1,32 @@
 import {
   type Control,
   Controller,
-  type FieldErrors,
-  FieldValues,
+  type FieldPath,
+  type FieldValues,
   useWatch,
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
-
-import { ProjectsFormSchema } from './ProjectForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Textarea } from './ui/textarea';
 
 interface ContentInputProps<T extends FieldValues> {
   control: Control<T>;
+  formName: FieldPath<T>;
   index: number;
-  errors: FieldErrors<T>;
+  placeholder: string;
+  error?: string;
 }
 
-const ContentInput = ({
+const ContentInput = <T extends FieldValues>({
   control,
+  formName,
   index,
-  errors,
-}: ContentInputProps<ProjectsFormSchema>) => {
+  placeholder,
+  error,
+}: ContentInputProps<T>) => {
   const value = useWatch({
-    name: 'projects',
+    name: formName,
     control,
   });
 
@@ -38,7 +39,7 @@ const ContentInput = ({
       <TabsContent value="edit">
         <Controller
           control={control}
-          name={`projects.${index}.content`}
+          name={`${formName}.${index}.content` as FieldPath<T>}
           render={({ field }) => (
             <div className="relative">
               <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-slate-300">
@@ -46,30 +47,22 @@ const ContentInput = ({
               </span>
               <Textarea
                 id="content"
-                className={`col-span-4 ${
-                  errors.projects && errors.projects[index]?.content?.message
-                    ? 'border-red-300'
-                    : ''
-                }`}
-                placeholder={PROJECT_PLACEHOLDER.content}
+                className={`col-span-4 ${error ? 'border-red-300' : ''}`}
+                placeholder={placeholder}
                 {...field}
               />
             </div>
           )}
         />
         <div className="mt-1 flex justify-between">
-          {errors.projects && errors.projects[index]?.content && (
-            <span className="text-xs text-red-300">
-              {errors.projects[index]?.content?.message}
-            </span>
-          )}
+          {error && <span className="text-xs text-red-300">{error}</span>}
           <span className="ml-auto text-xs text-slate-300">
             글자수 {value?.[index].content.length}
           </span>
         </div>
       </TabsContent>
       <TabsContent value="preview">
-        {value?.[index].content ? (
+        {value && value?.[index].content ? (
           <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem] text-sm">
             {value?.[index].content}
           </ReactMarkdown>

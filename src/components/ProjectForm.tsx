@@ -193,7 +193,13 @@ const ProjectForm = () => {
                   )}
                 />
               </div>
-              <ContentInput control={control} index={index} errors={errors} />
+              <ContentInput<ProjectsFormSchema>
+                control={control}
+                formName="projects"
+                index={index}
+                placeholder={PROJECT_PLACEHOLDER.content}
+                error={errors.projects?.[index]?.content?.message}
+              />
               {isSuggest[index] && (
                 <div className="mt-6 rounded-md bg-[#75ac9d80] px-3 py-2">
                   <Suspense fallback={<Fallback />}>
