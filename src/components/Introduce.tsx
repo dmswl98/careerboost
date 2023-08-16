@@ -13,7 +13,6 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import { USER_INFO } from '@/constants/user';
 import {
-  type Resume,
   useBlog,
   useBrief,
   useCareer,
@@ -21,8 +20,9 @@ import {
   useGithub,
   useName,
   usePhone,
-  useResumeActions,
-} from '@/store/resume';
+  type User,
+  useUserActions,
+} from '@/store/user';
 
 import { Button } from './ui/button';
 import {
@@ -54,7 +54,7 @@ const Introduce = () => {
     setEmail,
     setBlog,
     setGithub,
-  } = useResumeActions();
+  } = useUserActions();
 
   const methods = useForm({
     mode: 'all',
@@ -68,7 +68,7 @@ const Introduce = () => {
       github: '',
     },
   });
-  const { control, handleSubmit } = useForm<Resume>();
+  const { control, handleSubmit } = useForm<User>();
 
   const submit = ({
     name,
@@ -78,7 +78,7 @@ const Introduce = () => {
     email,
     blog,
     github,
-  }: Resume) => {
+  }: User) => {
     setName(name);
     setCareer(career);
     setBrief(brief);
