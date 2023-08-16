@@ -10,7 +10,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, outline = true, ...props }, ref) => {
     const outlineStyles = outline
-      ? 'rounded-md border border-input'
+      ? 'rounded-md border border-input text-sm placeholder:text-sm'
       : 'p-0 pl-1 text-lg font-bold text-slate-500 placeholder:text-lg placeholder:font-bold placeholder:text-slate-300';
 
     return (
