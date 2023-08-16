@@ -20,7 +20,7 @@ import {
   useGithub,
   useName,
   usePhone,
-} from '@/store/resume';
+} from '@/store/user';
 
 const PretendardRegular =
   'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf';
@@ -73,24 +73,18 @@ const RenderedPdf = () => {
                 <Image style={tw('w-4 mr-2')} src={'/icons/mail.png'} />
                 <Text>{email || USER_INFO.email}</Text>
               </View>
-              <Link
-                src={'https://github.com/orioncactus/pretendard'}
-                style={tw('flex-row items-center')}
-              >
-                <Image style={tw('w-4 mr-2')} src={'/icons/link.png'} />
-                <Text style={tw('text-slate-500')}>
-                  {blog || USER_INFO.blog}
-                </Text>
-              </Link>
-              <Link
-                src={'https://github.com/orioncactus/pretendard'}
-                style={tw('flex-row items-center')}
-              >
-                <Image style={tw('w-4 mr-2')} src={'/icons/github.png'} />
-                <Text style={tw('text-slate-500')}>
-                  {github || USER_INFO.github}
-                </Text>
-              </Link>
+              {blog && (
+                <Link src={blog} style={tw('flex-row items-center')}>
+                  <Image style={tw('w-4 mr-2')} src={'/icons/link.png'} />
+                  <Text style={tw('text-slate-500')}>{blog}</Text>
+                </Link>
+              )}
+              {github && (
+                <Link src={github} style={tw('flex-row items-center')}>
+                  <Image style={tw('w-4 mr-2')} src={'/icons/github.png'} />
+                  <Text style={tw('text-slate-500')}>{github}</Text>
+                </Link>
+              )}
             </View>
           </View>
         </Page>
