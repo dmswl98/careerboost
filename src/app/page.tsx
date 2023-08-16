@@ -2,7 +2,7 @@
 
 import ActivityForm from '@/components/ActivityForm';
 import Introduce from '@/components/Introduce';
-import Footer from '@/components/Layout/Footer';
+import Footer from '@/components/Llayout/Footer';
 import ProjectForm from '@/components/ProjectForm';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 
