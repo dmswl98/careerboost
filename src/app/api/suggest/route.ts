@@ -17,7 +17,8 @@ const getPayload = (content: string) => {
         role: 'user',
         content: `The project description and the experiences gained from the project are as follows. 
         ${content}
-        ${process.env.OPENAI_MESSAGE_CONTENT}`,
+        From the perspective of a frontend developer interviewer, 
+        please suggest 5 improvements or additional items in Korean that should be included in the resume, based on the provided project content, technical stack, and individual contributions to the project.`,
       },
     ],
   };
