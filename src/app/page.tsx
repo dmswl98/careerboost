@@ -2,7 +2,7 @@
 
 import Introduce from '@/components/Introduce';
 import Footer from '@/components/layout/Footer';
-import Project from '@/components/Project';
+import ProjectForm from '@/components/ProjectForm';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main>
       <Introduce />
-      <Project />
+      <ProjectForm />
       <Footer />
     </main>
   );

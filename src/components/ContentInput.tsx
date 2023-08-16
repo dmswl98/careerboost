@@ -70,7 +70,7 @@ const ContentInput = ({
       </TabsContent>
       <TabsContent value="preview">
         {value?.[index].content ? (
-          <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem]">
+          <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem] text-sm">
             {value?.[index].content}
           </ReactMarkdown>
         ) : (

@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusCircle, TrashIcon } from 'lucide-react';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
@@ -10,7 +10,9 @@ import { z } from 'zod';
 import { PROJECT_FORM_PLACEHOLDER } from '@/constants/project';
 
 import ContentInput from './ContentInput';
+import Fallback from './Fallback';
 import IconChatGpt from './Icon/IconChatGpt';
+import Suggestion from './Suggestion';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -47,8 +49,11 @@ const DEFAULT_PROJECTS: ProjectFormSchema[] = [
 const ProjectForm = () => {
   const [projects, setProjects] =
     useState<ProjectFormSchema[]>(DEFAULT_PROJECTS);
+  const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
 
   const {
+    trigger,
+    getValues,
     control,
     handleSubmit,
     formState: { errors },
@@ -72,20 +77,43 @@ const ProjectForm = () => {
       content: '',
       url: '',
     });
+
+    setIsSuggest((prev) => [...prev, false]);
   };
 
   const handleProjectFormRemove = (index: number) => {
     remove(index);
+
+    setIsSuggest((prev) => {
+      prev.splice(index, 1);
+
+      return prev;
+    });
+  };
+
+  const handleSuggestClick = (index: number) => {
+    trigger(`projects.${index}.content`);
+
+    if (
+      !getValues(`projects.${index}.content`).length ||
+      (errors.projects && errors.projects[index]?.content?.message)
+    ) {
+      return;
+    }
+
+    setIsSuggest((prev) => {
+      prev[index] = true;
+
+      return prev;
+    });
   };
 
   const onSubmit = (data: { projects: ProjectFormSchema[] }) => {
     setProjects(data.projects);
   };
 
-  console.log('render');
-
   return (
-    <div>
+    <div className="m-8">
       <div className="mb-4 flex items-center justify-between text-slate-500">
         <h1 className="text-xl font-bold">프로젝트</h1>
         <Button
@@ -130,9 +158,10 @@ const ProjectForm = () => {
                 <Button
                   className="bg-[#75ac9d99] hover:bg-[#75ac9d] disabled:bg-slate-300"
                   size="icon"
-                  type="submit"
+                  type="button"
                   title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
-                  // disabled={isSuggested}
+                  onClick={() => handleSuggestClick(index)}
+                  disabled={isSuggest[index]}
                 >
                   <IconChatGpt />
                 </Button>
@@ -178,6 +207,16 @@ const ProjectForm = () => {
                 />
               </div>
               <ContentInput control={control} index={index} errors={errors} />
+              {isSuggest[index] && (
+                <div className="mt-6 rounded-md bg-[#75ac9d80] px-3 py-2">
+                  <Suspense fallback={<Fallback />}>
+                    <Suggestion
+                      id={getValues(`projects.${index}.id`)}
+                      content={getValues(`projects.${index}.content`)}
+                    />
+                  </Suspense>
+                </div>
+              )}
             </li>
           ))}
         </ul>
