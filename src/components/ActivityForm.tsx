@@ -18,14 +18,17 @@ const activityFormSchema = resumeFormSchema.pick({ activities: true });
 export type ActivitiesFormSchema = z.infer<typeof activityFormSchema>;
 
 const ActivityForm = () => {
-  const { control } = useFormContext<ActivitiesFormSchema>();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<ActivitiesFormSchema>();
 
   const { fields, append, remove } = useFieldArray({
     name: 'activities',
     control,
   });
 
-  const handleProjectFormAppend = () => {
+  const handleActivityFormAppend = () => {
     append({
       id: v4(),
       title: '',
@@ -34,12 +37,12 @@ const ActivityForm = () => {
     });
   };
 
-  const handleProjectFormRemove = (index: number) => {
+  const handleActivityFormRemove = (index: number) => {
     remove(index);
   };
 
   return (
-    <FormCard title="활동" onAppendForm={handleProjectFormAppend}>
+    <FormCard title="활동" onAppendForm={handleActivityFormAppend}>
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border border-x-0 py-6">
@@ -50,7 +53,11 @@ const ActivityForm = () => {
                 render={({ field }) => (
                   <Input
                     id="title"
-                    className="col-span-4"
+                    className={`col-span-4 ${
+                      errors.activities && errors.activities[index]?.title
+                        ? 'border-b-red-300'
+                        : ''
+                    }`}
                     placeholder={ACTIVITY_PLACEHOLDER.title}
                     outline={false}
                     {...field}
@@ -61,7 +68,7 @@ const ActivityForm = () => {
                 variant="ghost"
                 size="icon"
                 type="button"
-                onClick={() => handleProjectFormRemove(index)}
+                onClick={() => handleActivityFormRemove(index)}
               >
                 <TrashIcon className="m-3 text-slate-500" />
               </Button>
@@ -73,7 +80,11 @@ const ActivityForm = () => {
                 render={({ field }) => (
                   <Input
                     id="date"
-                    className="col-span-4"
+                    className={`col-span-4 ${
+                      errors.activities && errors.activities[index]?.date
+                        ? 'border-red-300'
+                        : ''
+                    }`}
                     placeholder={ACTIVITY_PLACEHOLDER.date}
                     {...field}
                   />

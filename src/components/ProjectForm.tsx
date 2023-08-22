@@ -47,8 +47,6 @@ const ProjectForm = () => {
     });
 
     setIsSuggest((prev) => [...prev, false]);
-
-    console.log(errors);
   };
 
   const handleProjectFormRemove = (index: number) => {
@@ -62,7 +60,7 @@ const ProjectForm = () => {
   };
 
   const handleSuggestClick = (index: number) => {
-    trigger(`projects.${index}.content`);
+    trigger(`projects.${index}`);
 
     if (
       !getValues(`projects.${index}.content`).length ||
@@ -83,14 +81,18 @@ const ProjectForm = () => {
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border border-x-0 py-6">
-            <div className="mb-3 flex justify-between">
+            <div className="mb-3 flex items-center justify-between">
               <Controller
                 control={control}
                 name={`projects.${index}.title`}
                 render={({ field }) => (
                   <Input
                     id="title"
-                    className="col-span-4"
+                    className={`col-span-4 ${
+                      errors.projects && errors.projects[index]?.title
+                        ? 'border-b-red-300'
+                        : ''
+                    }`}
                     placeholder={PROJECT_PLACEHOLDER.title}
                     outline={false}
                     {...field}
@@ -124,7 +126,11 @@ const ProjectForm = () => {
                 render={({ field }) => (
                   <Input
                     id="startDate"
-                    className="col-span-4"
+                    className={`col-span-4 ${
+                      errors.projects && errors.projects[index]?.startDate
+                        ? 'border-red-300'
+                        : ''
+                    }`}
                     placeholder={PROJECT_PLACEHOLDER.date}
                     {...field}
                   />
@@ -136,7 +142,11 @@ const ProjectForm = () => {
                 render={({ field }) => (
                   <Input
                     id="endDate"
-                    className="col-span-4"
+                    className={`col-span-4 ${
+                      errors.projects && errors.projects[index]?.endDate
+                        ? 'border-red-300'
+                        : ''
+                    }`}
                     placeholder={PROJECT_PLACEHOLDER.date}
                     {...field}
                   />
