@@ -19,6 +19,7 @@ const FormCard = ({
         <Button
           variant="ghost"
           size="icon"
+          type="button"
           onClick={onAppendForm}
           aria-controls="radix-:R1mcq:"
         >
