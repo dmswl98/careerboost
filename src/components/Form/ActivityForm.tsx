@@ -7,11 +7,11 @@ import { z } from 'zod';
 
 import { ACTIVITY_PLACEHOLDER } from '@/constants/formPlaceholder';
 
+import { resumeFormSchema } from '../Providers/FormProvider';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import ContentInput from './ContentInput';
-import FormCard from './Form/FormCard';
-import { resumeFormSchema } from './Providers/FormProvider';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import FormCard from './FormCard';
 
 const activityFormSchema = resumeFormSchema.pick({ activities: true });
 

@@ -7,8 +7,8 @@ import {
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Textarea } from './ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Textarea } from '../ui/textarea';
 
 interface ContentInputProps<T extends FieldValues> {
   control: Control<T>;

@@ -8,14 +8,14 @@ import { z } from 'zod';
 
 import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
 
+import Fallback from '../Fallback';
+import IconChatGpt from '../Icon/IconChatGpt';
+import { resumeFormSchema } from '../Providers/FormProvider';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import ContentInput from './ContentInput';
-import Fallback from './Fallback';
-import FormCard from './Form/FormCard';
-import IconChatGpt from './Icon/IconChatGpt';
-import { resumeFormSchema } from './Providers/FormProvider';
+import FormCard from './FormCard';
 import Suggestion from './Suggestion';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 const projectFormSchema = resumeFormSchema.pick({ projects: true });
 

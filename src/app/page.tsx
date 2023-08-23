@@ -1,10 +1,10 @@
 'use client';
 
-import ActivityForm from '@/components/ActivityForm';
+import ActivityForm from '@/components/Form/ActivityForm';
+import ProjectForm from '@/components/Form/ProjectForm';
+import SubmitButton from '@/components/Form/SubmitButton';
 import Introduce from '@/components/Introduce';
-import Footer from '@/components/Layout/Footer';
 import PdfFile from '@/components/PdfFile';
-import ProjectForm from '@/components/ProjectForm';
 import FormProvider from '@/components/Providers/FormProvider';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 
@@ -18,7 +18,7 @@ export default function Home() {
         <ProjectForm />
         <ActivityForm />
         <PdfFile />
-        <Footer />
+        <SubmitButton />
       </FormProvider>
     </main>
   );
