@@ -1,5 +1,5 @@
 import { Document, Page, PDFViewer } from '@react-pdf/renderer';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 import {
   useBlog,
@@ -11,8 +11,9 @@ import {
   usePhone,
 } from '@/store/user';
 
-import { ProjectsFormSchema } from '../Form/ProjectForm';
+import { ResumeFormSchema } from '../Providers/FormProvider';
 import { tailwind } from './config';
+import PdfActivity from './PdfActivity';
 import PdfIntroduce from './PdfIntroduce';
 import PdfProject from './PdfProject';
 
@@ -25,12 +26,7 @@ const PdfContent = () => {
   const blog = useBlog();
   const github = useGithub();
 
-  const { control } = useFormContext<ProjectsFormSchema>();
-
-  const projects = useWatch({
-    name: 'projects',
-    control,
-  });
+  const { getValues } = useFormContext<ResumeFormSchema>();
 
   return (
     <PDFViewer width="100%" height="650px">
@@ -39,7 +35,8 @@ const PdfContent = () => {
           <PdfIntroduce
             userInfo={{ name, career, brief, phone, email, blog, github }}
           />
-          <PdfProject projects={projects} />
+          <PdfProject projects={getValues('projects')} />
+          <PdfActivity activities={getValues('activities')} />
         </Page>
       </Document>
     </PDFViewer>
