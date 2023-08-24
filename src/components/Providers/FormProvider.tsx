@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider as Provider, useForm } from 'react-hook-form';
-import { v4 } from 'uuid';
 import { z } from 'zod';
+
+import { INITIAL_VALUE } from '@/constants/form';
 
 export const resumeFormSchema = z.object({
   projects: z.array(
@@ -25,26 +26,8 @@ export const resumeFormSchema = z.object({
   ),
 });
 
-const DEFAULT_PROJECTS = [
-  {
-    id: v4(),
-    title: '',
-    startDate: '',
-    endDate: '',
-    content: '',
-    url: '',
-  },
-];
-
-const DEFAULT_ACTIVITIES = [
-  {
-    id: v4(),
-    title: '',
-    startDate: '',
-    endDate: '',
-    content: '',
-  },
-];
+const DEFAULT_PROJECTS = [INITIAL_VALUE.project];
+const DEFAULT_ACTIVITIES = [INITIAL_VALUE.activity];
 
 export type ResumeFormSchema = z.infer<typeof resumeFormSchema>;
 

@@ -5,7 +5,7 @@ import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { ACTIVITY_PLACEHOLDER } from '@/constants/formPlaceholder';
+import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
@@ -30,11 +30,8 @@ const ActivityForm = () => {
 
   const handleActivityFormAppend = () => {
     append({
+      ...INITIAL_VALUE.activity,
       id: v4(),
-      title: '',
-      startDate: '',
-      endDate: '',
-      content: '',
     });
   };
 
@@ -59,7 +56,7 @@ const ActivityForm = () => {
                         ? 'border-b-red-300'
                         : ''
                     }`}
-                    placeholder={ACTIVITY_PLACEHOLDER.title}
+                    placeholder={PLACEHOLDER.activity.title}
                     outline={false}
                     {...field}
                   />
@@ -86,7 +83,7 @@ const ActivityForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={ACTIVITY_PLACEHOLDER.date}
+                    placeholder={PLACEHOLDER.activity.date}
                     {...field}
                   />
                 )}
@@ -102,7 +99,7 @@ const ActivityForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={ACTIVITY_PLACEHOLDER.date}
+                    placeholder={PLACEHOLDER.activity.date}
                     {...field}
                   />
                 )}
@@ -112,7 +109,7 @@ const ActivityForm = () => {
               control={control}
               formName="activities"
               index={index}
-              placeholder={ACTIVITY_PLACEHOLDER.content}
+              placeholder={PLACEHOLDER.activity.content}
             />
           </li>
         ))}
