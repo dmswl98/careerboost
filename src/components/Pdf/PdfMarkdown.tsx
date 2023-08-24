@@ -15,9 +15,7 @@ const PdfMarkdown = ({ content }: PdfMarkdownProps) => {
 };
 
 const markdownComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
-  p: ({ children }) => (
-    <Text style={tailwind('text-sm py-0.5')}>{children}</Text>
-  ),
+  p: ({ children }) => <Text style={tailwind('text-sm py-1')}>{children}</Text>,
   ul: ({ children }) => <View style={tailwind('text-sm')}>{children}</View>,
   li: ({ children }) => (
     <View style={tailwind('flex-row text-sm py-0.5 pr-3')}>
