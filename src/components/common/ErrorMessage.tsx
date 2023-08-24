@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 const ERROR_MESSAGE = {
   title: '일시적인 오류가 발생했어요',

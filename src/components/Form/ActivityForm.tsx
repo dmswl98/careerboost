@@ -5,13 +5,13 @@ import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { ACTIVITY_PLACEHOLDER } from '@/constants/formPlaceholder';
+import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
+import { resumeFormSchema } from '../Providers/FormProvider';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import ContentInput from './ContentInput';
-import FormCard from './Form/FormCard';
-import { resumeFormSchema } from './Providers/FormProvider';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import FormCard from './FormCard';
 
 const activityFormSchema = resumeFormSchema.pick({ activities: true });
 
@@ -30,10 +30,8 @@ const ActivityForm = () => {
 
   const handleActivityFormAppend = () => {
     append({
+      ...INITIAL_VALUE.activity,
       id: v4(),
-      title: '',
-      date: '',
-      content: '',
     });
   };
 
@@ -58,7 +56,7 @@ const ActivityForm = () => {
                         ? 'border-b-red-300'
                         : ''
                     }`}
-                    placeholder={ACTIVITY_PLACEHOLDER.title}
+                    placeholder={PLACEHOLDER.activity.title}
                     outline={false}
                     {...field}
                   />
@@ -73,29 +71,44 @@ const ActivityForm = () => {
                 <TrashIcon className="m-3 text-slate-500" />
               </Button>
             </div>
-            <div className="mb-4 flex gap-2">
+            <div className="mb-2 flex gap-2">
               <Controller
                 control={control}
-                name={`activities.${index}.date`}
+                name={`activities.${index}.startDate`}
                 render={({ field }) => (
                   <Input
-                    id="date"
+                    id="startDate"
                     className={`col-span-4 ${
-                      errors.activities && errors.activities[index]?.date
+                      errors.activities && errors.activities[index]?.startDate
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={ACTIVITY_PLACEHOLDER.date}
+                    placeholder={PLACEHOLDER.activity.date}
+                    {...field}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name={`activities.${index}.endDate`}
+                render={({ field }) => (
+                  <Input
+                    id="endDate"
+                    className={`col-span-4 ${
+                      errors.activities && errors.activities[index]?.endDate
+                        ? 'border-red-300'
+                        : ''
+                    }`}
+                    placeholder={PLACEHOLDER.activity.date}
                     {...field}
                   />
                 )}
               />
             </div>
             <ContentInput
-              control={control}
               formName="activities"
               index={index}
-              placeholder={ACTIVITY_PLACEHOLDER.content}
+              placeholder={PLACEHOLDER.activity.content}
             />
           </li>
         ))}

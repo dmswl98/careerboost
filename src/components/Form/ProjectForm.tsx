@@ -6,16 +6,16 @@ import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
-import { PROJECT_PLACEHOLDER } from '@/constants/formPlaceholder';
+import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
+import Fallback from '../Fallback';
+import IconChatGpt from '../Icon/IconChatGpt';
+import { resumeFormSchema } from '../Providers/FormProvider';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import ContentInput from './ContentInput';
-import Fallback from './Fallback';
-import FormCard from './Form/FormCard';
-import IconChatGpt from './Icon/IconChatGpt';
-import { resumeFormSchema } from './Providers/FormProvider';
+import FormCard from './FormCard';
 import Suggestion from './Suggestion';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 const projectFormSchema = resumeFormSchema.pick({ projects: true });
 
@@ -38,12 +38,8 @@ const ProjectForm = () => {
 
   const handleProjectFormAppend = () => {
     append({
+      ...INITIAL_VALUE.project,
       id: v4(),
-      title: '',
-      startDate: '',
-      endDate: '',
-      content: '',
-      url: '',
     });
 
     setIsSuggest((prev) => [...prev, false]);
@@ -93,7 +89,7 @@ const ProjectForm = () => {
                         ? 'border-b-red-300'
                         : ''
                     }`}
-                    placeholder={PROJECT_PLACEHOLDER.title}
+                    placeholder={PLACEHOLDER.project.title}
                     outline={false}
                     {...field}
                   />
@@ -131,7 +127,7 @@ const ProjectForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PROJECT_PLACEHOLDER.date}
+                    placeholder={PLACEHOLDER.project.date}
                     {...field}
                   />
                 )}
@@ -147,7 +143,7 @@ const ProjectForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PROJECT_PLACEHOLDER.date}
+                    placeholder={PLACEHOLDER.project.date}
                     {...field}
                   />
                 )}
@@ -161,17 +157,16 @@ const ProjectForm = () => {
                   <Input
                     id="url"
                     className="col-span-4"
-                    placeholder={PROJECT_PLACEHOLDER.url}
+                    placeholder={PLACEHOLDER.project.url}
                     {...field}
                   />
                 )}
               />
             </div>
             <ContentInput
-              control={control}
               formName="projects"
               index={index}
-              placeholder={PROJECT_PLACEHOLDER.content}
+              placeholder={PLACEHOLDER.project.content}
               error={errors.projects?.[index]?.content?.message}
             />
             {isSuggest[index] && (

@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider as Provider, useForm } from 'react-hook-form';
-import { v4 } from 'uuid';
 import { z } from 'zod';
+
+import { INITIAL_VALUE } from '@/constants/form';
 
 export const resumeFormSchema = z.object({
   projects: z.array(
@@ -18,36 +19,20 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
-      date: z.string().regex(new RegExp('\\d{4}')),
+      startDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
+      endDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
       content: z.string().optional(),
     })
   ),
 });
 
-const DEFAULT_PROJECTS = [
-  {
-    id: v4(),
-    title: '',
-    startDate: '',
-    endDate: '',
-    content: '',
-    url: '',
-  },
-];
+const DEFAULT_PROJECTS = [INITIAL_VALUE.project];
+const DEFAULT_ACTIVITIES = [INITIAL_VALUE.activity];
 
-const DEFAULT_ACTIVITIES = [
-  {
-    id: v4(),
-    title: '',
-    date: '',
-    content: '',
-  },
-];
-
-type ResumeFormSchema = z.infer<typeof resumeFormSchema>;
+export type ResumeFormSchema = z.infer<typeof resumeFormSchema>;
 
 const FormProvider = ({ children }: StrictPropsWithChildren) => {
-  const methods = useForm({
+  const methods = useForm<ResumeFormSchema>({
     mode: 'onChange',
     resolver: zodResolver(resumeFormSchema),
     defaultValues: {
