@@ -1,34 +1,34 @@
 import {
-  type Control,
   Controller,
   type FieldPath,
-  type FieldValues,
+  useFormContext,
   useWatch,
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
+import { ResumeFormSchema } from '../Providers/FormProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Textarea } from '../ui/textarea';
 
-interface ContentInputProps<T extends FieldValues> {
-  control: Control<T>;
-  formName: FieldPath<T>;
+interface ContentInputProps {
+  formName: FieldPath<ResumeFormSchema>;
   index: number;
   placeholder: string;
   error?: string;
 }
 
-const ContentInput = <T extends FieldValues>({
-  control,
+const ContentInput = ({
   formName,
   index,
   placeholder,
   error,
-}: ContentInputProps<T>) => {
+}: ContentInputProps) => {
+  const { control } = useFormContext<ResumeFormSchema>();
+
   const value = useWatch({
-    name: formName,
+    name: `${formName}.${index}.content` as FieldPath<ResumeFormSchema>,
     control,
-  });
+  }) as string;
 
   return (
     <Tabs defaultValue="edit" className="w-full">
@@ -39,7 +39,7 @@ const ContentInput = <T extends FieldValues>({
       <TabsContent value="edit">
         <Controller
           control={control}
-          name={`${formName}.${index}.content` as FieldPath<T>}
+          name={`${formName}.${index}.content` as FieldPath<ResumeFormSchema>}
           render={({ field }) => (
             <div className="relative">
               <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-slate-300">
@@ -49,7 +49,9 @@ const ContentInput = <T extends FieldValues>({
                 id="content"
                 className={`col-span-4 ${error ? 'border-red-300' : ''}`}
                 placeholder={placeholder}
-                {...field}
+                ref={field.ref}
+                onChange={field.onChange}
+                value={field.value as string}
               />
             </div>
           )}
@@ -57,14 +59,14 @@ const ContentInput = <T extends FieldValues>({
         <div className="mt-1 flex justify-between">
           {error && <span className="text-xs text-red-300">{error}</span>}
           <span className="ml-auto text-xs text-slate-300">
-            글자수 {value?.[index].content.length}
+            글자수 {value?.length || 0}
           </span>
         </div>
       </TabsContent>
       <TabsContent value="preview">
-        {value && value?.[index].content ? (
+        {value ? (
           <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem] text-sm">
-            {value?.[index].content}
+            {value as string}
           </ReactMarkdown>
         ) : (
           <div className="py-10 text-center text-sm text-slate-500">

@@ -106,7 +106,6 @@ const ActivityForm = () => {
               />
             </div>
             <ContentInput
-              control={control}
               formName="activities"
               index={index}
               placeholder={PLACEHOLDER.activity.content}

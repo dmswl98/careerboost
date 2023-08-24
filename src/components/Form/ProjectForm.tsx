@@ -164,7 +164,6 @@ const ProjectForm = () => {
               />
             </div>
             <ContentInput
-              control={control}
               formName="projects"
               index={index}
               placeholder={PLACEHOLDER.project.content}
