@@ -18,7 +18,8 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
-      date: z.string().regex(new RegExp('\\d{4}')),
+      startDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
+      endDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
       content: z.string().optional(),
     })
   ),
@@ -39,15 +40,16 @@ const DEFAULT_ACTIVITIES = [
   {
     id: v4(),
     title: '',
-    date: '',
+    startDate: '',
+    endDate: '',
     content: '',
   },
 ];
 
-type ResumeFormSchema = z.infer<typeof resumeFormSchema>;
+export type ResumeFormSchema = z.infer<typeof resumeFormSchema>;
 
 const FormProvider = ({ children }: StrictPropsWithChildren) => {
-  const methods = useForm({
+  const methods = useForm<ResumeFormSchema>({
     mode: 'onChange',
     resolver: zodResolver(resumeFormSchema),
     defaultValues: {

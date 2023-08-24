@@ -8,6 +8,6 @@ export const PROJECT_PLACEHOLDER = {
 export const ACTIVITY_PLACEHOLDER = {
   title: '활동명',
   group: '소속/기관',
-  date: 'YYYY',
+  date: 'YYYY.MM',
   content: '참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요.',
 };
