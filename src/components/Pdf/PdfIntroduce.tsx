@@ -2,12 +2,12 @@
 import { Image, Link, Text, View } from '@react-pdf/renderer';
 
 import { USER_INFO } from '@/constants/user';
-import type { User } from '@/store/user';
 
+import { UserInfoFormSchema } from '../Form/UserInfoForm';
 import { tailwind } from './config';
 
 interface PdfIntroduceProps {
-  userInfo: User;
+  userInfo: UserInfoFormSchema['userInfo'];
 }
 
 const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {

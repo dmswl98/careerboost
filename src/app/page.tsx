@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <main>
-      <Introduce />
       <FormProvider>
+        <Introduce />
         <ProjectForm />
         <ActivityForm />
         <PdfContent />

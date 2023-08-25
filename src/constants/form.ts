@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 
 export const PLACEHOLDER = {
-  info: {
+  userInfo: {
     name: '이름',
     career: '프론트엔드 개발자',
     brief: '나만의 소개글을 작성해보세요',
@@ -24,6 +24,15 @@ export const PLACEHOLDER = {
 };
 
 export const INITIAL_VALUE = {
+  userInfo: {
+    name: '',
+    career: '',
+    brief: '',
+    phone: '',
+    email: '',
+    blog: '',
+    github: '',
+  },
   project: {
     id: v4(),
     title: '',
