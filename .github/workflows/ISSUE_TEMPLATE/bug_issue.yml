@@ -1,0 +1,43 @@
+name: 🐛 Bug Report
+about: 발생한 버그를 기록해주세요.
+title: '[BUG]'
+labels: bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **버그**를 자세하게 작성해주시면 서비스를 더 나은 방향으로 개선하는 데에 많은 도움이 됩니다. 감사합니다! 🙂
+
+  - type: input
+    id: title
+    validations:
+      required: true
+    attributes:
+      label: 📌 버그가 발생한 곳이 어디인가요?
+      description: 버그가 발생된 페이지, 섹션 등을 자유롭게 남겨주세요.
+
+  - type: textarea
+    id: what-happened
+    validations:
+      required: true
+    attributes:
+      label: ✏️ 발생한 버그에 대해 자세히 설명해주세요.
+      description: 버그가 발생된 지점, 버그가 발생한 과정, 정상적으로 기대하는 동작 등을 남겨주시면 좋아요.
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 🖼️ 버그 스크린샷
+      description: 버그가 발생한 시점의 스크린샷이 있다면 남겨주세요.
+
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: 🌏 어떤 브라우저를 사용하고 있나요?
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Microsoft Edge
