@@ -7,17 +7,25 @@ import Introduce from '@/components/Introduce';
 import PdfDocumentViewer from '@/components/Pdf/PdfDocumentViewer';
 import FormProvider from '@/components/Providers/FormProvider';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
+import { useIsPreview } from '@/store/preview';
 
 export default function Home() {
+  const isPreview = useIsPreview();
+
   useBeforeUnload();
 
   return (
     <main>
       <FormProvider>
-        <Introduce />
-        <ProjectForm />
-        <ActivityForm />
-        <PdfDocumentViewer />
+        {isPreview ? (
+          <PdfDocumentViewer />
+        ) : (
+          <>
+            <Introduce />
+            <ProjectForm />
+            <ActivityForm />
+          </>
+        )}
         <SubmitButton />
       </FormProvider>
     </main>
