@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
+import { PLACEHOLDER } from '@/constants/form';
 import { USER_INFO } from '@/constants/user';
 import {
   useBlog,
@@ -151,7 +152,7 @@ const Introduce = () => {
                       id="name"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="이름"
+                      placeholder={PLACEHOLDER.info.name}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -170,7 +171,7 @@ const Introduce = () => {
                       id="career"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="직무"
+                      placeholder={PLACEHOLDER.info.career}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -189,7 +190,7 @@ const Introduce = () => {
                       id="brief"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="나만의 소개글을 작성해보세요."
+                      placeholder={PLACEHOLDER.info.brief}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -208,7 +209,7 @@ const Introduce = () => {
                       id="phone"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="010-1234-5678"
+                      placeholder={PLACEHOLDER.info.phone}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -228,7 +229,7 @@ const Introduce = () => {
                       type="email"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="eunji@gmail.com"
+                      placeholder={PLACEHOLDER.info.email}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -247,7 +248,7 @@ const Introduce = () => {
                       id="blog"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="https://"
+                      placeholder={PLACEHOLDER.info.link}
                       onChange={onChange}
                       value={value || ''}
                     />
@@ -266,7 +267,7 @@ const Introduce = () => {
                       id="github"
                       className="col-span-4"
                       ref={ref}
-                      placeholder="https://"
+                      placeholder={PLACEHOLDER.info.link}
                       onChange={onChange}
                       value={value || ''}
                     />
