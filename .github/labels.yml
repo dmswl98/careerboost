@@ -1,0 +1,6 @@
+:hammer: chore: chore/*
+:memo: docs: docs/*
+:sparkles: feature: ['feature/*', 'feat/*']
+:bug: fix: fix/*
+:recycle: refactor: refactor/*
+:white_check_mark: test: test/*
