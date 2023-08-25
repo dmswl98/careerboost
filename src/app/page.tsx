@@ -4,7 +4,7 @@ import ActivityForm from '@/components/Form/ActivityForm';
 import ProjectForm from '@/components/Form/ProjectForm';
 import SubmitButton from '@/components/Form/SubmitButton';
 import Introduce from '@/components/Introduce';
-import PdfContent from '@/components/Pdf/PdfContent';
+import PdfDocumentViewer from '@/components/Pdf/PdfDocumentViewer';
 import FormProvider from '@/components/Providers/FormProvider';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 
@@ -17,7 +17,7 @@ export default function Home() {
         <Introduce />
         <ProjectForm />
         <ActivityForm />
-        <PdfContent />
+        <PdfDocumentViewer />
         <SubmitButton />
       </FormProvider>
     </main>
