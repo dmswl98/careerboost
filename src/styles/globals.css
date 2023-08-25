@@ -127,3 +127,7 @@ a {
   border-radius: 0.4rem;
   padding: 0.1rem 0.4rem;
 }
+
+::selection {
+  @apply bg-slate-200;
+}
