@@ -31,7 +31,7 @@ const Introduce = () => {
           </p>
         </div>
         <p className="mb-2">{value.brief || USER_INFO.brief}</p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 whitespace-nowrap">
           <div className="flex items-center">
             <Phone className="mr-2 h-4 w-4" />
             <span className="text-sm">{value.phone || USER_INFO.phone}</span>
