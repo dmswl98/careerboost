@@ -1,4 +1,4 @@
-import IconChatGpt from './Icon/IconChatGpt';
+import IconChatGpt from '../Icon/IconChatGpt';
 
 const Fallback = () => {
   return (

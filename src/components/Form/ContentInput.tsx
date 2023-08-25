@@ -43,7 +43,7 @@ const ContentInput = ({
           render={({ field }) => (
             <div className="relative">
               <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-slate-300">
-                마크다운 문법을 지원합니다.
+                마크다운 문법을 지원해요
               </span>
               <Textarea
                 id="content"
@@ -70,7 +70,7 @@ const ContentInput = ({
           </ReactMarkdown>
         ) : (
           <div className="py-10 text-center text-sm text-slate-500">
-            작성된 내용이 없어요.
+            작성된 내용이 없어요
           </div>
         )}
       </TabsContent>

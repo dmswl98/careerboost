@@ -71,7 +71,7 @@ const ActivityForm = () => {
                 <TrashIcon className="m-3 text-slate-500" />
               </Button>
             </div>
-            <div className="mb-2 flex gap-2">
+            <div className="mb-4 flex gap-2">
               <Controller
                 control={control}
                 name={`activities.${index}.startDate`}
