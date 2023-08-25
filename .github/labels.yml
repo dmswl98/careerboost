@@ -1,6 +1,6 @@
-:hammer: chore: chore/*
-:memo: docs: docs/*
-:sparkles: feature: ['feature/*', 'feat/*']
-:bug: fix: fix/*
-:recycle: refactor: refactor/*
-:white_check_mark: test: test/*
+chore :hammer:: chore/*
+docs :memo:: docs/*
+feature :sparkles:: ['feature/*', 'feat/*']
+fix :bug:: fix/*
+refactor :recycle:: refactor/*
+test :white_check_mark:: test/*
