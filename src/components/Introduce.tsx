@@ -30,8 +30,7 @@ const Introduce = () => {
             {value.career || USER_INFO.career}
           </p>
         </div>
-        <p className="mb-2">{value.brief || USER_INFO.brief}</p>
-        <div className="flex gap-3 whitespace-nowrap">
+        <div className="mb-4 flex gap-3 whitespace-nowrap">
           <div className="flex items-center">
             <Phone className="mr-2 h-4 w-4" />
             <span className="text-sm">{value.phone || USER_INFO.phone}</span>
@@ -69,6 +68,7 @@ const Introduce = () => {
             )}
           </div>
         </div>
+        <p>{value.brief || USER_INFO.brief}</p>
       </div>
       <UserInfoForm isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
