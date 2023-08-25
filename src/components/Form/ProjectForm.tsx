@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
-import Fallback from '../Fallback';
+import Fallback from '../common/Fallback';
 import IconChatGpt from '../Icon/IconChatGpt';
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
