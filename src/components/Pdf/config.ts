@@ -6,11 +6,14 @@ const Pretendard = {
     'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.ttf',
   regular:
     'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf',
+  semiBold:
+    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf',
   bold: 'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.ttf',
 };
 
 Font.register({ family: 'PretendardLight', src: Pretendard.light });
 Font.register({ family: 'PretendardRegular', src: Pretendard.regular });
+Font.register({ family: 'PretendardSemiBold', src: Pretendard.semiBold });
 Font.register({ family: 'PretendardBold', src: Pretendard.bold });
 
 export const tailwind = createTw({
@@ -18,6 +21,7 @@ export const tailwind = createTw({
     fontFamily: {
       light: 'PretendardLight',
       regular: 'PretendardRegular',
+      semiBold: 'PretendardSemiBold',
       bold: 'PretendardBold',
     },
   },
