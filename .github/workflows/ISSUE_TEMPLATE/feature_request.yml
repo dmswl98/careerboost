@@ -1,0 +1,24 @@
+name: ✨ Feature Request
+about: 건의할 기능을 기록해주세요.
+title: '[Feature]'
+labels: feature
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        추가하면 좋을 **기능**에 대해 자세하게 작성해주시면 서비스를 더 나은 방향으로 개선하는 데에 많은 도움이 됩니다. 감사합니다! 🙂
+
+  - type: textarea
+    id: feature-description
+    validations:
+      required: true
+    attributes:
+      label: ✏️ 기능에 대해 자세히 설명해주세요.
+      description: 어느 부분에서 어떻게 동작하는 기능 등을 남겨주시면 좋아요.
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: 🖇️ 레퍼런스
+      description: 참고한 레퍼런스나 비슷한 기능이 존재하는 서비스 등을 자유롭게 남겨주세요.
