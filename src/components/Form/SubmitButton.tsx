@@ -10,9 +10,9 @@ import { ResumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 
 const ISSUE_URL = {
-  BUG: 'https://github.com/dmswl98/resume-with-ai/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=%5BBUG%5D',
+  BUG: 'https://github.com/dmswl98/careerboost/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=%5BBUG%5D',
   FEATURE:
-    'https://github.com/dmswl98/resume-with-ai/issues/new?assignees=&labels=feature&projects=&template=feature_request.yml&title=%5BFeature%5D',
+    'https://github.com/dmswl98/careerboost/issues/new?assignees=&labels=feature&projects=&template=feature_request.yml&title=%5BFeature%5D',
 };
 
 const SubmitButton = () => {
