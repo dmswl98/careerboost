@@ -1,21 +1,21 @@
 'use client';
 
+import { useCompletion } from 'ai/react';
 import { TrashIcon } from 'lucide-react';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
-import Fallback from '../common/Fallback';
 import IconChatGpt from '../Icon/IconChatGpt';
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import AiSuggestion from './AiSuggestion';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
-import Suggestion from './Suggestion';
 
 const projectFormSchema = resumeFormSchema.pick({ projects: true });
 
@@ -26,7 +26,6 @@ const ProjectForm = () => {
 
   const {
     control,
-    trigger,
     getValues,
     formState: { errors },
   } = useFormContext<ProjectsFormSchema>();
@@ -34,6 +33,10 @@ const ProjectForm = () => {
   const { fields, append, remove } = useFieldArray({
     name: 'projects',
     control,
+  });
+
+  const { complete, completion } = useCompletion({
+    api: '/api/suggest',
   });
 
   const handleProjectFormAppend = () => {
@@ -56,12 +59,9 @@ const ProjectForm = () => {
   };
 
   const handleSuggestClick = (index: number) => {
-    trigger(`projects.${index}`);
+    const projectContent = getValues(`projects.${index}.content`);
 
-    if (
-      !getValues(`projects.${index}.content`).length ||
-      errors.projects?.[index]
-    ) {
+    if (!projectContent.length || errors.projects?.[index]) {
       return;
     }
 
@@ -70,6 +70,8 @@ const ProjectForm = () => {
 
       return prev;
     });
+
+    complete(projectContent);
   };
 
   return (
@@ -169,14 +171,9 @@ const ProjectForm = () => {
               placeholder={PLACEHOLDER.project.content}
               error={errors.projects?.[index]?.content?.message}
             />
-            {isSuggest[index] && (
+            {isSuggest[index] && completion && (
               <div className="mt-6 rounded-md bg-[#75ac9d80] px-3 py-2">
-                <Suspense fallback={<Fallback />}>
-                  <Suggestion
-                    id={getValues(`projects.${index}.id`)}
-                    content={getValues(`projects.${index}.content`)}
-                  />
-                </Suspense>
+                <AiSuggestion aiSuggestion={completion} />
               </div>
             )}
           </li>

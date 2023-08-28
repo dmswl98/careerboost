@@ -1,49 +1,36 @@
-import { NextResponse } from 'next/server';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { Configuration, OpenAIApi } from 'openai-edge';
 
-const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
+const config = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY!,
+});
 
-const options = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-  },
-};
+const openai = new OpenAIApi(config);
 
-const getPayload = (content: string) => {
-  return {
+export const runtime = 'edge';
+
+export async function POST(req: Request) {
+  const { prompt } = await req.json();
+
+  const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
+    stream: true,
     messages: [
       {
         role: 'user',
         content: `The project description and the experiences gained from the project are as follows. 
-        ${content}
-        From the perspective of a frontend developer interviewer, 
-        please suggest 5 improvements or additional items in Korean that should be included in the resume, based on the provided project content, technical stack, and individual contributions to the project.`,
+          ${prompt}
+          From the perspective of a frontend developer interviewer, 
+          please suggest 5 improvements or additional items in Korean that should be included in the resume, based on the provided project content, technical stack, and individual contributions to the project.`,
       },
     ],
-  };
-};
+    temperature: 0, // you want absolute certainty for spell check
+    top_p: 1,
+    frequency_penalty: 1,
+    presence_penalty: 1,
+  });
 
-export async function POST(req: Request) {
-  const { content } = await req.json();
+  const stream = OpenAIStream(response);
 
-  try {
-    const response = await fetch(OPENAI_URL, {
-      method: 'POST',
-      ...options,
-      body: JSON.stringify(getPayload(content)),
-    });
-
-    if (!response.ok) {
-      throw new Error('오류 발생');
-    }
-
-    const data = await response.json();
-
-    const suggestion = data.choices[0].message.content;
-
-    return NextResponse.json({ suggestion });
-  } catch (error) {
-    return NextResponse.json({ error, message: '잠시 후 다시 시도해주세요!' });
-  }
+  return new StreamingTextResponse(stream);
 }
