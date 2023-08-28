@@ -104,10 +104,10 @@ const ProjectForm = () => {
                 className="mr-1"
                 onClick={() => handleProjectFormRemove(index)}
               >
-                <TrashIcon className="m-3 text-slate-500" />
+                <TrashIcon className="m-3 text-gray-500" />
               </Button>
               <Button
-                className="bg-[#75ac9d99] hover:bg-[#75ac9d] disabled:bg-slate-300"
+                className="bg-[#75ac9d99] hover:bg-[#75ac9d] disabled:bg-gray-300"
                 size="icon"
                 type="button"
                 title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."

@@ -16,7 +16,7 @@ const PdfActivity = ({ activities }: PdfActivityProps) => {
       {activities.map((activity) => (
         <View
           key={activity.id}
-          style={tailwind('border border-x-0 border-slate-200 py-6')}
+          style={tailwind('border border-x-0 border-gray-200 py-6')}
         >
           <View style={tailwind('mb-4')}>
             <PdfSectionInfo

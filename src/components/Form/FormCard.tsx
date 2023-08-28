@@ -14,7 +14,7 @@ const FormCard = ({
 }: StrictPropsWithChildren<FormCardProps>) => {
   return (
     <div className="m-8">
-      <div className="mb-4 flex items-center justify-between text-slate-500">
+      <div className="mb-4 flex items-center justify-between text-gray-600">
         <h1 className="text-xl font-bold">{title}</h1>
         <Button
           variant="ghost"

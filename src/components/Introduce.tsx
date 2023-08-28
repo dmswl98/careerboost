@@ -20,7 +20,7 @@ const Introduce = () => {
   });
 
   return (
-    <div className="flex justify-between bg-slate-100 p-8 text-slate-500">
+    <div className="flex justify-between bg-gray-100 p-8 text-gray-600">
       <div>
         <div className="mb-4 flex items-center">
           <h1 className="mr-4 text-2xl font-bold">
