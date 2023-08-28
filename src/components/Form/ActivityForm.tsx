@@ -68,7 +68,7 @@ const ActivityForm = () => {
                 type="button"
                 onClick={() => handleActivityFormRemove(index)}
               >
-                <TrashIcon className="m-3 text-slate-500" />
+                <TrashIcon className="m-3 text-gray-500" />
               </Button>
             </div>
             <div className="mb-4 flex gap-2">

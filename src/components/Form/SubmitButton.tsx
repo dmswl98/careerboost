@@ -25,7 +25,7 @@ const SubmitButton = () => {
   } = useFormContext<ResumeFormSchema>();
 
   return (
-    <div className="fixed bottom-0 left-0 flex w-full justify-between border-t border-solid border-slate-200 bg-white px-6 py-4">
+    <div className="fixed bottom-0 left-0 flex w-full justify-between border-t border-solid border-gray-200 bg-white px-6 py-4">
       <div>
         <Link href={ISSUE_URL.BUG} target="_blank">
           <Button variant="destructive" type="button" className="mr-2">

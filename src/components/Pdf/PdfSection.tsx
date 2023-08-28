@@ -13,7 +13,7 @@ const PdfSection = ({
   title,
 }: StrictPropsWithChildren<PdfSectionProps>) => {
   return (
-    <View style={tailwind('my-8 text-slate-500')}>
+    <View style={tailwind('my-8 text-gray-500')}>
       <Text style={tailwind('mb-3 text-lg font-bold')}>{title}</Text>
       {children}
     </View>

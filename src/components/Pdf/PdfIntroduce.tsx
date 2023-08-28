@@ -14,7 +14,7 @@ const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {
   return (
     <View
       style={tailwind(
-        'flex-column justify-between bg-slate-100 text-slate-500 p-8 mt-[-29px] mx-[-23px]'
+        'flex-column justify-between bg-gray-100 text-gray-500 p-8 mt-[-29px] mx-[-23px]'
       )}
     >
       <View style={tailwind('flex-row')}>
@@ -37,14 +37,14 @@ const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {
         {userInfo.blog ? (
           <Link src={userInfo.blog} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-slate-500')}>
+            <Text style={tailwind('text-gray-500')}>
               {userInfo.blog || USER_INFO.blog}
             </Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-slate-500')}>
+            <Text style={tailwind('text-gray-500')}>
               {userInfo.blog || USER_INFO.blog}
             </Text>
           </View>
@@ -52,14 +52,14 @@ const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {
         {userInfo.github ? (
           <Link src={userInfo.github} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-slate-500')}>
+            <Text style={tailwind('text-gray-500')}>
               {userInfo.github || USER_INFO.github}
             </Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-slate-500')}>
+            <Text style={tailwind('text-gray-500')}>
               {userInfo.github || USER_INFO.github}
             </Text>
           </View>

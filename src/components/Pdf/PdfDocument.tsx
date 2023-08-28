@@ -22,7 +22,7 @@ const PdfDocument = ({ resume }: PdfDocumentProps) => {
           style={tailwind('absolute bottom-4 left-0 right-0 text-center')}
           fixed
         >
-          <Text style={tailwind('text-slate-300 text-xs')}>@dmswl98</Text>
+          <Text style={tailwind('text-gray-300 text-xs')}>@dmswl98</Text>
         </Link>
       </Page>
     </Document>
