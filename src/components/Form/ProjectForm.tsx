@@ -26,6 +26,7 @@ const ProjectForm = () => {
 
   const {
     control,
+    trigger,
     getValues,
     formState: { errors },
   } = useFormContext<ProjectsFormSchema>();
@@ -59,6 +60,8 @@ const ProjectForm = () => {
   };
 
   const handleSuggestClick = (index: number) => {
+    trigger(`projects.${index}.content`);
+
     const projectContent = getValues(`projects.${index}.content`);
 
     if (!projectContent.length || errors.projects?.[index]) {
