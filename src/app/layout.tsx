@@ -2,7 +2,6 @@ import '../styles/globals.css';
 
 import type { Metadata } from 'next';
 
-import ReactQueryProvider from '@/components/Providers/ReactQueryProvider';
 import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {
@@ -18,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className} ${sourceCode.variable}`}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        {children}
       </body>
     </html>
   );
