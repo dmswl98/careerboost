@@ -35,7 +35,6 @@ version-resolver:
       - 'patch'
   default: patch
 template: |
-  template: |
   ## 📌 변경 사항
   ---
   $CHANGES
