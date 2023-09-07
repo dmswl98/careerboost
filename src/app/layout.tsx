@@ -2,6 +2,8 @@ import '../styles/globals.css';
 
 import type { Metadata } from 'next';
 
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import Hotjar from '@/components/analytics/Hotjar';
 import META from '@/constants/meta';
 import { pretendard, sourceCode } from '@/styles/font';
 
@@ -35,6 +37,12 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${pretendard.className} ${sourceCode.variable}`}>
         {children}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <GoogleAnalytics />
+            <Hotjar />
+          </>
+        )}
       </body>
     </html>
   );
