@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import type { Metadata } from 'next';
 
 import { GoogleAnalytics, Hotjar } from '@/components/analytics';
+import Navigation from '@/components/Layout/Navigation';
 import META from '@/constants/meta';
 import { pretendard, sourceCode } from '@/styles/font';
 
@@ -27,14 +28,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: StrictPropsWithChildren) {
   return (
     <html lang="ko">
       <body className={`${pretendard.className} ${sourceCode.variable}`}>
+        <Navigation />
         {children}
         {process.env.NODE_ENV === 'production' && (
           <>
