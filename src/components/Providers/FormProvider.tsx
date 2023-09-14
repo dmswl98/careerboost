@@ -6,13 +6,15 @@ import { INITIAL_VALUE } from '@/constants/form';
 
 export const resumeFormSchema = z.object({
   userInfo: z.object({
-    name: z.string(),
-    career: z.string(),
-    brief: z.string(),
-    phone: z.string(),
+    name: z.string().min(1),
+    career: z.string().min(1),
+    phone: z
+      .optional(z.string().regex(/^\d{3}-\d{3,4}-\d{4}$/))
+      .or(z.literal('')),
     email: z.string().email(),
-    blog: z.string().url(),
+    blog: z.optional(z.string().url()).or(z.literal('')),
     github: z.string().url(),
+    brief: z.optional(z.string()),
   }),
   projects: z.array(
     z.object({
