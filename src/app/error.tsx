@@ -1,6 +1,6 @@
 'use client';
 
-import ErrorMessage from '@/components/common/ErrorMessage';
+import { ServiceErrorMessage } from '@/components/common';
 
 interface ErrorProps {
   error: Error;
@@ -8,9 +8,9 @@ interface ErrorProps {
 }
 
 const Error = ({ error, reset }: ErrorProps) => {
-  console.log({ error });
+  console.warn({ error });
 
-  return <ErrorMessage onReset={reset} />;
+  return <ServiceErrorMessage onReset={reset} />;
 };
 
 export default Error;

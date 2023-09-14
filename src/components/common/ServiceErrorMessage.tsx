@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 
 const ERROR_MESSAGE = {
-  title: '일시적인 오류가 발생했어요',
-  description: '잠시 후 다시 시도해주세요',
-  reset: '재시도',
+  TITLE: '일시적인 오류가 발생했어요',
+  DESCRIPTION: '잠시 후 다시 시도해주세요',
+  RESET: '재시도',
 };
 
 interface ErrorMessageProps {
@@ -18,9 +18,9 @@ interface ErrorMessageProps {
 }
 
 const ErrorMessage = ({
-  title = ERROR_MESSAGE.title,
-  description = ERROR_MESSAGE.description,
-  reset = ERROR_MESSAGE.reset,
+  title = ERROR_MESSAGE.TITLE,
+  description = ERROR_MESSAGE.DESCRIPTION,
+  reset = ERROR_MESSAGE.RESET,
   onReset,
 }: ErrorMessageProps) => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const ErrorMessage = ({
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="my-10 flex flex-col items-center justify-center">
       <p className="mb-1 text-xl font-bold">{title}</p>
       <p className="mb-4">{description}</p>
       <Button onClick={onReset || handleHomeNavigate}>{reset}</Button>
