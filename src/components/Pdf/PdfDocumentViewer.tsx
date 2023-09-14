@@ -1,13 +1,13 @@
 import { PDFViewer } from '@react-pdf/renderer';
 import { useFormContext } from 'react-hook-form';
 
-import { ResumeFormSchema } from '../Providers/FormProvider';
+import { type ResumeFormSchema } from '../Providers/FormProvider';
 import PdfDocument from './PdfDocument';
 
 const PdfDocumentViewer = () => {
   const { getValues } = useFormContext<ResumeFormSchema>();
   return (
-    <PDFViewer width="100%" height="650px">
+    <PDFViewer width="100%" height="650px" showToolbar={false}>
       <PdfDocument resume={getValues()} />
     </PDFViewer>
   );
