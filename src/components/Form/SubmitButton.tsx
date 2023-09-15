@@ -6,8 +6,8 @@ import { useFormContext } from 'react-hook-form';
 import { useIsPreview, useResumePreviewActions } from '@/store/preview';
 import { type ResumeFormDataSchema } from '@/types/form';
 
+import { Button } from '../common';
 import PdfDocument from '../Pdf/PdfDocument';
-import { Button } from '../ui/button';
 
 const ISSUE_URL = {
   BUG: 'https://github.com/dmswl98/careerboost/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=%5BBUG%5D',

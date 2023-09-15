@@ -7,8 +7,7 @@ import { v4 } from 'uuid';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
-import { Input } from '../common';
-import { Button } from '../ui/button';
+import { Button, Input } from '../common';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
 

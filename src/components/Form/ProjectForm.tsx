@@ -9,9 +9,8 @@ import { v4 } from 'uuid';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ProjectsFormDataSchema } from '@/types/form';
 
-import { Input } from '../common';
+import { Button, Input } from '../common';
 import IconChatGpt from '../Icon/IconChatGpt';
-import { Button } from '../ui/button';
 import AiSuggestion from './AiSuggestion';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
