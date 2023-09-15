@@ -6,12 +6,13 @@ import {
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
+import { type ResumeFormDataSchema } from '@/types/form';
+
 import { Textarea } from '../common';
-import { type ResumeFormSchema } from '../Providers/FormProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 
 interface ContentInputProps {
-  formName: FieldPath<ResumeFormSchema>;
+  formName: FieldPath<ResumeFormDataSchema>;
   index: number;
   placeholder: string;
   error?: string;
@@ -23,10 +24,10 @@ const ContentInput = ({
   placeholder,
   error,
 }: ContentInputProps) => {
-  const { control } = useFormContext<ResumeFormSchema>();
+  const { control } = useFormContext<ResumeFormDataSchema>();
 
   const value = useWatch({
-    name: `${formName}.${index}.content` as FieldPath<ResumeFormSchema>,
+    name: `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>,
     control,
   }) as string;
 
@@ -39,7 +40,9 @@ const ContentInput = ({
       <TabsContent value="edit">
         <Controller
           control={control}
-          name={`${formName}.${index}.content` as FieldPath<ResumeFormSchema>}
+          name={
+            `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
+          }
           render={({ field }) => (
             <div className="relative">
               <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-gray-300">

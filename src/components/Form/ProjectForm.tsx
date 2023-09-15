@@ -5,21 +5,16 @@ import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
-import { type z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
+import { type ProjectsFormDataSchema } from '@/types/form';
 
 import { Input } from '../common';
 import IconChatGpt from '../Icon/IconChatGpt';
-import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 import AiSuggestion from './AiSuggestion';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
-
-const projectFormSchema = resumeFormSchema.pick({ projects: true });
-
-export type ProjectsFormSchema = z.infer<typeof projectFormSchema>;
 
 const ProjectForm = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -29,7 +24,7 @@ const ProjectForm = () => {
     trigger,
     getValues,
     formState: { errors },
-  } = useFormContext<ProjectsFormSchema>();
+  } = useFormContext<ProjectsFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
     name: 'projects',

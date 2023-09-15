@@ -1,12 +1,11 @@
 import { PenLineIcon } from 'lucide-react';
 import type { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { type z } from 'zod';
 
 import { PLACEHOLDER } from '@/constants/form';
+import { type UserInfoFormDataSchema } from '@/types/form';
 
 import { Input, Label, Textarea } from '../common';
-import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 import {
   Dialog,
@@ -17,17 +16,13 @@ import {
   DialogTrigger,
 } from '../ui/dialog';
 
-const userInfoFormSchema = resumeFormSchema.pick({ userInfo: true });
-
-export type UserInfoFormSchema = z.infer<typeof userInfoFormSchema>;
-
 interface UserInfoFormProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
-  const { control } = useFormContext<UserInfoFormSchema>();
+  const { control } = useFormContext<UserInfoFormDataSchema>();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

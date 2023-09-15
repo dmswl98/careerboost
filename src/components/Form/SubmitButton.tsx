@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useFormContext } from 'react-hook-form';
 
 import { useIsPreview, useResumePreviewActions } from '@/store/preview';
+import { type ResumeFormDataSchema } from '@/types/form';
 
 import PdfDocument from '../Pdf/PdfDocument';
-import { type ResumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 
 const ISSUE_URL = {
@@ -22,7 +22,7 @@ const SubmitButton = () => {
   const {
     getValues,
     formState: { isSubmitSuccessful },
-  } = useFormContext<ResumeFormSchema>();
+  } = useFormContext<ResumeFormDataSchema>();
 
   return (
     <div className="fixed bottom-0 left-0 flex w-full justify-between border-t border-solid border-gray-200 bg-white px-6 py-4">

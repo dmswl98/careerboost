@@ -3,25 +3,20 @@
 import { TrashIcon } from 'lucide-react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
-import { type z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
+import { type ActivitiesFormDataSchema } from '@/types/form';
 
 import { Input } from '../common';
-import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
-
-const activityFormSchema = resumeFormSchema.pick({ activities: true });
-
-export type ActivitiesFormSchema = z.infer<typeof activityFormSchema>;
 
 const ActivityForm = () => {
   const {
     control,
     formState: { errors },
-  } = useFormContext<ActivitiesFormSchema>();
+  } = useFormContext<ActivitiesFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
     name: 'activities',

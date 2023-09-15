@@ -1,13 +1,14 @@
 import { View } from '@react-pdf/renderer';
 
-import { type ActivitiesFormSchema } from '../Form/ActivityForm';
+import { type ActivitiesFormDataSchema } from '@/types/form';
+
 import { tailwind } from './config';
 import PdfMarkdown from './PdfMarkdown';
 import PdfSection from './PdfSection';
 import PdfSectionInfo from './PdfSectionInfo';
 
 interface PdfActivityProps {
-  activities: ActivitiesFormSchema['activities'];
+  activities: ActivitiesFormDataSchema['activities'];
 }
 
 const PdfActivity = ({ activities }: PdfActivityProps) => {

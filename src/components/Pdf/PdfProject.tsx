@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { View } from '@react-pdf/renderer';
 
-import { type ProjectsFormSchema } from '../Form/ProjectForm';
+import { type ProjectsFormDataSchema } from '@/types/form';
+
 import { tailwind } from './config';
 import PdfLink from './PdfLink';
 import PdfMarkdown from './PdfMarkdown';
@@ -9,7 +10,7 @@ import PdfSection from './PdfSection';
 import PdfSectionInfo from './PdfSectionInfo';
 
 interface PdfProjectProps {
-  projects: ProjectsFormSchema['projects'];
+  projects: ProjectsFormDataSchema['projects'];
 }
 
 const PdfProject = ({ projects }: PdfProjectProps) => {
