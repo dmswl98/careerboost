@@ -7,9 +7,8 @@ import { v4 } from 'uuid';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
-import { Button, Input } from '../common';
+import { Button, FormCard, Input } from '../common';
 import ContentInput from './ContentInput';
-import FormCard from './FormCard';
 
 const ActivityForm = () => {
   const {
