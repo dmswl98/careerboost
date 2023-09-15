@@ -5,14 +5,14 @@ import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
-import { z } from 'zod';
+import { type z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
+import { Input } from '../common';
 import IconChatGpt from '../Icon/IconChatGpt';
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import AiSuggestion from './AiSuggestion';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
@@ -94,8 +94,7 @@ const ProjectForm = () => {
                         ? 'border-b-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.project.title}
-                    outline={false}
+                    placeholder={PLACEHOLDER.PROJECT.TITLE}
                     {...field}
                   />
                 )}
@@ -132,7 +131,7 @@ const ProjectForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.project.date}
+                    placeholder={PLACEHOLDER.PROJECT.DATE}
                     {...field}
                   />
                 )}
@@ -148,7 +147,7 @@ const ProjectForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.project.date}
+                    placeholder={PLACEHOLDER.PROJECT.DATE}
                     {...field}
                   />
                 )}
@@ -162,7 +161,7 @@ const ProjectForm = () => {
                   <Input
                     id="url"
                     className="col-span-4"
-                    placeholder={PLACEHOLDER.project.url}
+                    placeholder={PLACEHOLDER.PROJECT.URL}
                     {...field}
                   />
                 )}
@@ -171,7 +170,7 @@ const ProjectForm = () => {
             <ContentInput
               formName="projects"
               index={index}
-              placeholder={PLACEHOLDER.project.content}
+              placeholder={PLACEHOLDER.PROJECT.CONTENT}
               error={errors.projects?.[index]?.content?.message}
             />
             {isSuggest[index] && completion && (

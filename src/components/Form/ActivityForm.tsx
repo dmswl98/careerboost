@@ -3,13 +3,13 @@
 import { TrashIcon } from 'lucide-react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
-import { z } from 'zod';
+import { type z } from 'zod';
 
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 
+import { Input } from '../common';
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import ContentInput from './ContentInput';
 import FormCard from './FormCard';
 
@@ -56,8 +56,7 @@ const ActivityForm = () => {
                         ? 'border-b-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.activity.title}
-                    outline={false}
+                    placeholder={PLACEHOLDER.ACTIVITY.TITLE}
                     {...field}
                   />
                 )}
@@ -83,7 +82,7 @@ const ActivityForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.activity.date}
+                    placeholder={PLACEHOLDER.ACTIVITY.DATE}
                     {...field}
                   />
                 )}
@@ -99,7 +98,7 @@ const ActivityForm = () => {
                         ? 'border-red-300'
                         : ''
                     }`}
-                    placeholder={PLACEHOLDER.activity.date}
+                    placeholder={PLACEHOLDER.ACTIVITY.DATE}
                     {...field}
                   />
                 )}
@@ -108,7 +107,7 @@ const ActivityForm = () => {
             <ContentInput
               formName="activities"
               index={index}
-              placeholder={PLACEHOLDER.activity.content}
+              placeholder={PLACEHOLDER.ACTIVITY.CONTENT}
             />
           </li>
         ))}

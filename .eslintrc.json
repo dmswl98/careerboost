@@ -28,6 +28,10 @@
     "simple-import-sort/exports": "warn",
     "import/named": "off",
     "import/no-unresolved": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "fixStyle": "inline-type-imports" }
+    ]
   }
 }

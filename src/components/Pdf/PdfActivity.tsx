@@ -1,6 +1,6 @@
 import { View } from '@react-pdf/renderer';
 
-import { ActivitiesFormSchema } from '../Form/ActivityForm';
+import { type ActivitiesFormSchema } from '../Form/ActivityForm';
 import { tailwind } from './config';
 import PdfMarkdown from './PdfMarkdown';
 import PdfSection from './PdfSection';

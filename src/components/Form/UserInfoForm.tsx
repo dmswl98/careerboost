@@ -1,10 +1,11 @@
 import { PenLineIcon } from 'lucide-react';
 import type { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { z } from 'zod';
+import { type z } from 'zod';
 
 import { PLACEHOLDER } from '@/constants/form';
 
+import { Input, Label, Textarea } from '../common';
 import { resumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 import {
@@ -15,9 +16,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
 
 const userInfoFormSchema = resumeFormSchema.pick({ userInfo: true });
 
@@ -54,7 +52,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="name"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.name}
+                placeholder={PLACEHOLDER.USER_INFO.NAME}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -73,7 +71,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="career"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.career}
+                placeholder={PLACEHOLDER.USER_INFO.CAREER}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -92,7 +90,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="brief"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.brief}
+                placeholder={PLACEHOLDER.USER_INFO.BRIEF}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -111,7 +109,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="phone"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.phone}
+                placeholder={PLACEHOLDER.USER_INFO.PHONE}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -131,7 +129,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 type="email"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.email}
+                placeholder={PLACEHOLDER.USER_INFO.EMAIL}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -150,7 +148,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="blog"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.link}
+                placeholder={PLACEHOLDER.USER_INFO.URL}
                 onChange={onChange}
                 value={value || ''}
               />
@@ -169,7 +167,7 @@ const UserInfoForm = ({ isOpen, setIsOpen }: UserInfoFormProps) => {
                 id="github"
                 className="col-span-4"
                 ref={ref}
-                placeholder={PLACEHOLDER.userInfo.link}
+                placeholder={PLACEHOLDER.USER_INFO.URL}
                 onChange={onChange}
                 value={value || ''}
               />

@@ -1,6 +1,6 @@
 import { Document, Link, Page, Text } from '@react-pdf/renderer';
 
-import { ResumeFormSchema } from '../Providers/FormProvider';
+import { type ResumeFormSchema } from '../Providers/FormProvider';
 import { tailwind } from './config';
 import PdfActivity from './PdfActivity';
 import PdfIntroduce from './PdfIntroduce';

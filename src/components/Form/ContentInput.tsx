@@ -6,9 +6,9 @@ import {
 } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { ResumeFormSchema } from '../Providers/FormProvider';
+import { Textarea } from '../common';
+import { type ResumeFormSchema } from '../Providers/FormProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
-import { Textarea } from '../ui/textarea';
 
 interface ContentInputProps {
   formName: FieldPath<ResumeFormSchema>;

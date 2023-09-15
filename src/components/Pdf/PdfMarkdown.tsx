@@ -1,5 +1,5 @@
 import { Link, Text, View } from '@react-pdf/renderer';
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { tailwind } from './config';

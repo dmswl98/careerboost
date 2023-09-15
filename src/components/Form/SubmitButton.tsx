@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { useIsPreview, useResumePreviewActions } from '@/store/preview';
 
 import PdfDocument from '../Pdf/PdfDocument';
-import { ResumeFormSchema } from '../Providers/FormProvider';
+import { type ResumeFormSchema } from '../Providers/FormProvider';
 import { Button } from '../ui/button';
 
 const ISSUE_URL = {
