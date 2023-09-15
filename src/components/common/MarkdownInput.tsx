@@ -1,30 +1,27 @@
-import {
-  Controller,
-  type FieldPath,
-  useFormContext,
-  useWatch,
-} from 'react-hook-form';
+'use client';
+
+import { type FieldPath, useFormContext, useWatch } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
 import { type ResumeFormDataSchema } from '@/types/form';
 
-import { Textarea } from '../common';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { FormErrorMessage, Textarea } from '.';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tab';
 
-interface ContentInputProps {
+interface MarkdownInputProps {
   formName: FieldPath<ResumeFormDataSchema>;
   index: number;
   placeholder: string;
   error?: string;
 }
 
-const ContentInput = ({
+const MarkdownInput = ({
   formName,
   index,
   placeholder,
   error,
-}: ContentInputProps) => {
-  const { control } = useFormContext<ResumeFormDataSchema>();
+}: MarkdownInputProps) => {
+  const { control, register } = useFormContext<ResumeFormDataSchema>();
 
   const value = useWatch({
     name: `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>,
@@ -38,29 +35,21 @@ const ContentInput = ({
         <TabsTrigger value="preview">미리보기</TabsTrigger>
       </TabsList>
       <TabsContent value="edit">
-        <Controller
-          control={control}
-          name={
-            `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
-          }
-          render={({ field }) => (
-            <div className="relative">
-              <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-gray-300">
-                마크다운 문법을 지원해요
-              </span>
-              <Textarea
-                id="content"
-                className={`col-span-4 ${error ? 'border-red-300' : ''}`}
-                placeholder={placeholder}
-                ref={field.ref}
-                onChange={field.onChange}
-                value={field.value as string}
-              />
-            </div>
-          )}
-        />
+        <div className="relative">
+          <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-gray-300">
+            마크다운 문법을 지원해요
+          </span>
+          <Textarea
+            {...register(
+              `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
+            )}
+            id="content"
+            className={`col-span-4 ${error ? 'border-red-300' : ''}`}
+            placeholder={placeholder}
+          />
+        </div>
         <div className="mt-1 flex justify-between">
-          {error && <span className="text-xs text-red-300">{error}</span>}
+          {error && <FormErrorMessage message={error} />}
           <span className="ml-auto text-xs text-gray-300">
             글자수 {value?.length || 0}
           </span>
@@ -81,4 +70,4 @@ const ContentInput = ({
   );
 };
 
-export default ContentInput;
+export default MarkdownInput;

@@ -7,8 +7,7 @@ import { v4 } from 'uuid';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
-import { Button, FormCard, Input } from '../common';
-import ContentInput from './ContentInput';
+import { Button, FormCard, Input, MarkdownInput } from '../common';
 
 const ActivityForm = () => {
   const {
@@ -97,7 +96,7 @@ const ActivityForm = () => {
                 )}
               />
             </div>
-            <ContentInput
+            <MarkdownInput
               formName="activities"
               index={index}
               placeholder={PLACEHOLDER.ACTIVITY.CONTENT}
