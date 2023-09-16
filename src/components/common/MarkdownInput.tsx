@@ -3,14 +3,15 @@
 import { type FieldPath, useFormContext, useWatch } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
+import { FormErrorMessage, Label, Textarea } from '@/components/common';
 import { type ResumeFormDataSchema } from '@/types/form';
 
-import { FormErrorMessage, Textarea } from '.';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tab';
 
 interface MarkdownInputProps {
   formName: FieldPath<ResumeFormDataSchema>;
   index: number;
+  label: string;
   placeholder: string;
   error?: string;
 }
@@ -18,6 +19,7 @@ interface MarkdownInputProps {
 const MarkdownInput = ({
   formName,
   index,
+  label,
   placeholder,
   error,
 }: MarkdownInputProps) => {
@@ -30,24 +32,29 @@ const MarkdownInput = ({
 
   return (
     <Tabs defaultValue="edit" className="w-full">
-      <TabsList className="ml-auto grid w-[150px] grid-cols-2">
-        <TabsTrigger value="edit">수정</TabsTrigger>
-        <TabsTrigger value="preview">미리보기</TabsTrigger>
-      </TabsList>
-      <TabsContent value="edit">
-        <div className="relative">
-          <span className="absolute top-[-1.2rem] mb-[-0.25rem] text-xs text-gray-300">
+      <div className="flex items-end">
+        <div className="mb-[-0.55rem]">
+          <Label htmlFor="content" isRequired>
+            {label}
+          </Label>
+          <span className="mb-1 ml-2 inline-block text-xs text-gray-300">
             마크다운 문법을 지원해요
           </span>
-          <Textarea
-            {...register(
-              `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
-            )}
-            id="content"
-            className={`col-span-4 ${error ? 'border-red-300' : ''}`}
-            placeholder={placeholder}
-          />
         </div>
+        <TabsList className="ml-auto grid w-[150px] grid-cols-2">
+          <TabsTrigger value="edit">수정</TabsTrigger>
+          <TabsTrigger value="preview">미리보기</TabsTrigger>
+        </TabsList>
+      </div>
+      <TabsContent value="edit">
+        <Textarea
+          {...register(
+            `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
+          )}
+          id="content"
+          className={`col-span-4 ${error ? 'border-red-300' : ''}`}
+          placeholder={placeholder}
+        />
         <div className="mt-1 flex justify-between">
           {error && <FormErrorMessage message={error} />}
           <span className="ml-auto text-xs text-gray-300">
@@ -57,7 +64,7 @@ const MarkdownInput = ({
       </TabsContent>
       <TabsContent value="preview">
         {value ? (
-          <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.55rem] text-sm">
+          <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.57rem] text-sm">
             {value as string}
           </ReactMarkdown>
         ) : (
