@@ -1,4 +1,5 @@
 export { default as Button } from './Button';
+export { default as Checkbox } from './Checkbox';
 export { default as FormCard } from './FormCard';
 export { default as FormErrorMessage } from './FormErrorMessage';
 export { default as Guide } from './Guide';
