@@ -15,7 +15,7 @@ const ResumeStepMenuItem = ({ title, route }: ResumeStepMenuItemProps) => {
 
   return (
     <li
-      className={`my-0.5 rounded-lg text-[15px] transition-all hover:bg-gray-100/70 ${
+      className={`my-0.5 rounded-md text-[15px] text-primary transition-all hover:bg-gray-100/70 ${
         isCurrentLocation && 'bg-gray-100 font-bold'
       }`}
     >
