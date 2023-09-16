@@ -32,6 +32,7 @@ module.exports = {
         border: '#e8eaedff',
         ring: '#d1d5dbff',
         background: '#ffffff',
+        ai: '#75ac9d',
       },
       keyframes: {
         rotate: {
