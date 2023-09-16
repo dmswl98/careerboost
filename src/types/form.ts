@@ -1,12 +1,13 @@
 import { z } from 'zod';
 
+const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;
+const DATE_REGEX = /^\d{4}\.\d{2}$/;
+
 export const resumeFormSchema = z.object({
   userInfo: z.object({
     name: z.string().min(1),
     career: z.string().min(1),
-    phone: z
-      .optional(z.string().regex(/^\d{3}-\d{3,4}-\d{4}$/))
-      .or(z.literal('')),
+    phone: z.optional(z.string().regex(PHONE_REGEX)).or(z.literal('')),
     email: z.string().email(),
     blog: z.optional(z.string().url()).or(z.literal('')),
     github: z.string().url(),
@@ -16,8 +17,8 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
-      startDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
-      endDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
+      startDate: z.string().regex(DATE_REGEX),
+      endDate: z.string().regex(DATE_REGEX).or(z.literal('진행 중')),
       content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
       url: z.string().optional(),
     })
@@ -26,8 +27,8 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
-      startDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
-      endDate: z.string().regex(new RegExp('\\d{4}\\.\\d{2}')),
+      startDate: z.string().regex(DATE_REGEX),
+      endDate: z.string().regex(DATE_REGEX).or(z.literal('진행 중')),
       content: z.string().optional(),
     })
   ),

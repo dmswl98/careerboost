@@ -28,6 +28,8 @@ const Page = () => {
     register,
     trigger,
     getValues,
+    setValue,
+    resetField,
     formState: { errors },
   } = useFormContext<ProjectsFormDataSchema>();
 
@@ -54,6 +56,14 @@ const Page = () => {
 
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
+  };
+
+  const handleCheckboxClick = (index: number) => {
+    if (!getValues(`projects.${index}.endDate`)) {
+      setValue(`projects.${index}.endDate`, '진행 중');
+    } else {
+      resetField(`projects.${index}.endDate`);
+    }
   };
 
   const handleSuggestClick = (index: number) => {
@@ -140,7 +150,11 @@ const Page = () => {
                   }
                 />
               </div>
-              <Checkbox id="date" label="아직 진행중이에요" />
+              <Checkbox
+                id={`isDoing-${index}`}
+                label="아직 진행 중이에요"
+                onClick={() => handleCheckboxClick(index)}
+              />
             </div>
             <Label htmlFor="url">프로젝트 주소</Label>
             <Input
