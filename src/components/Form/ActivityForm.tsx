@@ -97,6 +97,7 @@ const ActivityForm = () => {
               />
             </div>
             <MarkdownInput
+              label="활동 내용"
               formName="activities"
               index={index}
               placeholder={PLACEHOLDER.ACTIVITY.CONTENT}
