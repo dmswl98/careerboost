@@ -27,9 +27,10 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
+      institution: z.optional(z.string()),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z.string().regex(DATE_REGEX).or(z.literal('진행 중')),
-      content: z.string().optional(),
+      content: z.string().min(1, { message: '내용을 작성해주세요' }),
     })
   ),
 });

@@ -17,7 +17,7 @@ export const PLACEHOLDER = {
   },
   ACTIVITY: {
     TITLE: '활동명',
-    GROUP: '소속/기관',
+    INSTITUTION: '소속/기관',
     DATE: 'YYYY.MM',
     CONTENT: '참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요',
   },
@@ -44,6 +44,7 @@ export const INITIAL_VALUE = {
   activity: {
     id: v4(),
     title: '',
+    institution: '',
     startDate: '',
     endDate: '',
     content: '',
