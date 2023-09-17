@@ -3,14 +3,14 @@
 import { useFormContext } from 'react-hook-form';
 
 import { FormCard, Guide, Input, Label, Textarea } from '@/components/common';
-import { type UserInfoFormSchema } from '@/components/Form/UserInfoForm';
 import { PLACEHOLDER } from '@/constants/form';
+import { type UserInfoFormDataSchema } from '@/types/form';
 
 const Page = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<UserInfoFormSchema>();
+  } = useFormContext<UserInfoFormDataSchema>();
 
   return (
     <FormCard title="기본 정보">

@@ -6,13 +6,14 @@ import { useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { USER_INFO } from '@/constants/user';
+import { type UserInfoFormDataSchema } from '@/types/form';
 
-import UserInfoForm, { type UserInfoFormSchema } from './Form/UserInfoForm';
+import UserInfoForm from './Form/UserInfoForm';
 
 const Introduce = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { control } = useFormContext<UserInfoFormSchema>();
+  const { control } = useFormContext<UserInfoFormDataSchema>();
 
   const value = useWatch({
     name: 'userInfo',

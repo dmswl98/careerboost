@@ -1,13 +1,14 @@
 import { Document, Link, Page, Text } from '@react-pdf/renderer';
 
-import { type ResumeFormSchema } from '../Providers/FormProvider';
+import { type ResumeFormDataSchema } from '@/types/form';
+
 import { tailwind } from './config';
 import PdfActivity from './PdfActivity';
 import PdfIntroduce from './PdfIntroduce';
 import PdfProject from './PdfProject';
 
 interface PdfDocumentProps {
-  resume: ResumeFormSchema;
+  resume: ResumeFormDataSchema;
 }
 
 const PdfDocument = ({ resume }: PdfDocumentProps) => {
