@@ -3,8 +3,8 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { Guide, Input, Label, MarkdownInput } from '@/components/common';
-import { FormCard, PeriodInput } from '@/components/Form';
+import { Guide, Input, Label } from '@/components/common';
+import { FormCard, MarkdownInput, PeriodInput } from '@/components/Form';
 import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';

@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { FormErrorMessage, Label, Textarea } from '@/components/common';
 import { type ResumeFormDataSchema } from '@/types/form';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tab';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../common/Tab';
 
 interface MarkdownInputProps {
   formName: FieldPath<ResumeFormDataSchema>;
