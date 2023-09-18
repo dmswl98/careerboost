@@ -1,11 +1,9 @@
 'use client';
 
-import { TrashIcon } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import {
-  Button,
   FormCard,
   Guide,
   Input,
@@ -13,6 +11,7 @@ import {
   MarkdownInput,
 } from '@/components/common';
 import { PeriodInput } from '@/components/Form';
+import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
@@ -35,10 +34,6 @@ const Page = () => {
     });
   };
 
-  const handleActivityFormRemove = (index: number) => {
-    remove(index);
-  };
-
   return (
     <FormCard title="수상 및 활동" onAppendForm={handleActivityFormAppend}>
       <Guide descrption="💡 활동에 참여한 동기와 어떤 역량을 키울 수 있었는지 구체적으로 작성하여 지속적인 성장 의지와 전문성을 강조해보세요" />
@@ -52,28 +47,21 @@ const Page = () => {
               <Input
                 {...register(`activities.${index}.title`)}
                 id="title"
+                className="mr-1"
                 placeholder={PLACEHOLDER.ACTIVITY.TITLE}
                 isError={
                   !!(errors.activities && errors.activities[index]?.title)
                 }
-                className="mr-1"
                 autoFocus
               />
-              <Button
-                variant="outline"
-                size="icon"
-                type="button"
-                onClick={() => handleActivityFormRemove(index)}
-              >
-                <TrashIcon className="m-3 text-gray-500" />
-              </Button>
+              <FormRemoveButton onRemoveForm={() => remove(index)} />
             </div>
             <Label htmlFor="institution">기관명</Label>
             <Input
               {...register(`activities.${index}.institution`)}
               id="title"
-              placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
               className="mb-3"
+              placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
             />
             <PeriodInput
               formName="activities"

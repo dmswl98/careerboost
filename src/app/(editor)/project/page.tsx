@@ -1,7 +1,6 @@
 'use client';
 
 import { useCompletion } from 'ai/react';
-import { TrashIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
@@ -15,6 +14,7 @@ import {
   MarkdownInput,
 } from '@/components/common';
 import { AiSuggestion, PeriodInput } from '@/components/Form';
+import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ProjectsFormDataSchema } from '@/types/form';
@@ -93,26 +93,21 @@ const Page = () => {
               <Input
                 {...register(`projects.${index}.title`)}
                 id="title"
+                className="mr-1"
                 placeholder={PLACEHOLDER.PROJECT.TITLE}
                 isError={!!(errors.projects && errors.projects[index]?.title)}
-                className="mr-1"
                 autoFocus
               />
-              <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                className="mr-1"
-                onClick={() => handleProjectFormRemove(index)}
-              >
-                <TrashIcon className="m-3 text-gray-500" />
-              </Button>
+              <FormRemoveButton
+                onRemoveForm={() => handleProjectFormRemove(index)}
+              />
               <Button
                 size="icon"
                 type="button"
+                className="ml-1"
+                disabled={isSuggest[index]}
                 title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
                 onClick={() => handleSuggestClick(index)}
-                disabled={isSuggest[index]}
               >
                 <IconChatGpt />
               </Button>
