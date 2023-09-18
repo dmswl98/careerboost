@@ -1,8 +1,6 @@
 import { clsx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
-import RequireMark from './RequireMark';
-
 interface LabelProps extends ComponentPropsWithoutRef<'label'> {
   isRequired?: boolean;
 }
@@ -18,7 +16,11 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
         )}
         {...props}
       />
-      {isRequired && <RequireMark />}
+      {isRequired && (
+        <span className="mb-1.5 ml-1 inline-block text-xs text-gray-400">
+          ✱
+        </span>
+      )}
     </>
   )
 );
