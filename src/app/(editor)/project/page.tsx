@@ -34,7 +34,7 @@ const Page = () => {
   });
 
   const { complete, completion } = useCompletion({
-    api: '/api/suggest',
+    api: '/api/ai',
   });
 
   const handleProjectFormAppend = () => {

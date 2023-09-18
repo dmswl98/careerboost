@@ -24,7 +24,7 @@ export async function POST(req: Request) {
           please suggest 5 improvements or additional items in Korean that should be included in the resume, based on the provided project content, technical stack, and individual contributions to the project.`,
       },
     ],
-    temperature: 0, // you want absolute certainty for spell check
+    temperature: 0,
     top_p: 1,
     frequency_penalty: 1,
     presence_penalty: 1,
