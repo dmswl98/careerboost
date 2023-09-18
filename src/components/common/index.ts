@@ -1,7 +1,6 @@
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as FormErrorMessage } from './FormErrorMessage';
-export { default as Guide } from './Guide';
 export { default as Input } from './Input';
 export { default as Label } from './Label';
 export { default as Progress } from './Progress';
