@@ -2,7 +2,8 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { FormCard, Guide, Input, Label, Textarea } from '@/components/common';
+import { Guide, Input, Label, Textarea } from '@/components/common';
+import { FormCard } from '@/components/Form';
 import { PLACEHOLDER } from '@/constants/form';
 import { type UserInfoFormDataSchema } from '@/types/form';
 

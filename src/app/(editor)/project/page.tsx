@@ -7,13 +7,12 @@ import { v4 } from 'uuid';
 
 import {
   Button,
-  FormCard,
   Guide,
   Input,
   Label,
   MarkdownInput,
 } from '@/components/common';
-import { AiSuggestion, PeriodInput } from '@/components/Form';
+import { AiSuggestion, FormCard, PeriodInput } from '@/components/Form';
 import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
