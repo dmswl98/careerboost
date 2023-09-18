@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { PLACEHOLDER } from '@/constants/form';
+
 const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;
 const DATE_REGEX = /^\d{4}\.\d{2}$/;
 
@@ -18,7 +20,7 @@ export const resumeFormSchema = z.object({
       id: z.string().uuid(),
       title: z.string().min(1),
       startDate: z.string().regex(DATE_REGEX),
-      endDate: z.string().regex(DATE_REGEX).or(z.literal('진행 중')),
+      endDate: z.string().regex(DATE_REGEX).or(z.literal(PLACEHOLDER.IS_DOING)),
       content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
       url: z.string().optional(),
     })
@@ -29,7 +31,7 @@ export const resumeFormSchema = z.object({
       title: z.string().min(1),
       institution: z.optional(z.string()),
       startDate: z.string().regex(DATE_REGEX),
-      endDate: z.string().regex(DATE_REGEX).or(z.literal('진행 중')),
+      endDate: z.string().regex(DATE_REGEX).or(z.literal(PLACEHOLDER.IS_DOING)),
       content: z.string().min(1, { message: '내용을 작성해주세요' }),
     })
   ),

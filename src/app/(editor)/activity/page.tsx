@@ -6,13 +6,13 @@ import { v4 } from 'uuid';
 
 import {
   Button,
-  Checkbox,
   FormCard,
   Guide,
   Input,
   Label,
   MarkdownInput,
 } from '@/components/common';
+import { PeriodInput } from '@/components/Form';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
@@ -20,9 +20,6 @@ const Page = () => {
   const {
     control,
     register,
-    getValues,
-    setValue,
-    resetField,
     formState: { errors },
   } = useFormContext<ActivitiesFormDataSchema>();
 
@@ -40,14 +37,6 @@ const Page = () => {
 
   const handleActivityFormRemove = (index: number) => {
     remove(index);
-  };
-
-  const handleCheckboxClick = (index: number) => {
-    if (!getValues(`activities.${index}.endDate`)) {
-      setValue(`activities.${index}.endDate`, '진행 중');
-    } else {
-      resetField(`activities.${index}.endDate`);
-    }
   };
 
   return (
@@ -86,34 +75,18 @@ const Page = () => {
               placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
               className="mb-3"
             />
-            <Label htmlFor="startDate" isRequired>
-              기간
-            </Label>
-            <div className="mb-3">
-              <div className="mb-1 flex gap-2">
-                <Input
-                  {...register(`activities.${index}.startDate`)}
-                  id="startDate"
-                  placeholder={PLACEHOLDER.ACTIVITY.DATE}
-                  isError={
-                    !!(errors.activities && errors.activities[index]?.startDate)
-                  }
-                />
-                <Input
-                  {...register(`activities.${index}.endDate`)}
-                  id="endDate"
-                  placeholder={PLACEHOLDER.ACTIVITY.DATE}
-                  isError={
-                    !!(errors.activities && errors.activities[index]?.endDate)
-                  }
-                />
-              </div>
-              <Checkbox
-                id={`isDoing-${index}`}
-                label="아직 진행 중이에요"
-                onClick={() => handleCheckboxClick(index)}
-              />
-            </div>
+            <PeriodInput
+              formName="activities"
+              index={index}
+              isError={{
+                startDate: !!(
+                  errors.activities && errors.activities[index]?.startDate
+                ),
+                endDate: !!(
+                  errors.activities && errors.activities[index]?.endDate
+                ),
+              }}
+            />
             <MarkdownInput
               formName="activities"
               index={index}

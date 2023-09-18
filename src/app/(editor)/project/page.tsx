@@ -8,14 +8,13 @@ import { v4 } from 'uuid';
 
 import {
   Button,
-  Checkbox,
   FormCard,
   Guide,
   Input,
   Label,
   MarkdownInput,
 } from '@/components/common';
-import AiSuggestion from '@/components/Form/AiSuggestion';
+import { AiSuggestion, PeriodInput } from '@/components/Form';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { type ProjectsFormDataSchema } from '@/types/form';
@@ -28,8 +27,6 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    setValue,
-    resetField,
     formState: { errors },
   } = useFormContext<ProjectsFormDataSchema>();
 
@@ -56,14 +53,6 @@ const Page = () => {
 
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
-  };
-
-  const handleCheckboxClick = (index: number) => {
-    if (!getValues(`projects.${index}.endDate`)) {
-      setValue(`projects.${index}.endDate`, '진행 중');
-    } else {
-      resetField(`projects.${index}.endDate`);
-    }
   };
 
   const handleSuggestClick = (index: number) => {
@@ -128,34 +117,16 @@ const Page = () => {
                 <IconChatGpt />
               </Button>
             </div>
-            <Label htmlFor="startDate" isRequired>
-              프로젝트 기간
-            </Label>
-            <div className="mb-3">
-              <div className="mb-1 flex gap-2">
-                <Input
-                  {...register(`projects.${index}.startDate`)}
-                  id="startDate"
-                  placeholder={PLACEHOLDER.PROJECT.DATE}
-                  isError={
-                    !!(errors.projects && errors.projects[index]?.startDate)
-                  }
-                />
-                <Input
-                  {...register(`projects.${index}.endDate`)}
-                  id="endDate"
-                  placeholder={PLACEHOLDER.PROJECT.DATE}
-                  isError={
-                    !!(errors.projects && errors.projects[index]?.endDate)
-                  }
-                />
-              </div>
-              <Checkbox
-                id={`isDoing-${index}`}
-                label="아직 진행 중이에요"
-                onClick={() => handleCheckboxClick(index)}
-              />
-            </div>
+            <PeriodInput
+              formName="projects"
+              index={index}
+              isError={{
+                startDate: !!(
+                  errors.projects && errors.projects[index]?.startDate
+                ),
+                endDate: !!(errors.projects && errors.projects[index]?.endDate),
+              }}
+            />
             <Label htmlFor="url">프로젝트 주소</Label>
             <Input
               {...register(`projects.${index}.url`)}
