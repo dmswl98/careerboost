@@ -2,7 +2,7 @@ import '../styles/globals.css';
 
 import type { Metadata } from 'next';
 
-import { GoogleAnalytics, Hotjar } from '@/components/Analytics';
+import { GoogleAnalytics, Hotjar } from '@/components/Analyticss';
 import Navigation from '@/components/Layout/Navigation';
 import META from '@/constants/meta';
 import { pretendard, sourceCode } from '@/styles/font';
