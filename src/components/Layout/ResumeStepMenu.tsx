@@ -17,7 +17,7 @@ const RESUME_STEP = [
     route: ROUTES.PROJECT,
   },
   {
-    title: '활동',
+    title: '수상 및 활동',
     route: ROUTES.ACTIVITY,
   },
 ];

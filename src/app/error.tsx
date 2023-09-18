@@ -4,13 +4,12 @@ import { ServiceErrorMessage } from '@/components/common';
 
 interface ErrorProps {
   error: Error;
-  reset: () => void;
 }
 
-const Error = ({ error, reset }: ErrorProps) => {
+const Error = ({ error }: ErrorProps) => {
   console.warn({ error });
 
-  return <ServiceErrorMessage onReset={reset} />;
+  return <ServiceErrorMessage />;
 };
 
 export default Error;

@@ -12,14 +12,16 @@ const ResumeStepMenuItem = ({ title, route }: ResumeStepMenuItemProps) => {
   const pathname = usePathname();
 
   const isCurrentLocation = pathname === route;
+  const currentLocationStyle = isCurrentLocation
+    ? 'border-primary font-bold text-primary'
+    : 'border-white text-gray-400';
 
   return (
-    <li
-      className={`my-0.5 rounded-md text-[15px] text-primary transition-all hover:bg-gray-100/70 ${
-        isCurrentLocation && 'bg-gray-100 font-bold'
-      }`}
-    >
-      <Link href={route} className="block p-2">
+    <li className={`my-3 text-[15px] last:mb-0`}>
+      <Link
+        href={route}
+        className={`inline-block border-b-[3px] py-1 transition-all hover:border-primary hover:font-bold hover:text-primary ${currentLocationStyle}`}
+      >
         {title}
       </Link>
     </li>

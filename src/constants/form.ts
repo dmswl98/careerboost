@@ -11,16 +11,16 @@ export const PLACEHOLDER = {
   },
   PROJECT: {
     TITLE: '프로젝트명',
-    DATE: 'YYYY.MM',
     URL: '프로젝트 주소',
     CONTENT: '프로젝트 내용과 본인의 역할, 기여도를 작성해보세요',
   },
   ACTIVITY: {
-    TITLE: '활동명',
-    GROUP: '소속/기관',
-    DATE: 'YYYY.MM',
+    TITLE: '수상 및 활동명',
+    INSTITUTION: '소속/기관',
     CONTENT: '참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요',
   },
+  DATE: 'YYYY.MM',
+  IS_DOING: '진행 중',
 };
 
 export const INITIAL_VALUE = {
@@ -44,6 +44,7 @@ export const INITIAL_VALUE = {
   activity: {
     id: v4(),
     title: '',
+    institution: '',
     startDate: '',
     endDate: '',
     content: '',
