@@ -2,7 +2,8 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { FormCard, Guide, Input, Label, Textarea } from '@/components/common';
+import { Input, Label, Textarea } from '@/components/common';
+import { FormCard } from '@/components/Form';
 import { PLACEHOLDER } from '@/constants/form';
 import { type UserInfoFormDataSchema } from '@/types/form';
 
@@ -13,8 +14,10 @@ const Page = () => {
   } = useFormContext<UserInfoFormDataSchema>();
 
   return (
-    <FormCard title="기본 정보">
-      <Guide descrption="입력한 정보가 올바른지 다시 한 번 확인해주세요" />
+    <FormCard
+      title="기본 정보"
+      guide="입력한 정보가 올바른지 다시 한 번 확인해주세요"
+    >
       <Label htmlFor="name" isRequired>
         이름
       </Label>

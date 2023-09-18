@@ -3,10 +3,16 @@
 import { type FieldPath, useFormContext, useWatch } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { FormErrorMessage, Label, Textarea } from '@/components/common';
+import { Label, Textarea } from '@/components/common';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/common/Tab';
 import { type ResumeFormDataSchema } from '@/types/form';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tab';
+import { FormErrorMessage } from '.';
 
 interface MarkdownInputProps {
   formName: FieldPath<ResumeFormDataSchema>;

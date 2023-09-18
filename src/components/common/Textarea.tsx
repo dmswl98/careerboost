@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
-import { FormErrorMessage } from '@/components/common';
+import { FormErrorMessage } from '@/components/Form';
 
 export interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
   error?: string;

@@ -4,12 +4,14 @@ import { Button } from '@/components/common';
 
 interface FormCardProps {
   title: string;
+  guide?: string;
   onAppendForm?: () => void;
 }
 
 const FormCard = ({
   children,
   title,
+  guide,
   onAppendForm,
 }: StrictPropsWithChildren<FormCardProps>) => {
   return (
@@ -27,6 +29,11 @@ const FormCard = ({
           </Button>
         )}
       </div>
+      {guide && (
+        <div className="mb-5 whitespace-pre-line rounded-lg bg-gray-100 p-4 text-sm text-gray-600">
+          {guide}
+        </div>
+      )}
       {children}
     </div>
   );

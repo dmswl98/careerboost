@@ -5,15 +5,13 @@ import { useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
+import { Button, Input, Label } from '@/components/common';
 import {
-  Button,
+  AiSuggestion,
   FormCard,
-  Guide,
-  Input,
-  Label,
   MarkdownInput,
-} from '@/components/common';
-import { AiSuggestion, PeriodInput } from '@/components/Form';
+  PeriodInput,
+} from '@/components/Form';
 import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
@@ -36,7 +34,7 @@ const Page = () => {
   });
 
   const { complete, completion } = useCompletion({
-    api: '/api/suggest',
+    api: '/api/ai',
   });
 
   const handleProjectFormAppend = () => {
@@ -81,8 +79,11 @@ const Page = () => {
   };
 
   return (
-    <FormCard title="프로젝트" onAppendForm={handleProjectFormAppend}>
-      <Guide descrption="💡 단순히 어떤 기술을 사용했다는 것보다 해당 프로젝트에서 마주친 문제를 해결한 과정과 배운 점, 결과 등을 강조해보세요" />
+    <FormCard
+      title="프로젝트"
+      guide="💡 단순히 어떤 기술을 사용했다는 것보다 해당 프로젝트에서 마주친 문제를 해결한 과정과 배운 점, 결과 등을 강조해보세요"
+      onAppendForm={handleProjectFormAppend}
+    >
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border-b border-gray-200/70 py-6">
