@@ -1,3 +1,5 @@
+'use client';
+
 import { type FieldPath, useFormContext } from 'react-hook-form';
 
 import { Checkbox, Input, Label } from '@/components/common';
