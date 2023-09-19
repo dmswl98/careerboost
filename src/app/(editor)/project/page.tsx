@@ -15,6 +15,7 @@ import {
 import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
+import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
 
 const Page = () => {
@@ -80,8 +81,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title="프로젝트"
-      guide="💡 단순히 어떤 기술을 사용했다는 것보다 해당 프로젝트에서 마주친 문제를 해결한 과정과 배운 점, 결과 등을 강조해보세요"
+      title={MENU_INFO.PROJECT.TITLE}
+      guide={MENU_INFO.PROJECT.GUIDE}
       onAppendForm={handleProjectFormAppend}
     >
       <ul>

@@ -7,6 +7,7 @@ import { Input, Label } from '@/components/common';
 import { FormCard, MarkdownInput, PeriodInput } from '@/components/Form';
 import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
+import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
 const Page = () => {
@@ -30,8 +31,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title="수상 및 활동"
-      guide="💡 활동에 참여한 동기와 어떤 역량을 키울 수 있었는지 구체적으로 작성하여 지속적인 성장 의지와 전문성을 강조해보세요"
+      title={MENU_INFO.ACTIVITY.TITLE}
+      guide={MENU_INFO.ACTIVITY.GUIDE}
       onAppendForm={handleActivityFormAppend}
     >
       <ul>
