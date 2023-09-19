@@ -9,6 +9,12 @@ export const PLACEHOLDER = {
     URL: 'https://',
     BRIEF: '나만의 소개글을 작성해보세요',
   },
+  EXPERIENCE: {
+    COMPANY: '회사명',
+    EMPLOYMENT_TYPE: '근무 형태',
+    JOB_TITLE: '직무',
+    CONTENT: '맡은 역할과 달성한 구체적인 성과를 작성해보세요',
+  },
   PROJECT: {
     TITLE: '프로젝트명',
     URL: '프로젝트 주소',
@@ -19,8 +25,11 @@ export const PLACEHOLDER = {
     INSTITUTION: '소속/기관',
     CONTENT: '참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요',
   },
+  PERIOD: {
+    WORKING: '재직 중',
+    PROGRESS: '진행 중',
+  },
   DATE: 'YYYY.MM',
-  IS_DOING: '진행 중',
 };
 
 export const INITIAL_VALUE = {
@@ -32,6 +41,15 @@ export const INITIAL_VALUE = {
     email: '',
     blog: '',
     github: '',
+  },
+  experience: {
+    id: v4(),
+    company: '',
+    employmentType: '',
+    jobTitle: '',
+    startDate: '',
+    endDate: '',
+    content: '',
   },
   project: {
     id: v4(),
@@ -49,4 +67,21 @@ export const INITIAL_VALUE = {
     endDate: '',
     content: '',
   },
+};
+
+export const EMPLOYMENT_TYPE = {
+  FULL_TIME: '정규직',
+  CONTRACTOR: '계약직',
+  INTERN: '인턴',
+};
+
+export const EMPLOYMENT_TYPES = [
+  EMPLOYMENT_TYPE.FULL_TIME,
+  EMPLOYMENT_TYPE.CONTRACTOR,
+  EMPLOYMENT_TYPE.INTERN,
+];
+
+export const PERIOD_LABEL = {
+  WORKING: '아직 재직 중이에요',
+  PROGRESS: '아직 진행 중이에요',
 };
