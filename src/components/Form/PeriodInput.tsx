@@ -3,8 +3,10 @@
 import { type FieldPath, useFormContext } from 'react-hook-form';
 
 import { Checkbox, Input, Label } from '@/components/common';
-import { PLACEHOLDER } from '@/constants/form';
+import { PERIOD_LABEL, PLACEHOLDER } from '@/constants/form';
 import { type ResumeFormDataSchema } from '@/types/form';
+
+type PeriodLabelType = (typeof PERIOD_LABEL)[keyof typeof PERIOD_LABEL];
 
 interface PeriodError {
   startDate: boolean;
@@ -14,10 +16,21 @@ interface PeriodError {
 interface PeriodInputProps {
   formName: FieldPath<ResumeFormDataSchema>;
   index: number;
+  label?: PeriodLabelType;
   isError: PeriodError;
 }
 
-const PeriodInput = ({ formName, index, isError }: PeriodInputProps) => {
+const PeriodInput = ({
+  formName,
+  index,
+  label = PERIOD_LABEL.PROGRESS,
+  isError,
+}: PeriodInputProps) => {
+  const PERIOD_INPUT_PLACEHOLDER =
+    label === PERIOD_LABEL.PROGRESS
+      ? PLACEHOLDER.PERIOD.PROGRESS
+      : PLACEHOLDER.PERIOD.WORKING;
+
   const { register, watch, setValue, resetField } =
     useFormContext<ResumeFormDataSchema>();
 
@@ -26,7 +39,7 @@ const PeriodInput = ({ formName, index, isError }: PeriodInputProps) => {
       `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>;
 
     if (!watch(endDateField)) {
-      setValue(endDateField, PLACEHOLDER.IS_DOING);
+      setValue(endDateField, PERIOD_INPUT_PLACEHOLDER);
     } else {
       resetField(endDateField);
     }
@@ -58,11 +71,11 @@ const PeriodInput = ({ formName, index, isError }: PeriodInputProps) => {
         </div>
         <Checkbox
           id={`isDoing-${index}`}
-          label="아직 진행 중이에요"
+          label={label}
           checked={
             watch(
               `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
-            ) === PLACEHOLDER.IS_DOING
+            ) === PERIOD_INPUT_PLACEHOLDER
           }
           onClick={() => handleCheckboxClick(index)}
         />
