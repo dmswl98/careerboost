@@ -1,6 +1,6 @@
 'use client';
 
-import ResumeStepMenu from '@/components/Layout/ResumeStepMenu';
+import Sidebar from '@/components/Layout/Sidebar';
 import FormProvider from '@/components/Providers/FormProvider';
 
 const Layout = ({ children }: StrictPropsWithChildren) => {
@@ -9,7 +9,7 @@ const Layout = ({ children }: StrictPropsWithChildren) => {
       <FormProvider>
         <div className="flex gap-6">
           {children}
-          <ResumeStepMenu />
+          <Sidebar />
         </div>
       </FormProvider>
     </main>

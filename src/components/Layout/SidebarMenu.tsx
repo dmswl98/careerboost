@@ -3,12 +3,12 @@ import { usePathname } from 'next/navigation';
 
 import { type ROUTES } from '@/constants/routes';
 
-interface ResumeStepMenuItemProps {
+interface SidebarMenuProps {
   title: string;
   route: (typeof ROUTES)[keyof typeof ROUTES];
 }
 
-const ResumeStepMenuItem = ({ title, route }: ResumeStepMenuItemProps) => {
+const SidebarMenu = ({ title, route }: SidebarMenuProps) => {
   const pathname = usePathname();
 
   const isCurrentLocation = pathname === route;
@@ -17,7 +17,7 @@ const ResumeStepMenuItem = ({ title, route }: ResumeStepMenuItemProps) => {
     : 'border-white text-gray-400';
 
   return (
-    <li className={`my-3 text-[15px] last:mb-0`}>
+    <li className="my-3 text-[15px] last:mb-0">
       <Link
         href={route}
         className={`inline-block border-b-[3px] py-1 transition-all hover:border-primary hover:font-bold hover:text-primary ${currentLocationStyle}`}
@@ -28,4 +28,4 @@ const ResumeStepMenuItem = ({ title, route }: ResumeStepMenuItemProps) => {
   );
 };
 
-export default ResumeStepMenuItem;
+export default SidebarMenu;
