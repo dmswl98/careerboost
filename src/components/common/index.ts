@@ -4,4 +4,5 @@ export { default as Input } from './Input';
 export { default as Label } from './Label';
 export { default as Progress } from './Progress';
 export { default as ServiceErrorMessage } from './ServiceErrorMessage';
+export { default as Switch } from './Switch';
 export { default as Textarea } from './Textarea';
