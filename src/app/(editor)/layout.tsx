@@ -1,5 +1,6 @@
 'use client';
 
+import SubmitButton from '@/components/Form/SubmitButton';
 import Sidebar from '@/components/Layout/Sidebar';
 import FormProvider from '@/components/Providers/FormProvider';
 
@@ -9,7 +10,10 @@ const Layout = ({ children }: StrictPropsWithChildren) => {
       <FormProvider>
         <div className="flex gap-6">
           {children}
-          <Sidebar />
+          <div className="flex flex-col">
+            <Sidebar />
+            <SubmitButton />
+          </div>
         </div>
       </FormProvider>
     </main>

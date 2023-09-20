@@ -4,4 +4,5 @@ export const ROUTES = {
   EXPERIENCE: '/experience',
   PROJECT: '/project',
   ACTIVITY: '/activity',
+  PREVIEW: '/preview',
 } as const;
