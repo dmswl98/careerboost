@@ -5,7 +5,7 @@ import { type ResumeFormDataSchema } from '@/types/form';
 
 import PdfDocument from './PdfDocument';
 
-const PdfDocumentViewer = () => {
+const PdfViewer = () => {
   const { getValues } = useFormContext<ResumeFormDataSchema>();
   return (
     <PDFViewer width="780px" height="800px" showToolbar={false}>
@@ -14,4 +14,4 @@ const PdfDocumentViewer = () => {
   );
 };
 
-export default PdfDocumentViewer;
+export default PdfViewer;

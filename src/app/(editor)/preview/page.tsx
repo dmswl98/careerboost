@@ -1,9 +1,9 @@
 'use client';
 
-import PdfDocumentViewer from '@/components/Pdf/PdfDocumentViewer';
+import PdfViewer from '@/components/Pdf/PdfViewer';
 
 const Page = () => {
-  return <PdfDocumentViewer />;
+  return <PdfViewer />;
 };
 
 export default Page;
