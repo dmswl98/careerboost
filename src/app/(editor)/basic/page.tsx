@@ -25,6 +25,7 @@ const Page = () => {
         placeholder={PLACEHOLDER.USER_INFO.NAME}
         isError={!!errors.userInfo?.name}
         className="mb-3"
+        autoFocus
       />
       <Label htmlFor="career" isRequired>
         직무
