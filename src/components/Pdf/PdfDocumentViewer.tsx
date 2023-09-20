@@ -8,7 +8,7 @@ import PdfDocument from './PdfDocument';
 const PdfDocumentViewer = () => {
   const { getValues } = useFormContext<ResumeFormDataSchema>();
   return (
-    <PDFViewer width="100%" height="650px" showToolbar={false}>
+    <PDFViewer width="780px" height="800px" showToolbar={false}>
       <PdfDocument resume={getValues()} />
     </PDFViewer>
   );

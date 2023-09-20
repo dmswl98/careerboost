@@ -1,8 +1,12 @@
 import { Text, View } from '@react-pdf/renderer';
 
+import { type MENU_INFO } from '@/constants/menu';
+
 import { tailwind } from './config';
 
-type SectionTitle = '프로젝트' | '활동';
+type ExtractTitle<T> = T extends { TITLE: infer U } ? U : never;
+
+type SectionTitle = ExtractTitle<(typeof MENU_INFO)[keyof typeof MENU_INFO]>;
 
 interface PdfSectionProps {
   title: SectionTitle;

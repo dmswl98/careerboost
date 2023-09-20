@@ -1,5 +1,6 @@
 import { View } from '@react-pdf/renderer';
 
+import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 
 import { tailwind } from './config';
@@ -13,7 +14,7 @@ interface PdfActivityProps {
 
 const PdfActivity = ({ activities }: PdfActivityProps) => {
   return (
-    <PdfSection title="활동">
+    <PdfSection title={MENU_INFO.ACTIVITY.TITLE}>
       {activities.map((activity) => (
         <View
           key={activity.id}

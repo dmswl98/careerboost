@@ -20,7 +20,7 @@ export const MENU_INFO = {
     GUIDE:
       '💡 활동에 참여한 동기와 어떤 역량을 키울 수 있었는지 구체적으로 작성하여 지속적인 성장 의지와 전문성을 강조해보세요',
   },
-};
+} as const;
 
 export const SIDEBAR_MENU = [
   {

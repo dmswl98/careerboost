@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Image, Link, Text, View } from '@react-pdf/renderer';
 
-import { USER_INFO } from '@/constants/user';
 import { type UserInfoFormDataSchema } from '@/types/form';
 
 import { tailwind } from './config';
 
-interface PdfIntroduceProps {
+interface PdfUserInfoProps {
   userInfo: UserInfoFormDataSchema['userInfo'];
 }
 
-const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {
+const PdfUserInfo = ({ userInfo }: PdfUserInfoProps) => {
   return (
     <View
       style={tailwind(
@@ -19,57 +18,49 @@ const PdfIntroduce = ({ userInfo }: PdfIntroduceProps) => {
     >
       <View style={tailwind('flex-row')}>
         <Text style={tailwind('mr-4 text-2xl font-bold')}>
-          {userInfo.name || USER_INFO.name}
+          {userInfo.name || '이름'}
         </Text>
         <Text style={tailwind('text-lg mt-1 font-semiBold')}>
-          {userInfo.career || USER_INFO.career}
+          {userInfo.career || '직무'}
         </Text>
       </View>
-      <View style={tailwind('flex-row gap-3 text-sm mb-4')}>
+      <View style={tailwind('flex-row gap-3 text-sm')}>
         <View style={tailwind('flex-row items-center')}>
           <Image style={tailwind('w-4 mr-2')} src={'/icons/phone.png'} />
-          <Text>{userInfo.phone || USER_INFO.phone}</Text>
+          <Text>{userInfo.phone || '전화번호'}</Text>
         </View>
         <View style={tailwind('flex-row items-center')}>
           <Image style={tailwind('w-4 mr-2')} src={'/icons/mail.png'} />
-          <Text>{userInfo.email || USER_INFO.email}</Text>
+          <Text>{userInfo.email || '이메일'}</Text>
         </View>
         {userInfo.blog ? (
           <Link src={userInfo.blog} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-gray-500')}>
-              {userInfo.blog || USER_INFO.blog}
-            </Text>
+            <Text style={tailwind('text-gray-500')}>{userInfo.blog}</Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-gray-500')}>
-              {userInfo.blog || USER_INFO.blog}
-            </Text>
+            <Text style={tailwind('text-gray-500')}>블로그</Text>
           </View>
         )}
         {userInfo.github ? (
           <Link src={userInfo.github} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-gray-500')}>
-              {userInfo.github || USER_INFO.github}
-            </Text>
+            <Text style={tailwind('text-gray-500')}>{userInfo.github}</Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-gray-500')}>
-              {userInfo.github || USER_INFO.github}
-            </Text>
+            <Text style={tailwind('text-gray-500')}>깃허브</Text>
           </View>
         )}
       </View>
-      <Text style={tailwind('text-sm')}>
-        {userInfo.brief || USER_INFO.brief}
-      </Text>
+      {userInfo.brief && (
+        <Text style={tailwind('text-sm mt-4')}>{userInfo.brief}</Text>
+      )}
     </View>
   );
 };
 
-export default PdfIntroduce;
+export default PdfUserInfo;

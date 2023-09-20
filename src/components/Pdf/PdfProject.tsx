@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { View } from '@react-pdf/renderer';
 
+import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
 
 import { tailwind } from './config';
@@ -15,7 +16,7 @@ interface PdfProjectProps {
 
 const PdfProject = ({ projects }: PdfProjectProps) => {
   return (
-    <PdfSection title="프로젝트">
+    <PdfSection title={MENU_INFO.PROJECT.TITLE}>
       {projects.map((project) => (
         <View
           key={project.id}
