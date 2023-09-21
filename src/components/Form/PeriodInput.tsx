@@ -51,7 +51,7 @@ const PeriodInput = ({
         기간
       </Label>
       <div className="mb-3">
-        <div className="mb-1 flex gap-2">
+        <div className="mb-1 flex flex-col gap-1 md:flex-row md:gap-2">
           <Input
             {...register(
               `${formName}.${index}.startDate` as FieldPath<ResumeFormDataSchema>

@@ -43,7 +43,7 @@ const MarkdownInput = ({
           <Label htmlFor="content" isRequired>
             {label}
           </Label>
-          <span className="mb-1 ml-2 inline-block text-xs text-gray-300">
+          <span className="mb-2 block text-xs text-gray-300 min-[470px]:mb-1 min-[470px]:ml-2 min-[470px]:inline-block">
             마크다운 문법을 지원해요
           </span>
         </div>
