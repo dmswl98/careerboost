@@ -5,7 +5,7 @@ import SidebarMenu from './SidebarMenu';
 
 const Sidebar = () => {
   return (
-    <aside className="mb-6 h-fit w-[260px] rounded-xl border border-gray-200/70 bg-white px-5 py-7">
+    <aside className="mb-2 h-fit rounded-xl border border-gray-200/70 bg-white px-5 py-7 md:mb-6">
       <h1 className="mb-2 text-base font-bold">이력서 완성도</h1>
       <Progress value={30} />
       <ul className="mt-6">

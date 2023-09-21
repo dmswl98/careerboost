@@ -70,7 +70,7 @@ const Page = () => {
               />
               <FormRemoveButton onRemoveForm={() => remove(index)} />
             </div>
-            <div className="mb-3 flex gap-2">
+            <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
               <div className="flex-1">
                 <Label htmlFor="employmentType" isRequired>
                   근무 형태

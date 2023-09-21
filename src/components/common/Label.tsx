@@ -11,13 +11,13 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
       <label
         ref={ref}
         className={clsx(
-          `mb-1 inline-block text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70`,
+          `mb-0 inline-block text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 min-[470px]:mb-1`,
           className
         )}
         {...props}
       />
       {isRequired && (
-        <span className="mb-1.5 ml-1 inline-block text-xs text-gray-400">
+        <span className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5">
           ✱
         </span>
       )}
