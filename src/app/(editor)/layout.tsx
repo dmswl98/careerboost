@@ -6,14 +6,14 @@ import FormProvider from '@/components/Providers/FormProvider';
 
 const Layout = ({ children }: StrictPropsWithChildren) => {
   return (
-    <main className="mx-auto my-6 max-w-[1080px]">
+    <main className="mx-auto my-4 max-w-[1080px] px-4 sm:my-6 sm:px-6">
       <FormProvider>
-        <div className="flex gap-6">
-          {children}
-          <div className="flex flex-col">
+        <div className="flex flex-col gap-6 md:flex-row-reverse">
+          <div className="flex min-w-[260px] flex-col">
             <Sidebar />
             <SubmitButton />
           </div>
+          {children}
         </div>
       </FormProvider>
     </main>
