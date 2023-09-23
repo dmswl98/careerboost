@@ -47,61 +47,53 @@ const Page = () => {
       guide={MENU_INFO.BASIC.GUIDE}
       onSaveForm={handleSaveClick}
     >
-      <Label htmlFor="name" isRequired>
-        이름
-      </Label>
       <Input
         {...register('userInfo.name')}
         id="name"
         className="mb-3"
+        label={{ text: '이름', isRequired: true }}
         placeholder={PLACEHOLDER.USER_INFO.NAME}
         error={errors.userInfo?.name?.message}
       />
-      <Label htmlFor="career" isRequired>
-        직무
-      </Label>
       <Input
         {...register('userInfo.career')}
         id="career"
         className="mb-3"
+        label={{ text: '직무', isRequired: true }}
         placeholder={PLACEHOLDER.USER_INFO.CAREER}
         error={errors.userInfo?.career?.message}
       />
-      <Label htmlFor="phone">전화번호</Label>
       <Input
         {...register('userInfo.phone')}
         id="phone"
         type="tel"
         className="mb-3"
+        label={{ text: '전화번호' }}
         placeholder={PLACEHOLDER.USER_INFO.PHONE}
         error={errors.userInfo?.phone?.message}
       />
-      <Label htmlFor="email" isRequired>
-        이메일
-      </Label>
       <Input
         {...register('userInfo.email')}
         id="email"
         type="email"
         className="mb-3"
+        label={{ text: '이메일', isRequired: true }}
         placeholder={PLACEHOLDER.USER_INFO.EMAIL}
         error={errors.userInfo?.email?.message}
       />
-      <Label htmlFor="blog">블로그</Label>
       <Input
         {...register('userInfo.blog')}
         id="blog"
         className="mb-3"
+        label={{ text: '블로그' }}
         placeholder={PLACEHOLDER.USER_INFO.URL}
         error={errors.userInfo?.blog?.message}
       />
-      <Label htmlFor="github" isRequired>
-        깃허브
-      </Label>
       <Input
         {...register('userInfo.github')}
         id="github"
         className="mb-3"
+        label={{ text: '깃허브', isRequired: true }}
         placeholder={PLACEHOLDER.USER_INFO.URL}
         error={errors.userInfo?.github?.message}
       />

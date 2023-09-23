@@ -12,7 +12,7 @@ export const resumeFormSchema = z.object({
     name: z.string().min(1, { message: NO_ENTERED_DATA }),
     career: z.string().min(1, { message: NO_ENTERED_DATA }),
     phone: z.optional(z.string().regex(PHONE_REGEX)).or(z.literal('')),
-    email: z.string().email({ message: NO_ENTERED_DATA }),
+    email: z.string().email({ message: '이메일 형식에 맞게 작성해주세요' }),
     blog: z.optional(z.string().url()).or(z.literal('')),
     github: z.string().url({ message: NO_ENTERED_DATA }),
     brief: z.optional(z.string()),
@@ -20,14 +20,14 @@ export const resumeFormSchema = z.object({
   experiences: z.array(
     z.object({
       id: z.string().uuid(),
-      company: z.string().min(1),
+      company: z.string().min(1, { message: NO_ENTERED_DATA }),
       employmentType: z.union([
         z.literal('정규직'),
         z.literal('계약직'),
         z.literal('인턴'),
         z.string(),
       ]),
-      jobTitle: z.string().min(1),
+      jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z
         .string()
@@ -39,7 +39,7 @@ export const resumeFormSchema = z.object({
   projects: z.array(
     z.object({
       id: z.string().uuid(),
-      title: z.string().min(1),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z
         .string()
@@ -52,7 +52,7 @@ export const resumeFormSchema = z.object({
   activities: z.array(
     z.object({
       id: z.string().uuid(),
-      title: z.string().min(1),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
       institution: z.optional(z.string()),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z

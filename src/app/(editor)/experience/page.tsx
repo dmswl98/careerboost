@@ -80,14 +80,12 @@ const Page = () => {
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border-b border-gray-200/70 py-6">
-            <Label htmlFor="title" isRequired>
-              회사명
-            </Label>
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex items-end gap-2">
               <Input
                 {...register(`experiences.${index}.company`)}
                 id="title"
                 className="mr-1"
+                label={{ text: '회사명', isRequired: true }}
                 placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
                 error={errors.experiences?.[index]?.company?.message}
                 autoFocus
@@ -122,12 +120,10 @@ const Page = () => {
                 />
               </div>
               <div className="flex-1">
-                <Label htmlFor="jobTitle" isRequired>
-                  직무
-                </Label>
                 <Input
                   {...register(`experiences.${index}.jobTitle`)}
                   id="jobTitle"
+                  label={{ text: '직무', isRequired: true }}
                   placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
                   error={errors.experiences?.[index]?.jobTitle?.message}
                 />
@@ -137,13 +133,9 @@ const Page = () => {
               formName="experiences"
               index={index}
               label={PERIOD_LABEL.WORKING}
-              isError={{
-                startDate: !!(
-                  errors.experiences && errors.experiences[index]?.startDate
-                ),
-                endDate: !!(
-                  errors.experiences && errors.experiences[index]?.endDate
-                ),
+              error={{
+                startDate: errors.experiences?.[index]?.startDate?.message,
+                endDate: errors.experiences?.[index]?.endDate?.message,
               }}
             />
             <MarkdownInput

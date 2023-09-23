@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { Button, Input, Label } from '@/components/common';
+import { Button, Input } from '@/components/common';
 import {
   AiSuggestion,
   FormCard,
@@ -107,17 +107,14 @@ const Page = () => {
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border-b border-gray-200/70 py-6">
-            <Label htmlFor="title" isRequired>
-              프로젝트명
-            </Label>
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex items-end gap-1">
               <Input
                 {...register(`projects.${index}.title`)}
                 id="title"
                 className="mr-1"
+                label={{ text: '프로젝트명', isRequired: true }}
                 placeholder={PLACEHOLDER.PROJECT.TITLE}
                 error={errors.projects?.[index]?.title?.message}
-                autoFocus
               />
               <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
               <Button
@@ -134,19 +131,17 @@ const Page = () => {
             <PeriodInput
               formName="projects"
               index={index}
-              isError={{
-                startDate: !!(
-                  errors.projects && errors.projects[index]?.startDate
-                ),
-                endDate: !!(errors.projects && errors.projects[index]?.endDate),
+              error={{
+                startDate: errors.projects?.[index]?.startDate?.message,
+                endDate: errors.projects?.[index]?.endDate?.message,
               }}
             />
-            <Label htmlFor="url">프로젝트 주소</Label>
             <Input
               {...register(`projects.${index}.url`)}
               id="url"
-              placeholder={PLACEHOLDER.PROJECT.URL}
               className="mb-3"
+              label={{ text: '프로젝트 주소', isRequired: true }}
+              placeholder={PLACEHOLDER.PROJECT.URL}
             />
             <MarkdownInput
               formName="projects"

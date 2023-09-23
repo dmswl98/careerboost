@@ -3,27 +3,57 @@ import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { FormErrorMessage } from '@/components/Form';
 
-export interface InputProps extends ComponentPropsWithoutRef<'input'> {
+interface Label {
+  text: string;
+  isRequired?: boolean;
+}
+
+interface InputProps extends ComponentPropsWithoutRef<'input'> {
+  label?: Label;
   error?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', className, error, ...props }, ref) => {
+  ({ id, type = 'text', className, label, error, ...props }, ref) => {
     return (
-      <>
+      <div className="relative flex grow flex-col">
+        {label?.text && (
+          <div>
+            <label
+              htmlFor={id}
+              className={clsx(
+                'mb-0 inline-block text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 min-[470px]:mb-1',
+                className
+              )}
+            >
+              {label.text}
+            </label>
+            {label.isRequired && (
+              <span className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5">
+                ✱
+              </span>
+            )}
+          </div>
+        )}
+        {error && (
+          <FormErrorMessage
+            className="absolute right-0 top-1.5"
+            message={error}
+          />
+        )}
         <input
+          id={id}
           type={type}
           ref={ref}
           className={clsx(
-            `flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
+            `flex h-10 w-full grow rounded-md border bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
               error ? 'border-red-300' : 'border-gray-200'
             }`,
             className
           )}
           {...props}
         />
-        {error && <FormErrorMessage message={error} />}
-      </>
+      </div>
     );
   }
 );
