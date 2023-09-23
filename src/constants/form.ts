@@ -33,7 +33,7 @@ export const PLACEHOLDER = {
 };
 
 export const INITIAL_VALUE = {
-  userInfo: {
+  USER_INFO: {
     name: '',
     career: '',
     brief: '',
@@ -42,7 +42,7 @@ export const INITIAL_VALUE = {
     blog: '',
     github: '',
   },
-  experience: {
+  EXPERIENCE: {
     id: v4(),
     company: '',
     employmentType: '',
@@ -51,7 +51,7 @@ export const INITIAL_VALUE = {
     endDate: '',
     content: '',
   },
-  project: {
+  PROJECT: {
     id: v4(),
     title: '',
     startDate: '',
@@ -59,7 +59,7 @@ export const INITIAL_VALUE = {
     content: '',
     url: '',
   },
-  activity: {
+  ACTIVITY: {
     id: v4(),
     title: '',
     institution: '',

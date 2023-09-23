@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -9,12 +10,16 @@ import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
 
 const Page = () => {
   const {
     control,
     register,
-    formState: { errors },
+    trigger,
+    getValues,
+    setValue,
+    formState: { errors, dirtyFields },
   } = useFormContext<ActivitiesFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -22,18 +27,39 @@ const Page = () => {
     control,
   });
 
-  const handleActivityFormAppend = () => {
+  useEffect(() => {
+    setValue('activities', storage.get(STORAGE_KEY.ACTIVITY));
+  }, [setValue]);
+
+  const handleAppendClick = () => {
     append({
-      ...INITIAL_VALUE.activity,
+      ...INITIAL_VALUE.ACTIVITY,
       id: v4(),
     });
+  };
+
+  const handleRemoveClick = (index: number) => {
+    remove(index);
+
+    storage.set(STORAGE_KEY.ACTIVITY, getValues('activities'));
+  };
+
+  const handleSaveClick = () => {
+    trigger('activities');
+
+    if (!dirtyFields.activities || errors.activities) {
+      return;
+    }
+
+    storage.set(STORAGE_KEY.ACTIVITY, getValues('activities'));
   };
 
   return (
     <FormCard
       title={MENU_INFO.ACTIVITY.TITLE}
       guide={MENU_INFO.ACTIVITY.GUIDE}
-      onAppendForm={handleActivityFormAppend}
+      onAppendForm={handleAppendClick}
+      onSaveForm={handleSaveClick}
     >
       <ul>
         {fields.map((item, index) => (
@@ -52,7 +78,7 @@ const Page = () => {
                 }
                 autoFocus
               />
-              <FormRemoveButton onRemoveForm={() => remove(index)} />
+              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
             </div>
             <Label htmlFor="institution">기관명</Label>
             <Input

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -25,12 +26,16 @@ import {
 } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ExperienceFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
 
 const Page = () => {
   const {
     control,
     register,
-    formState: { errors },
+    trigger,
+    getValues,
+    setValue,
+    formState: { errors, dirtyFields },
   } = useFormContext<ExperienceFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -38,18 +43,39 @@ const Page = () => {
     control,
   });
 
-  const handleExperienceFormAppend = () => {
+  useEffect(() => {
+    setValue('experiences', storage.get(STORAGE_KEY.EXPERIENCE));
+  }, [setValue]);
+
+  const handleAppendClick = () => {
     append({
-      ...INITIAL_VALUE.experience,
+      ...INITIAL_VALUE.EXPERIENCE,
       id: v4(),
     });
+  };
+
+  const handleRemoveClick = (index: number) => {
+    remove(index);
+
+    storage.set(STORAGE_KEY.EXPERIENCE, getValues('experiences'));
+  };
+
+  const handleSaveClick = () => {
+    trigger('experiences');
+
+    if (!dirtyFields.experiences || errors.experiences) {
+      return;
+    }
+
+    storage.set(STORAGE_KEY.EXPERIENCE, getValues('experiences'));
   };
 
   return (
     <FormCard
       title={MENU_INFO.EXPERIENCE.TITLE}
       guide={MENU_INFO.EXPERIENCE.GUIDE}
-      onAppendForm={handleExperienceFormAppend}
+      onAppendForm={handleAppendClick}
+      onSaveForm={handleSaveClick}
     >
       <ul>
         {fields.map((item, index) => (
@@ -68,7 +94,7 @@ const Page = () => {
                 }
                 autoFocus
               />
-              <FormRemoveButton onRemoveForm={() => remove(index)} />
+              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
             </div>
             <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
               <div className="flex-1">

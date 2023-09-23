@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Input, Label, Textarea } from '@/components/common';
@@ -7,15 +8,45 @@ import { FormCard } from '@/components/Form';
 import { PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type UserInfoFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
 
 const Page = () => {
   const {
     register,
+    trigger,
+    getValues,
+    setValue,
     formState: { errors },
   } = useFormContext<UserInfoFormDataSchema>();
 
+  useEffect(() => {
+    setValue('userInfo', storage.get(STORAGE_KEY.USER_INFO));
+  }, [setValue]);
+
+  const handleSaveClick = () => {
+    trigger('userInfo');
+
+    const formValues = getValues('userInfo');
+
+    if (
+      !formValues.name ||
+      !formValues.career ||
+      !formValues.email ||
+      !formValues.github ||
+      errors.userInfo
+    ) {
+      return;
+    }
+
+    storage.set(STORAGE_KEY.USER_INFO, formValues);
+  };
+
   return (
-    <FormCard title={MENU_INFO.BASIC.TITLE} guide={MENU_INFO.BASIC.GUIDE}>
+    <FormCard
+      title={MENU_INFO.BASIC.TITLE}
+      guide={MENU_INFO.BASIC.GUIDE}
+      onSaveForm={handleSaveClick}
+    >
       <Label htmlFor="name" isRequired>
         이름
       </Label>
@@ -25,7 +56,6 @@ const Page = () => {
         placeholder={PLACEHOLDER.USER_INFO.NAME}
         isError={!!errors.userInfo?.name}
         className="mb-3"
-        autoFocus
       />
       <Label htmlFor="career" isRequired>
         직무

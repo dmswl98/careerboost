@@ -1,7 +1,7 @@
 'use client';
 
 import { useCompletion } from 'ai/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -17,6 +17,7 @@ import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
 
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -26,7 +27,8 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    formState: { errors },
+    setValue,
+    formState: { errors, dirtyFields },
   } = useFormContext<ProjectsFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -38,20 +40,26 @@ const Page = () => {
     api: '/api/ai',
   });
 
-  const handleProjectFormAppend = () => {
+  useEffect(() => {
+    setValue('projects', storage.get(STORAGE_KEY.PROJECT));
+  }, [setValue]);
+
+  const handleAppendClick = () => {
     append({
-      ...INITIAL_VALUE.project,
+      ...INITIAL_VALUE.PROJECT,
       id: v4(),
     });
 
     setIsSuggest((prev) => [...prev, false]);
   };
 
-  const handleProjectFormRemove = (index: number) => {
+  const handleRemoveClick = (index: number) => {
     remove(index);
 
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
+
+    storage.set(STORAGE_KEY.PROJECT, getValues('projects'));
   };
 
   const handleSuggestClick = (index: number) => {
@@ -79,11 +87,22 @@ const Page = () => {
     complete(content);
   };
 
+  const handleSaveClick = () => {
+    trigger('projects');
+
+    if (!dirtyFields.projects || errors.projects) {
+      return;
+    }
+
+    storage.set(STORAGE_KEY.PROJECT, getValues('projects'));
+  };
+
   return (
     <FormCard
       title={MENU_INFO.PROJECT.TITLE}
       guide={MENU_INFO.PROJECT.GUIDE}
-      onAppendForm={handleProjectFormAppend}
+      onAppendForm={handleAppendClick}
+      onSaveForm={handleSaveClick}
     >
       <ul>
         {fields.map((item, index) => (
@@ -100,9 +119,7 @@ const Page = () => {
                 isError={!!(errors.projects && errors.projects[index]?.title)}
                 autoFocus
               />
-              <FormRemoveButton
-                onRemoveForm={() => handleProjectFormRemove(index)}
-              />
+              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
               <Button
                 size="icon"
                 type="button"

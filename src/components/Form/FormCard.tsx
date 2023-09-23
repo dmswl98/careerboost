@@ -6,6 +6,7 @@ interface FormCardProps {
   title: string;
   guide?: string;
   onAppendForm?: () => void;
+  onSaveForm: () => void;
 }
 
 const FormCard = ({
@@ -13,6 +14,7 @@ const FormCard = ({
   title,
   guide,
   onAppendForm,
+  onSaveForm,
 }: StrictPropsWithChildren<FormCardProps>) => {
   return (
     <div className="w-full rounded-xl border border-gray-200/70 bg-white p-6 md:w-[780px] md:p-8">
@@ -35,6 +37,11 @@ const FormCard = ({
         </div>
       )}
       {children}
+      <div className="ml-auto mt-4 w-fit">
+        <Button type="button" onClick={onSaveForm}>
+          저장
+        </Button>
+      </div>
     </div>
   );
 };
