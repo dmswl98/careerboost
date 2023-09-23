@@ -17,7 +17,7 @@ const FormCard = ({
   onSaveForm,
 }: StrictPropsWithChildren<FormCardProps>) => {
   return (
-    <div className="w-full rounded-xl border border-gray-200/70 bg-white p-6 md:w-[780px] md:p-8">
+    <div className="w-full rounded-xl border border-gray-200/70 bg-white p-6 md:w-[800px] md:p-8">
       <div className="mb-3 flex justify-between">
         <h1 className="bg-white text-lg font-bold md:text-xl">{title}</h1>
         {onAppendForm && (
