@@ -33,7 +33,7 @@ export const PLACEHOLDER = {
 };
 
 export const INITIAL_VALUE = {
-  userInfo: {
+  USER_INFO: {
     name: '',
     career: '',
     brief: '',
@@ -42,7 +42,7 @@ export const INITIAL_VALUE = {
     blog: '',
     github: '',
   },
-  experience: {
+  EXPERIENCE: {
     id: v4(),
     company: '',
     employmentType: '',
@@ -51,7 +51,7 @@ export const INITIAL_VALUE = {
     endDate: '',
     content: '',
   },
-  project: {
+  PROJECT: {
     id: v4(),
     title: '',
     startDate: '',
@@ -59,7 +59,7 @@ export const INITIAL_VALUE = {
     content: '',
     url: '',
   },
-  activity: {
+  ACTIVITY: {
     id: v4(),
     title: '',
     institution: '',
@@ -72,13 +72,17 @@ export const INITIAL_VALUE = {
 export const EMPLOYMENT_TYPE = {
   FULL_TIME: '정규직',
   CONTRACTOR: '계약직',
+  FREELANCER: '프리랜서',
   INTERN: '인턴',
+  ETC: '기타',
 };
 
 export const EMPLOYMENT_TYPES = [
   EMPLOYMENT_TYPE.FULL_TIME,
   EMPLOYMENT_TYPE.CONTRACTOR,
+  EMPLOYMENT_TYPE.FREELANCER,
   EMPLOYMENT_TYPE.INTERN,
+  EMPLOYMENT_TYPE.ETC,
 ];
 
 export const PERIOD_LABEL = {

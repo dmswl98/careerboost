@@ -16,7 +16,9 @@ const AiSuggestion = ({ aiSuggestion }: AiSuggestionProps) => {
         </p>
       </div>
       {aiSuggestion ? (
-        <p className="py-0.5 text-sm text-primary">{aiSuggestion}</p>
+        <p className="whitespace-pre-line py-0.5 text-sm text-primary">
+          {aiSuggestion}
+        </p>
       ) : (
         <div className="flex justify-center py-4">
           <IconChatGpt className="h-5 w-10 animate-[rotate_3s_ease-in-out_infinite]" />

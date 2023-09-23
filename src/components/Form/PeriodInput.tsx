@@ -3,28 +3,29 @@
 import { type FieldPath, useFormContext } from 'react-hook-form';
 
 import { Checkbox, Input, Label } from '@/components/common';
+import { FormErrorMessage } from '@/components/Form';
 import { PERIOD_LABEL, PLACEHOLDER } from '@/constants/form';
 import { type ResumeFormDataSchema } from '@/types/form';
 
 type PeriodLabelType = (typeof PERIOD_LABEL)[keyof typeof PERIOD_LABEL];
 
-interface PeriodError {
-  startDate: boolean;
-  endDate: boolean;
+interface PeriodErrorMessage {
+  startDate?: string;
+  endDate?: string;
 }
 
 interface PeriodInputProps {
   formName: FieldPath<ResumeFormDataSchema>;
   index: number;
   label?: PeriodLabelType;
-  isError: PeriodError;
+  error?: PeriodErrorMessage;
 }
 
 const PeriodInput = ({
   formName,
   index,
   label = PERIOD_LABEL.PROGRESS,
-  isError,
+  error,
 }: PeriodInputProps) => {
   const PERIOD_INPUT_PLACEHOLDER =
     label === PERIOD_LABEL.PROGRESS
@@ -50,7 +51,13 @@ const PeriodInput = ({
       <Label htmlFor="startDate" isRequired>
         기간
       </Label>
-      <div className="mb-3">
+      <div className="relative mb-3">
+        {(error?.startDate || error?.endDate) && (
+          <FormErrorMessage
+            className="absolute bottom-[70px] right-0"
+            message="기간을 올바르게 작성해주세요"
+          />
+        )}
         <div className="mb-1 flex flex-col gap-1 md:flex-row md:gap-2">
           <Input
             {...register(
@@ -58,7 +65,6 @@ const PeriodInput = ({
             )}
             id="startDate"
             placeholder={PLACEHOLDER.DATE}
-            isError={isError.startDate}
           />
           <Input
             {...register(
@@ -66,7 +72,6 @@ const PeriodInput = ({
             )}
             id="endDate"
             placeholder={PLACEHOLDER.DATE}
-            isError={isError.endDate}
           />
         </div>
         <Checkbox

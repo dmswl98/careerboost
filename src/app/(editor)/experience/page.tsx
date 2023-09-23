@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -25,12 +26,18 @@ import {
 } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ExperienceFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
+
+const webStorage = storage(STORAGE_KEY.EXPERIENCE);
 
 const Page = () => {
   const {
     control,
     register,
-    formState: { errors },
+    trigger,
+    getValues,
+    setValue,
+    formState: { errors, dirtyFields },
   } = useFormContext<ExperienceFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -38,37 +45,63 @@ const Page = () => {
     control,
   });
 
-  const handleExperienceFormAppend = () => {
+  useEffect(() => {
+    const storageData = webStorage.get();
+
+    setValue(
+      'experiences',
+      storageData ? storageData : [INITIAL_VALUE.EXPERIENCE]
+    );
+  }, [setValue]);
+
+  const handleAppendClick = () => {
     append({
-      ...INITIAL_VALUE.experience,
+      ...INITIAL_VALUE.EXPERIENCE,
       id: v4(),
     });
+  };
+
+  const handleRemoveClick = (index: number) => {
+    remove(index);
+
+    const formValues = getValues('experiences');
+
+    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.EXPERIENCE]);
+  };
+
+  const handleSaveClick = () => {
+    trigger('experiences');
+
+    const formValues = getValues('experiences');
+
+    if (!dirtyFields.experiences || errors.experiences || !formValues.length) {
+      return;
+    }
+
+    webStorage.set(formValues);
   };
 
   return (
     <FormCard
       title={MENU_INFO.EXPERIENCE.TITLE}
       guide={MENU_INFO.EXPERIENCE.GUIDE}
-      onAppendForm={handleExperienceFormAppend}
+      onAppendForm={handleAppendClick}
+      onSaveForm={handleSaveClick}
     >
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border-b border-gray-200/70 py-6">
-            <Label htmlFor="title" isRequired>
-              회사명
-            </Label>
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex items-end gap-2">
               <Input
                 {...register(`experiences.${index}.company`)}
                 id="title"
                 className="mr-1"
+                label={{ text: '회사명', isRequired: true }}
                 placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
-                isError={
-                  !!(errors.experiences && errors.experiences[index]?.company)
-                }
+                error={errors.experiences?.[index]?.company?.message}
                 autoFocus
               />
-              <FormRemoveButton onRemoveForm={() => remove(index)} />
+              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
             </div>
             <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
               <div className="flex-1">
@@ -80,7 +113,11 @@ const Page = () => {
                   name={`experiences.${index}.employmentType`}
                   render={({ field: { onChange, value } }) => (
                     <Select onValueChange={onChange} defaultValue={value}>
-                      <SelectTrigger>
+                      <SelectTrigger
+                        error={
+                          errors.experiences?.[index]?.employmentType?.message
+                        }
+                      >
                         <SelectValue placeholder="근무 형태" />
                       </SelectTrigger>
                       <SelectContent>
@@ -98,18 +135,12 @@ const Page = () => {
                 />
               </div>
               <div className="flex-1">
-                <Label htmlFor="jobTitle" isRequired>
-                  직무
-                </Label>
                 <Input
                   {...register(`experiences.${index}.jobTitle`)}
                   id="jobTitle"
+                  label={{ text: '직무', isRequired: true }}
                   placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
-                  isError={
-                    !!(
-                      errors.experiences && errors.experiences[index]?.jobTitle
-                    )
-                  }
+                  error={errors.experiences?.[index]?.jobTitle?.message}
                 />
               </div>
             </div>
@@ -117,13 +148,9 @@ const Page = () => {
               formName="experiences"
               index={index}
               label={PERIOD_LABEL.WORKING}
-              isError={{
-                startDate: !!(
-                  errors.experiences && errors.experiences[index]?.startDate
-                ),
-                endDate: !!(
-                  errors.experiences && errors.experiences[index]?.endDate
-                ),
+              error={{
+                startDate: errors.experiences?.[index]?.startDate?.message,
+                endDate: errors.experiences?.[index]?.endDate?.message,
               }}
             />
             <MarkdownInput

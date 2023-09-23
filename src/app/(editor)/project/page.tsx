@@ -1,11 +1,11 @@
 'use client';
 
 import { useCompletion } from 'ai/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { Button, Input, Label } from '@/components/common';
+import { Button, Input } from '@/components/common';
 import {
   AiSuggestion,
   FormCard,
@@ -17,6 +17,9 @@ import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
+import { storage, STORAGE_KEY } from '@/utils/storage';
+
+const webStorage = storage(STORAGE_KEY.PROJECT);
 
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -26,7 +29,8 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    formState: { errors },
+    setValue,
+    formState: { errors, dirtyFields },
   } = useFormContext<ProjectsFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -38,20 +42,30 @@ const Page = () => {
     api: '/api/ai',
   });
 
-  const handleProjectFormAppend = () => {
+  useEffect(() => {
+    const storageData = webStorage.get();
+
+    setValue('projects', storageData ? storageData : [INITIAL_VALUE.PROJECT]);
+  }, [setValue]);
+
+  const handleAppendClick = () => {
     append({
-      ...INITIAL_VALUE.project,
+      ...INITIAL_VALUE.PROJECT,
       id: v4(),
     });
 
     setIsSuggest((prev) => [...prev, false]);
   };
 
-  const handleProjectFormRemove = (index: number) => {
+  const handleRemoveClick = (index: number) => {
     remove(index);
 
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
+
+    const formValues = getValues('projects');
+
+    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.PROJECT]);
   };
 
   const handleSuggestClick = (index: number) => {
@@ -79,30 +93,38 @@ const Page = () => {
     complete(content);
   };
 
+  const handleSaveClick = () => {
+    trigger('projects');
+
+    const formValues = getValues('projects');
+
+    if (!dirtyFields.projects || errors.projects || !formValues.length) {
+      return;
+    }
+
+    webStorage.set(formValues);
+  };
+
   return (
     <FormCard
       title={MENU_INFO.PROJECT.TITLE}
       guide={MENU_INFO.PROJECT.GUIDE}
-      onAppendForm={handleProjectFormAppend}
+      onAppendForm={handleAppendClick}
+      onSaveForm={handleSaveClick}
     >
       <ul>
         {fields.map((item, index) => (
           <li key={item.id} className="border-b border-gray-200/70 py-6">
-            <Label htmlFor="title" isRequired>
-              프로젝트명
-            </Label>
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex items-end gap-1">
               <Input
                 {...register(`projects.${index}.title`)}
                 id="title"
                 className="mr-1"
+                label={{ text: '프로젝트명', isRequired: true }}
                 placeholder={PLACEHOLDER.PROJECT.TITLE}
-                isError={!!(errors.projects && errors.projects[index]?.title)}
-                autoFocus
+                error={errors.projects?.[index]?.title?.message}
               />
-              <FormRemoveButton
-                onRemoveForm={() => handleProjectFormRemove(index)}
-              />
+              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
               <Button
                 size="icon"
                 type="button"
@@ -117,19 +139,17 @@ const Page = () => {
             <PeriodInput
               formName="projects"
               index={index}
-              isError={{
-                startDate: !!(
-                  errors.projects && errors.projects[index]?.startDate
-                ),
-                endDate: !!(errors.projects && errors.projects[index]?.endDate),
+              error={{
+                startDate: errors.projects?.[index]?.startDate?.message,
+                endDate: errors.projects?.[index]?.endDate?.message,
               }}
             />
-            <Label htmlFor="url">프로젝트 주소</Label>
             <Input
               {...register(`projects.${index}.url`)}
               id="url"
-              placeholder={PLACEHOLDER.PROJECT.URL}
               className="mb-3"
+              label={{ text: '프로젝트 주소', isRequired: true }}
+              placeholder={PLACEHOLDER.PROJECT.URL}
             />
             <MarkdownInput
               formName="projects"

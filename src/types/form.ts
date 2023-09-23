@@ -5,27 +5,26 @@ import { PLACEHOLDER } from '@/constants/form';
 const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;
 const DATE_REGEX = /^\d{4}\.\d{2}$/;
 
+const NO_ENTERED_DATA = '내용을 작성해주세요';
+
 export const resumeFormSchema = z.object({
   userInfo: z.object({
-    name: z.string().min(1),
-    career: z.string().min(1),
+    name: z.string().min(1, { message: NO_ENTERED_DATA }),
+    career: z.string().min(1, { message: NO_ENTERED_DATA }),
     phone: z.optional(z.string().regex(PHONE_REGEX)).or(z.literal('')),
-    email: z.string().email(),
+    email: z.string().email({ message: '이메일 형식에 맞게 작성해주세요' }),
     blog: z.optional(z.string().url()).or(z.literal('')),
-    github: z.string().url(),
+    github: z.string().url({ message: NO_ENTERED_DATA }),
     brief: z.optional(z.string()),
   }),
   experiences: z.array(
     z.object({
       id: z.string().uuid(),
-      company: z.string().min(1),
-      employmentType: z.union([
-        z.literal('정규직'),
-        z.literal('계약직'),
-        z.literal('인턴'),
-        z.string(),
-      ]),
-      jobTitle: z.string().min(1),
+      company: z.string().min(1, { message: NO_ENTERED_DATA }),
+      employmentType: z
+        .string()
+        .min(1, { message: '근무 형태를 선택해주세요' }),
+      jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z
         .string()
@@ -37,7 +36,7 @@ export const resumeFormSchema = z.object({
   projects: z.array(
     z.object({
       id: z.string().uuid(),
-      title: z.string().min(1),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z
         .string()
@@ -50,7 +49,7 @@ export const resumeFormSchema = z.object({
   activities: z.array(
     z.object({
       id: z.string().uuid(),
-      title: z.string().min(1),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
       institution: z.optional(z.string()),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z
