@@ -41,7 +41,9 @@ const Page = () => {
   });
 
   useEffect(() => {
-    setValue('projects', storage.get(STORAGE_KEY.PROJECT));
+    const storageData = storage.get(STORAGE_KEY.PROJECT);
+
+    setValue('projects', storageData ? storageData : [INITIAL_VALUE.PROJECT]);
   }, [setValue]);
 
   const handleAppendClick = () => {
@@ -59,7 +61,12 @@ const Page = () => {
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
 
-    storage.set(STORAGE_KEY.PROJECT, getValues('projects'));
+    const formValues = getValues('projects');
+
+    storage.set(
+      STORAGE_KEY.PROJECT,
+      formValues.length ? formValues : [INITIAL_VALUE.PROJECT]
+    );
   };
 
   const handleSuggestClick = (index: number) => {

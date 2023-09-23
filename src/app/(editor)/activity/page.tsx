@@ -28,7 +28,12 @@ const Page = () => {
   });
 
   useEffect(() => {
-    setValue('activities', storage.get(STORAGE_KEY.ACTIVITY));
+    const storageData = storage.get(STORAGE_KEY.ACTIVITY);
+
+    setValue(
+      'activities',
+      storageData ? storageData : [INITIAL_VALUE.ACTIVITY]
+    );
   }, [setValue]);
 
   const handleAppendClick = () => {
@@ -41,7 +46,12 @@ const Page = () => {
   const handleRemoveClick = (index: number) => {
     remove(index);
 
-    storage.set(STORAGE_KEY.ACTIVITY, getValues('activities'));
+    const formValues = getValues('activities');
+
+    storage.set(
+      STORAGE_KEY.ACTIVITY,
+      formValues.length ? formValues : [INITIAL_VALUE.ACTIVITY]
+    );
   };
 
   const handleSaveClick = () => {

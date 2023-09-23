@@ -44,7 +44,12 @@ const Page = () => {
   });
 
   useEffect(() => {
-    setValue('experiences', storage.get(STORAGE_KEY.EXPERIENCE));
+    const storageData = storage.get(STORAGE_KEY.EXPERIENCE);
+
+    setValue(
+      'experiences',
+      storageData ? storageData : [INITIAL_VALUE.EXPERIENCE]
+    );
   }, [setValue]);
 
   const handleAppendClick = () => {
@@ -57,7 +62,12 @@ const Page = () => {
   const handleRemoveClick = (index: number) => {
     remove(index);
 
-    storage.set(STORAGE_KEY.EXPERIENCE, getValues('experiences'));
+    const formValues = getValues('experiences');
+
+    storage.set(
+      STORAGE_KEY.EXPERIENCE,
+      formValues.length ? formValues : [INITIAL_VALUE.EXPERIENCE]
+    );
   };
 
   const handleSaveClick = () => {
