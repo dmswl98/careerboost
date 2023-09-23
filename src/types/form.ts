@@ -21,12 +21,9 @@ export const resumeFormSchema = z.object({
     z.object({
       id: z.string().uuid(),
       company: z.string().min(1, { message: NO_ENTERED_DATA }),
-      employmentType: z.union([
-        z.literal('정규직'),
-        z.literal('계약직'),
-        z.literal('인턴'),
-        z.string(),
-      ]),
+      employmentType: z
+        .string()
+        .min(1, { message: '근무 형태를 선택해주세요' }),
       jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
       startDate: z.string().regex(DATE_REGEX),
       endDate: z

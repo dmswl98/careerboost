@@ -9,21 +9,36 @@ import {
   forwardRef,
 } from 'react';
 
+import { FormErrorMessage } from '../Form';
+
 const Select = SelectPrimitive.Root;
 const SelectValue = SelectPrimitive.Value;
 
+interface SelectTriggerProps
+  extends ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
+  error?: string;
+}
+
 const SelectTrigger = forwardRef<
   ElementRef<typeof SelectPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  SelectTriggerProps
+>(({ className, error, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={clsx(
-      'flex h-[40px] w-full items-center justify-between rounded-md border border-border bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+      `relative flex h-[40px] w-full items-center justify-between rounded-md border bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+        error ? 'border-red-300' : 'border-border'
+      }`,
       className
     )}
     {...props}
   >
+    {error && (
+      <FormErrorMessage
+        className="absolute bottom-[44px] right-0"
+        message={error}
+      />
+    )}
     {children}
     <SelectPrimitive.Icon asChild>
       <ChevronDown className="h-4 w-4 text-gray-400" />

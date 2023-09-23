@@ -113,7 +113,11 @@ const Page = () => {
                   name={`experiences.${index}.employmentType`}
                   render={({ field: { onChange, value } }) => (
                     <Select onValueChange={onChange} defaultValue={value}>
-                      <SelectTrigger>
+                      <SelectTrigger
+                        error={
+                          errors.experiences?.[index]?.employmentType?.message
+                        }
+                      >
                         <SelectValue placeholder="근무 형태" />
                       </SelectTrigger>
                       <SelectContent>
