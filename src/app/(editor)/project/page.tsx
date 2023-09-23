@@ -90,11 +90,13 @@ const Page = () => {
   const handleSaveClick = () => {
     trigger('projects');
 
-    if (!dirtyFields.projects || errors.projects) {
+    const formValues = getValues('projects');
+
+    if (!dirtyFields.projects || errors.projects || !formValues.length) {
       return;
     }
 
-    storage.set(STORAGE_KEY.PROJECT, getValues('projects'));
+    storage.set(STORAGE_KEY.PROJECT, formValues);
   };
 
   return (

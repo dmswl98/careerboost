@@ -47,11 +47,13 @@ const Page = () => {
   const handleSaveClick = () => {
     trigger('activities');
 
-    if (!dirtyFields.activities || errors.activities) {
+    const formValues = getValues('activities');
+
+    if (!dirtyFields.activities || errors.activities || !formValues.length) {
       return;
     }
 
-    storage.set(STORAGE_KEY.ACTIVITY, getValues('activities'));
+    storage.set(STORAGE_KEY.ACTIVITY, formValues);
   };
 
   return (

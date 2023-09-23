@@ -63,11 +63,13 @@ const Page = () => {
   const handleSaveClick = () => {
     trigger('experiences');
 
-    if (!dirtyFields.experiences || errors.experiences) {
+    const formValues = getValues('experiences');
+
+    if (!dirtyFields.experiences || errors.experiences || !formValues.length) {
       return;
     }
 
-    storage.set(STORAGE_KEY.EXPERIENCE, getValues('experiences'));
+    storage.set(STORAGE_KEY.EXPERIENCE, formValues);
   };
 
   return (
