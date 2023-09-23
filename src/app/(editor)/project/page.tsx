@@ -19,6 +19,8 @@ import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
 import { storage, STORAGE_KEY } from '@/utils/storage';
 
+const webStorage = storage(STORAGE_KEY.PROJECT);
+
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
 
@@ -41,7 +43,7 @@ const Page = () => {
   });
 
   useEffect(() => {
-    const storageData = storage.get(STORAGE_KEY.PROJECT);
+    const storageData = webStorage.get();
 
     setValue('projects', storageData ? storageData : [INITIAL_VALUE.PROJECT]);
   }, [setValue]);
@@ -63,10 +65,7 @@ const Page = () => {
 
     const formValues = getValues('projects');
 
-    storage.set(
-      STORAGE_KEY.PROJECT,
-      formValues.length ? formValues : [INITIAL_VALUE.PROJECT]
-    );
+    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.PROJECT]);
   };
 
   const handleSuggestClick = (index: number) => {
@@ -103,7 +102,7 @@ const Page = () => {
       return;
     }
 
-    storage.set(STORAGE_KEY.PROJECT, formValues);
+    webStorage.set(formValues);
   };
 
   return (

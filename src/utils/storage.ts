@@ -21,9 +21,9 @@ type StorageValue =
   | ProjectsFormDataSchema['projects']
   | ActivitiesFormDataSchema['activities'];
 
-export const storage = {
-  get: (key: StorageKey) => JSON.parse(localStorage.getItem(key) as string),
-  set: (key: StorageKey, value: StorageValue) =>
+export const storage = (key: StorageKey) => ({
+  get: () => JSON.parse(localStorage.getItem(key) as string),
+  set: (value: StorageValue) =>
     localStorage.setItem(key, JSON.stringify(value)),
-  remove: (key: StorageKey) => localStorage.removeItem(key),
-};
+  remove: () => localStorage.removeItem(key),
+});

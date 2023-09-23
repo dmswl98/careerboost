@@ -12,6 +12,8 @@ import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 import { storage, STORAGE_KEY } from '@/utils/storage';
 
+const webStorage = storage(STORAGE_KEY.ACTIVITY);
+
 const Page = () => {
   const {
     control,
@@ -28,7 +30,7 @@ const Page = () => {
   });
 
   useEffect(() => {
-    const storageData = storage.get(STORAGE_KEY.ACTIVITY);
+    const storageData = webStorage.get();
 
     setValue(
       'activities',
@@ -48,10 +50,7 @@ const Page = () => {
 
     const formValues = getValues('activities');
 
-    storage.set(
-      STORAGE_KEY.ACTIVITY,
-      formValues.length ? formValues : [INITIAL_VALUE.ACTIVITY]
-    );
+    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.ACTIVITY]);
   };
 
   const handleSaveClick = () => {
@@ -63,7 +62,7 @@ const Page = () => {
       return;
     }
 
-    storage.set(STORAGE_KEY.ACTIVITY, formValues);
+    webStorage.set(formValues);
   };
 
   return (

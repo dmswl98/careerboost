@@ -28,6 +28,8 @@ import { MENU_INFO } from '@/constants/menu';
 import { type ExperienceFormDataSchema } from '@/types/form';
 import { storage, STORAGE_KEY } from '@/utils/storage';
 
+const webStorage = storage(STORAGE_KEY.EXPERIENCE);
+
 const Page = () => {
   const {
     control,
@@ -44,7 +46,7 @@ const Page = () => {
   });
 
   useEffect(() => {
-    const storageData = storage.get(STORAGE_KEY.EXPERIENCE);
+    const storageData = webStorage.get();
 
     setValue(
       'experiences',
@@ -64,10 +66,7 @@ const Page = () => {
 
     const formValues = getValues('experiences');
 
-    storage.set(
-      STORAGE_KEY.EXPERIENCE,
-      formValues.length ? formValues : [INITIAL_VALUE.EXPERIENCE]
-    );
+    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.EXPERIENCE]);
   };
 
   const handleSaveClick = () => {
@@ -79,7 +78,7 @@ const Page = () => {
       return;
     }
 
-    storage.set(STORAGE_KEY.EXPERIENCE, formValues);
+    webStorage.set(formValues);
   };
 
   return (

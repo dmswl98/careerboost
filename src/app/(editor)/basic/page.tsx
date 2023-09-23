@@ -10,6 +10,8 @@ import { MENU_INFO } from '@/constants/menu';
 import { type UserInfoFormDataSchema } from '@/types/form';
 import { storage, STORAGE_KEY } from '@/utils/storage';
 
+const webStorage = storage(STORAGE_KEY.USER_INFO);
+
 const Page = () => {
   const {
     register,
@@ -20,7 +22,7 @@ const Page = () => {
   } = useFormContext<UserInfoFormDataSchema>();
 
   useEffect(() => {
-    setValue('userInfo', storage.get(STORAGE_KEY.USER_INFO));
+    setValue('userInfo', webStorage.get());
   }, [setValue]);
 
   const handleSaveClick = () => {
@@ -38,7 +40,7 @@ const Page = () => {
       return;
     }
 
-    storage.set(STORAGE_KEY.USER_INFO, formValues);
+    webStorage.set(formValues);
   };
 
   return (
