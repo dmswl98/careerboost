@@ -1,8 +1,8 @@
-import {
-  type ActivitiesFormDataSchema,
-  type ExperienceFormDataSchema,
-  type ProjectsFormDataSchema,
-  type UserInfoFormDataSchema,
+import type {
+  ActivitiesFormDataSchema,
+  ExperienceFormDataSchema,
+  ProjectsFormDataSchema,
+  UserInfoFormDataSchema,
 } from '@/types/form';
 
 const SERVICE_NAME = 'CAREERBOOST';
