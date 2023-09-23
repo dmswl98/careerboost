@@ -53,9 +53,9 @@ const Page = () => {
       <Input
         {...register('userInfo.name')}
         id="name"
-        placeholder={PLACEHOLDER.USER_INFO.NAME}
-        isError={!!errors.userInfo?.name}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.NAME}
+        error={errors.userInfo?.name?.message}
       />
       <Label htmlFor="career" isRequired>
         직무
@@ -63,18 +63,18 @@ const Page = () => {
       <Input
         {...register('userInfo.career')}
         id="career"
-        placeholder={PLACEHOLDER.USER_INFO.CAREER}
-        isError={!!errors.userInfo?.career}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.CAREER}
+        error={errors.userInfo?.career?.message}
       />
       <Label htmlFor="phone">전화번호</Label>
       <Input
         {...register('userInfo.phone')}
         id="phone"
         type="tel"
-        placeholder={PLACEHOLDER.USER_INFO.PHONE}
-        isError={!!errors.userInfo?.phone}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.PHONE}
+        error={errors.userInfo?.phone?.message}
       />
       <Label htmlFor="email" isRequired>
         이메일
@@ -83,17 +83,17 @@ const Page = () => {
         {...register('userInfo.email')}
         id="email"
         type="email"
-        placeholder={PLACEHOLDER.USER_INFO.EMAIL}
-        isError={!!errors.userInfo?.email}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.EMAIL}
+        error={errors.userInfo?.email?.message}
       />
       <Label htmlFor="blog">블로그</Label>
       <Input
         {...register('userInfo.blog')}
         id="blog"
-        placeholder={PLACEHOLDER.USER_INFO.URL}
-        isError={!!errors.userInfo?.blog}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.URL}
+        error={errors.userInfo?.blog?.message}
       />
       <Label htmlFor="github" isRequired>
         깃허브
@@ -101,9 +101,9 @@ const Page = () => {
       <Input
         {...register('userInfo.github')}
         id="github"
-        placeholder={PLACEHOLDER.USER_INFO.URL}
-        isError={!!errors.userInfo?.github}
         className="mb-3"
+        placeholder={PLACEHOLDER.USER_INFO.URL}
+        error={errors.userInfo?.github?.message}
       />
       <Label htmlFor="brief">소개글</Label>
       <Textarea

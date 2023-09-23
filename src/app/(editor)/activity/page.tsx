@@ -73,9 +73,7 @@ const Page = () => {
                 id="title"
                 className="mr-1"
                 placeholder={PLACEHOLDER.ACTIVITY.TITLE}
-                isError={
-                  !!(errors.activities && errors.activities[index]?.title)
-                }
+                error={errors.activities?.[index]?.title?.message}
                 autoFocus
               />
               <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />

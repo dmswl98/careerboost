@@ -89,9 +89,7 @@ const Page = () => {
                 id="title"
                 className="mr-1"
                 placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
-                isError={
-                  !!(errors.experiences && errors.experiences[index]?.company)
-                }
+                error={errors.experiences?.[index]?.company?.message}
                 autoFocus
               />
               <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
@@ -131,11 +129,7 @@ const Page = () => {
                   {...register(`experiences.${index}.jobTitle`)}
                   id="jobTitle"
                   placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
-                  isError={
-                    !!(
-                      errors.experiences && errors.experiences[index]?.jobTitle
-                    )
-                  }
+                  error={errors.experiences?.[index]?.jobTitle?.message}
                 />
               </div>
             </div>

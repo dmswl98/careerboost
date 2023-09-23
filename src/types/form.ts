@@ -5,14 +5,16 @@ import { PLACEHOLDER } from '@/constants/form';
 const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;
 const DATE_REGEX = /^\d{4}\.\d{2}$/;
 
+const NO_ENTERED_DATA = '내용을 작성해주세요';
+
 export const resumeFormSchema = z.object({
   userInfo: z.object({
-    name: z.string().min(1),
-    career: z.string().min(1),
+    name: z.string().min(1, { message: NO_ENTERED_DATA }),
+    career: z.string().min(1, { message: NO_ENTERED_DATA }),
     phone: z.optional(z.string().regex(PHONE_REGEX)).or(z.literal('')),
-    email: z.string().email(),
+    email: z.string().email({ message: NO_ENTERED_DATA }),
     blog: z.optional(z.string().url()).or(z.literal('')),
-    github: z.string().url(),
+    github: z.string().url({ message: NO_ENTERED_DATA }),
     brief: z.optional(z.string()),
   }),
   experiences: z.array(
