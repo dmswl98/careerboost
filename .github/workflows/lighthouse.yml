@@ -1,0 +1,39 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lhci:
+    name: Measuring the performance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Dependency
+        run: pnpm install -no-frozen-lockfile
+
+      - name: Runs Next.js production server
+        run: pnpm start
+
+      - name: Install @lhci/cli globally
+        run: pnpm add -g @lhci/cli@0.12.x
+
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: pnpm lighthouse
