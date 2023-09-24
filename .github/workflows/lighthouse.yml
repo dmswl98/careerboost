@@ -27,11 +27,14 @@ jobs:
       - name: Install Dependency
         run: pnpm install -no-frozen-lockfile
 
-      - name: Runs Next.js production server
-        run: pnpm start
-
       - name: Install @lhci/cli globally
         run: pnpm add -g @lhci/cli@0.12.x
+
+      - name: Build the application for production usage
+        run: pnpm build
+
+      - name: Runs Next.js production server
+        run: pnpm start
 
       - name: Run Lighthouse CI
         env:
