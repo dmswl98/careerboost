@@ -37,3 +37,7 @@ next-env.d.ts
 # environment variables
 .env
 .env.production
+
+# lighthouse
+.lighthouseci
+lhci_reports
