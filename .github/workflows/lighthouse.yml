@@ -33,9 +33,6 @@ jobs:
       - name: Build the application for production usage
         run: pnpm build
 
-      - name: Runs Next.js production server
-        run: pnpm start
-
       - name: Run Lighthouse CI
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
