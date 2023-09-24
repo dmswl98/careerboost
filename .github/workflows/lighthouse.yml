@@ -1,8 +1,6 @@
 name: Lighthouse CI
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+on: pull_request
 
 jobs:
   lhci:
