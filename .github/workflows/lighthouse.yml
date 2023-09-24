@@ -48,4 +48,4 @@ jobs:
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
         with:
-          msg: ${{ steps.format_lighthouse_score.outputs.comments }}
+          message: ${{ steps.format_lighthouse_score.outputs.comments }}
