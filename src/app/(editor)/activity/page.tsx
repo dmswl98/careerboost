@@ -78,9 +78,9 @@ const Page = () => {
                 </div>
                 <Input
                   {...register(`activities.${index}.institution`)}
-                  id="title"
+                  id="institution"
                   className="mb-3"
-                  label={{ text: '기관명', isRequired: true }}
+                  label={{ text: '기관명' }}
                   placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
                 />
                 <PeriodInput

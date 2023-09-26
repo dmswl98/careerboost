@@ -131,7 +131,7 @@ const Page = () => {
                   {...register(`projects.${index}.url`)}
                   id="url"
                   className="mb-3"
-                  label={{ text: '프로젝트 주소', isRequired: true }}
+                  label={{ text: '프로젝트 주소' }}
                   placeholder={PLACEHOLDER.PROJECT.URL}
                 />
                 <MarkdownInput
