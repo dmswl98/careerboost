@@ -3,7 +3,7 @@
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
-import { Input, Label } from '@/components/common';
+import { Button, Input, Label } from '@/components/common';
 import {
   Select,
   SelectContent,
@@ -72,83 +72,94 @@ const Page = () => {
       title={MENU_INFO.EXPERIENCE.TITLE}
       guide={MENU_INFO.EXPERIENCE.GUIDE}
       onAppendForm={handleAppendClick}
-      onSaveForm={handleSaveClick}
     >
-      <ul>
-        {fields.map((item, index) => (
-          <li key={item.id} className="border-b border-gray-200/70 py-6">
-            <div className="mb-3 flex items-end gap-2">
-              <Input
-                {...register(`experiences.${index}.company`)}
-                id="title"
-                className="mr-1"
-                label={{ text: '회사명', isRequired: true }}
-                placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
-                error={errors.experiences?.[index]?.company?.message}
-                autoFocus
-              />
-              <FormRemoveButton onRemoveForm={() => handleRemoveClick(index)} />
-            </div>
-            <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
-              <div className="flex-1">
-                <Label htmlFor="employmentType" isRequired>
-                  근무 형태
-                </Label>
-                <Controller
-                  control={control}
-                  name={`experiences.${index}.employmentType`}
-                  render={({ field: { onChange, value } }) => (
-                    <Select onValueChange={onChange} defaultValue={value}>
-                      <SelectTrigger
-                        error={
-                          errors.experiences?.[index]?.employmentType?.message
-                        }
-                      >
-                        <SelectValue placeholder="근무 형태" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {EMPLOYMENT_TYPES.map((employmentType) => (
-                          <SelectItem
-                            key={employmentType}
-                            value={employmentType}
+      {fields.length > 0 && (
+        <div className="mt-5">
+          <ul>
+            {fields.map((item, index) => (
+              <li key={item.id} className="border-b border-gray-200/70 py-6">
+                <div className="mb-3 flex items-end gap-2">
+                  <Input
+                    {...register(`experiences.${index}.company`)}
+                    id="title"
+                    className="mr-1"
+                    label={{ text: '회사명', isRequired: true }}
+                    placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
+                    error={errors.experiences?.[index]?.company?.message}
+                    autoFocus
+                  />
+                  <FormRemoveButton
+                    onRemoveForm={() => handleRemoveClick(index)}
+                  />
+                </div>
+                <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
+                  <div className="flex-1">
+                    <Label htmlFor="employmentType" isRequired>
+                      근무 형태
+                    </Label>
+                    <Controller
+                      control={control}
+                      name={`experiences.${index}.employmentType`}
+                      render={({ field: { onChange, value } }) => (
+                        <Select onValueChange={onChange} defaultValue={value}>
+                          <SelectTrigger
+                            error={
+                              errors.experiences?.[index]?.employmentType
+                                ?.message
+                            }
                           >
-                            {employmentType}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
+                            <SelectValue placeholder="근무 형태" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {EMPLOYMENT_TYPES.map((employmentType) => (
+                              <SelectItem
+                                key={employmentType}
+                                value={employmentType}
+                              >
+                                {employmentType}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <Input
+                      {...register(`experiences.${index}.jobTitle`)}
+                      id="jobTitle"
+                      label={{ text: '직무', isRequired: true }}
+                      placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
+                      error={errors.experiences?.[index]?.jobTitle?.message}
+                    />
+                  </div>
+                </div>
+                <PeriodInput
+                  formName="experiences"
+                  index={index}
+                  label={PERIOD_LABEL.WORKING}
+                  error={{
+                    startDate: errors.experiences?.[index]?.startDate?.message,
+                    endDate: errors.experiences?.[index]?.endDate?.message,
+                  }}
                 />
-              </div>
-              <div className="flex-1">
-                <Input
-                  {...register(`experiences.${index}.jobTitle`)}
-                  id="jobTitle"
-                  label={{ text: '직무', isRequired: true }}
-                  placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
-                  error={errors.experiences?.[index]?.jobTitle?.message}
+                <MarkdownInput
+                  formName="experiences"
+                  index={index}
+                  label="내용"
+                  placeholder={PLACEHOLDER.EXPERIENCE.CONTENT}
+                  error={errors.experiences?.[index]?.content?.message}
                 />
-              </div>
-            </div>
-            <PeriodInput
-              formName="experiences"
-              index={index}
-              label={PERIOD_LABEL.WORKING}
-              error={{
-                startDate: errors.experiences?.[index]?.startDate?.message,
-                endDate: errors.experiences?.[index]?.endDate?.message,
-              }}
-            />
-            <MarkdownInput
-              formName="experiences"
-              index={index}
-              label="내용"
-              placeholder={PLACEHOLDER.EXPERIENCE.CONTENT}
-              error={errors.experiences?.[index]?.content?.message}
-            />
-          </li>
-        ))}
-      </ul>
+              </li>
+            ))}
+          </ul>
+          <div className="ml-auto mt-4 w-fit">
+            <Button type="button" onClick={handleSaveClick}>
+              저장
+            </Button>
+          </div>
+        </div>
+      )}
     </FormCard>
   );
 };
