@@ -1,7 +1,7 @@
 'use client';
 
 import { useCompletion } from 'ai/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -17,9 +17,7 @@ import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
-import { storage, STORAGE_KEY } from '@/utils/storage';
-
-const webStorage = storage(STORAGE_KEY.PROJECT);
+import { storage } from '@/utils/storage';
 
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -29,7 +27,6 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    setValue,
     formState: { errors, dirtyFields },
   } = useFormContext<ProjectsFormDataSchema>();
 
@@ -41,12 +38,6 @@ const Page = () => {
   const { complete, completion } = useCompletion({
     api: '/api/ai',
   });
-
-  useEffect(() => {
-    const storageData = webStorage.get();
-
-    setValue('projects', storageData ? storageData : [INITIAL_VALUE.PROJECT]);
-  }, [setValue]);
 
   const handleAppendClick = () => {
     append({
@@ -65,7 +56,10 @@ const Page = () => {
 
     const formValues = getValues('projects');
 
-    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.PROJECT]);
+    storage.set({
+      ...storage.get(),
+      activities: formValues,
+    });
   };
 
   const handleSuggestClick = (index: number) => {
@@ -102,7 +96,7 @@ const Page = () => {
       return;
     }
 
-    webStorage.set(formValues);
+    storage.set({ ...storage.get(), projects: formValues });
   };
 
   return (

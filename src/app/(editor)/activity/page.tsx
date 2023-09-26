@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
@@ -10,9 +9,7 @@ import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
-import { storage, STORAGE_KEY } from '@/utils/storage';
-
-const webStorage = storage(STORAGE_KEY.ACTIVITY);
+import { storage } from '@/utils/storage';
 
 const Page = () => {
   const {
@@ -20,7 +17,6 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    setValue,
     formState: { errors, dirtyFields },
   } = useFormContext<ActivitiesFormDataSchema>();
 
@@ -28,15 +24,6 @@ const Page = () => {
     name: 'activities',
     control,
   });
-
-  useEffect(() => {
-    const storageData = webStorage.get();
-
-    setValue(
-      'activities',
-      storageData ? storageData : [INITIAL_VALUE.ACTIVITY]
-    );
-  }, [setValue]);
 
   const handleAppendClick = () => {
     append({
@@ -50,7 +37,10 @@ const Page = () => {
 
     const formValues = getValues('activities');
 
-    webStorage.set(formValues.length ? formValues : [INITIAL_VALUE.ACTIVITY]);
+    storage.set({
+      ...storage.get(),
+      activities: formValues,
+    });
   };
 
   const handleSaveClick = () => {
@@ -62,7 +52,7 @@ const Page = () => {
       return;
     }
 
-    webStorage.set(formValues);
+    storage.set({ ...storage.get(), activities: formValues });
   };
 
   return (

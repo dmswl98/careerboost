@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Input, Label, Textarea } from '@/components/common';
@@ -8,22 +7,15 @@ import { FormCard } from '@/components/Form';
 import { PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type UserInfoFormDataSchema } from '@/types/form';
-import { storage, STORAGE_KEY } from '@/utils/storage';
-
-const webStorage = storage(STORAGE_KEY.USER_INFO);
+import { storage } from '@/utils/storage';
 
 const Page = () => {
   const {
     register,
     trigger,
     getValues,
-    setValue,
     formState: { errors },
   } = useFormContext<UserInfoFormDataSchema>();
-
-  useEffect(() => {
-    setValue('userInfo', webStorage.get());
-  }, [setValue]);
 
   const handleSaveClick = () => {
     trigger('userInfo');
@@ -40,7 +32,7 @@ const Page = () => {
       return;
     }
 
-    webStorage.set(formValues);
+    storage.set({ ...storage.get(), userInfo: formValues });
   };
 
   return (
