@@ -1,22 +1,37 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import { FormProvider as Provider, useForm } from 'react-hook-form';
 
 import { INITIAL_VALUE } from '@/constants/form';
 import { type ResumeFormDataSchema, resumeFormSchema } from '@/types/form';
-
-const FORM_DEFAULT_VALUES = {
-  userInfo: INITIAL_VALUE.USER_INFO,
-  experiences: [INITIAL_VALUE.EXPERIENCE],
-  projects: [INITIAL_VALUE.PROJECT],
-  activities: [INITIAL_VALUE.ACTIVITY],
-};
+import { storage } from '@/utils/storage';
 
 const FormProvider = ({ children }: StrictPropsWithChildren) => {
   const methods = useForm<ResumeFormDataSchema>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: zodResolver(resumeFormSchema),
-    defaultValues: FORM_DEFAULT_VALUES,
+    defaultValues: {
+      userInfo: INITIAL_VALUE.USER_INFO,
+      experiences: [],
+      projects: [],
+      activities: [],
+    },
   });
+
+  useEffect(() => {
+    const storageData = storage.get();
+
+    if (!storageData) {
+      return;
+    }
+
+    const { userInfo, experiences, projects, activities } = storageData;
+
+    methods.setValue('userInfo', userInfo);
+    methods.setValue('experiences', experiences);
+    methods.setValue('projects', projects);
+    methods.setValue('activities', activities);
+  }, [methods]);
 
   const onSubmit = (data: ResumeFormDataSchema) => {
     methods.trigger();
