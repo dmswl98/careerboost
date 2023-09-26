@@ -27,7 +27,7 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useFormContext<ProjectsFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -54,28 +54,16 @@ const Page = () => {
     const newIsSuggest = isSuggest.slice().splice(index, 1);
     setIsSuggest(newIsSuggest);
 
-    const formValues = getValues('projects');
-
     storage.set({
       ...storage.get(),
-      activities: formValues,
+      activities: getValues('projects'),
     });
   };
 
   const handleSuggestClick = (index: number) => {
     trigger(`projects.${index}`);
 
-    const { title, startDate, endDate, content } = getValues(
-      `projects.${index}`
-    );
-
-    if (
-      !title ||
-      !startDate ||
-      !endDate ||
-      !content ||
-      errors.projects?.[index]
-    ) {
+    if (errors.projects?.[index]) {
       return;
     }
 
@@ -84,19 +72,17 @@ const Page = () => {
 
     setIsSuggest(newIsSuggest);
 
-    complete(content);
+    complete(getValues(`projects.${index}.content`));
   };
 
   const handleSaveClick = () => {
     trigger('projects');
 
-    const formValues = getValues('projects');
-
-    if (!dirtyFields.projects || errors.projects || !formValues.length) {
+    if (errors.projects) {
       return;
     }
 
-    storage.set({ ...storage.get(), projects: formValues });
+    storage.set({ ...storage.get(), projects: getValues('projects') });
   };
 
   return (

@@ -8,7 +8,7 @@ import { storage } from '@/utils/storage';
 
 const FormProvider = ({ children }: StrictPropsWithChildren) => {
   const methods = useForm<ResumeFormDataSchema>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: zodResolver(resumeFormSchema),
     defaultValues: {
       userInfo: INITIAL_VALUE.USER_INFO,

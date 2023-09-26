@@ -17,7 +17,7 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useFormContext<ActivitiesFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -35,24 +35,20 @@ const Page = () => {
   const handleRemoveClick = (index: number) => {
     remove(index);
 
-    const formValues = getValues('activities');
-
     storage.set({
       ...storage.get(),
-      activities: formValues,
+      activities: getValues('activities'),
     });
   };
 
   const handleSaveClick = () => {
     trigger('activities');
 
-    const formValues = getValues('activities');
-
-    if (!dirtyFields.activities || errors.activities || !formValues.length) {
+    if (errors.activities) {
       return;
     }
 
-    storage.set({ ...storage.get(), activities: formValues });
+    storage.set({ ...storage.get(), activities: getValues('activities') });
   };
 
   return (

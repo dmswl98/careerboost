@@ -20,19 +20,11 @@ const Page = () => {
   const handleSaveClick = () => {
     trigger('userInfo');
 
-    const formValues = getValues('userInfo');
-
-    if (
-      !formValues.name ||
-      !formValues.career ||
-      !formValues.email ||
-      !formValues.github ||
-      errors.userInfo
-    ) {
+    if (errors.userInfo) {
       return;
     }
 
-    storage.set({ ...storage.get(), userInfo: formValues });
+    storage.set({ ...storage.get(), userInfo: getValues('userInfo') });
   };
 
   return (

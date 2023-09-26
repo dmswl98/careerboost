@@ -33,7 +33,7 @@ const Page = () => {
     register,
     trigger,
     getValues,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useFormContext<ExperienceFormDataSchema>();
 
   const { fields, append, remove } = useFieldArray({
@@ -51,24 +51,20 @@ const Page = () => {
   const handleRemoveClick = (index: number) => {
     remove(index);
 
-    const formValues = getValues('experiences');
-
     storage.set({
       ...storage.get(),
-      experiences: formValues,
+      experiences: getValues('experiences'),
     });
   };
 
   const handleSaveClick = () => {
     trigger('experiences');
 
-    const formValues = getValues('experiences');
-
-    if (!dirtyFields.experiences || errors.experiences || !formValues.length) {
+    if (errors.experiences) {
       return;
     }
 
-    storage.set({ ...storage.get(), experiences: formValues });
+    storage.set({ ...storage.get(), experiences: getValues('experiences') });
   };
 
   return (
