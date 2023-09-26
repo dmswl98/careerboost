@@ -32,25 +32,25 @@ const Sidebar = () => {
             isCurrentLocation={pathname === MENU_INFO.BASIC.ROUTE}
             title={MENU_INFO.BASIC.TITLE}
             route={MENU_INFO.BASIC.ROUTE}
-            status={errors.userInfo}
+            isError={errors.userInfo}
           />
           <MenuLink<ExperienceFormDataSchema>
             isCurrentLocation={pathname === MENU_INFO.EXPERIENCE.ROUTE}
             title={MENU_INFO.EXPERIENCE.TITLE}
             route={MENU_INFO.EXPERIENCE.ROUTE}
-            status={errors.experiences}
+            isError={errors.experiences}
           />
           <MenuLink<ProjectsFormDataSchema>
             isCurrentLocation={pathname === MENU_INFO.PROJECT.ROUTE}
             title={MENU_INFO.PROJECT.TITLE}
             route={MENU_INFO.PROJECT.ROUTE}
-            status={errors.projects}
+            isError={errors.projects}
           />
           <MenuLink<ActivitiesFormDataSchema>
             isCurrentLocation={pathname === MENU_INFO.ACTIVITY.ROUTE}
             title={MENU_INFO.ACTIVITY.TITLE}
             route={MENU_INFO.ACTIVITY.ROUTE}
-            status={errors.activities}
+            isError={errors.activities}
           />
         </ul>
       </div>

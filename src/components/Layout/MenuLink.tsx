@@ -8,14 +8,14 @@ interface MenuLinkProps<T extends FieldValues> {
   isCurrentLocation: boolean;
   title: string;
   route: (typeof ROUTES)[keyof typeof ROUTES];
-  status?: FieldErrors<T>;
+  isError?: FieldErrors<T>;
 }
 
 const MenuLink = <T extends FieldValues>({
   isCurrentLocation,
   route,
   title,
-  status,
+  isError,
 }: MenuLinkProps<T>) => {
   const currentLocationStyle = isCurrentLocation
     ? 'border-primary font-bold text-primary'
@@ -29,7 +29,7 @@ const MenuLink = <T extends FieldValues>({
       >
         {title}
       </Link>
-      {status && <AlertCircle className="h-5 w-5 text-destructive" />}
+      {isError && <AlertCircle className="h-5 w-5 text-destructive" />}
     </li>
   );
 };
