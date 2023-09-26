@@ -1,17 +1,17 @@
 version: 2
 
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'weekly'
     open-pull-requests-limit: 3
     commit-message:
-      prefix: "chore: "
+      prefix: 'chore: '
     assignees:
-      - "dmswl98"
+      - 'dmswl98'
     reviewers:
-      - "dmswl98"
+      - 'dmswl98'
     labels:
-      - "dependencies"
-      - "dependabot"
+      - 'dependencies'
+      - 'dependabot'
