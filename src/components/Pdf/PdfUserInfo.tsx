@@ -13,7 +13,7 @@ const PdfUserInfo = ({ userInfo }: PdfUserInfoProps) => {
   return (
     <View
       style={tailwind(
-        'flex-column justify-between bg-gray-100 text-gray-500 p-8 mt-[-29px] mx-[-23px]'
+        'flex-col justify-between bg-gray-100 text-gray-500 p-8 mt-[-29px] mx-[-23px]'
       )}
     >
       <View style={tailwind('flex-row')}>
