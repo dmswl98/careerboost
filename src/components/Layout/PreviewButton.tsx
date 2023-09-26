@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Switch } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
 
-const SubmitButton = () => {
+const PreviewButton = () => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -12,7 +12,7 @@ const SubmitButton = () => {
   };
 
   return (
-    <div className="flex w-full items-center justify-between rounded-xl bg-gray-100/80 px-5 py-4">
+    <div className="mb-4 flex w-full items-center justify-between rounded-xl bg-gray-100/80 px-5 py-4">
       <div className="grow text-sm font-bold text-primary">이력서 미리보기</div>
       <Switch
         checked={pathname === ROUTES.PREVIEW}
@@ -22,4 +22,4 @@ const SubmitButton = () => {
   );
 };
 
-export default SubmitButton;
+export default PreviewButton;
