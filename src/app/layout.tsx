@@ -8,6 +8,7 @@ import META from '@/constants/meta';
 import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://careerboost-bmt142ael-dmswl98.vercel.app'),
   title: META.TITLE,
   description: META.DESCRIPTION,
   keywords: [...META.KEYWORD],
