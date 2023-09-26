@@ -31,7 +31,7 @@ const DownloadButton = () => {
         </PDFDownloadLink>
       ) : (
         <Button type="submit" disabled={!!Object.keys(errors).length}>
-          이력서 다운로드
+          이력서 생성
         </Button>
       )}
     </>
