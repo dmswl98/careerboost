@@ -1,6 +1,12 @@
 name: Lighthouse CI
 
-on: pull_request
+on:
+  pull_request:
+    branches-ignore:
+      - 'dependabot/**'
+      - 'imgbot'
+    paths:
+      - 'src/**'
 
 jobs:
   lhci:
