@@ -35,7 +35,7 @@ const markdownComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
     <Text style={tailwind('text-sm font-bold')}>{children}</Text>
   ),
   code: ({ children }) => (
-    <Text style={tailwind('text-xs font-light bg-gray-100')}>
+    <Text style={tailwind('text-xs font-regular text-gray-500 bg-gray-100')}>
       <Text style={tailwind('bg-gray-100')}> </Text>
       {children}
       <Text style={tailwind('bg-gray-100')}> </Text>

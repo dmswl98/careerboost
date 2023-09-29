@@ -13,7 +13,7 @@ const PdfUserInfo = ({ userInfo }: PdfUserInfoProps) => {
   return (
     <View
       style={tailwind(
-        'flex-col justify-between bg-gray-100 text-gray-500 p-8 mt-[-29px] mx-[-23px]'
+        'flex-col justify-between bg-gray-100 text-gray-600 p-8 mt-[-29px] mx-[-23px]'
       )}
     >
       <View style={tailwind('flex-row')}>
@@ -36,23 +36,23 @@ const PdfUserInfo = ({ userInfo }: PdfUserInfoProps) => {
         {userInfo.blog ? (
           <Link src={userInfo.blog} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-gray-500')}>{userInfo.blog}</Text>
+            <Text style={tailwind('text-gray-600')}>{userInfo.blog}</Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/link.png'} />
-            <Text style={tailwind('text-gray-500')}>블로그</Text>
+            <Text style={tailwind('text-gray-600')}>블로그</Text>
           </View>
         )}
         {userInfo.github ? (
           <Link src={userInfo.github} style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-gray-500')}>{userInfo.github}</Text>
+            <Text style={tailwind('text-gray-600')}>{userInfo.github}</Text>
           </Link>
         ) : (
           <View style={tailwind('flex-row items-center')}>
             <Image style={tailwind('w-4 mr-2')} src={'/icons/github.png'} />
-            <Text style={tailwind('text-gray-500')}>깃허브</Text>
+            <Text style={tailwind('text-gray-600')}>깃허브</Text>
           </View>
         )}
       </View>
