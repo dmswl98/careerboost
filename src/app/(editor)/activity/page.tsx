@@ -4,12 +4,17 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import { Button, Input } from '@/components/common';
-import { FormCard, MarkdownInput, PeriodInput } from '@/components/Form';
-import FormRemoveButton from '@/components/Form/FormRemoveButton';
+import {
+  ButtonGroup,
+  FormCard,
+  MarkdownInput,
+  PeriodInput,
+} from '@/components/Form';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 import { storage } from '@/utils/storage';
+import { isBottomForm, isTopForm } from '@/utils/form';
 
 const Page = () => {
   const {
@@ -20,7 +25,7 @@ const Page = () => {
     formState: { errors },
   } = useFormContext<ActivitiesFormDataSchema>();
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, swap, remove } = useFieldArray({
     name: 'activities',
     control,
   });
@@ -30,6 +35,14 @@ const Page = () => {
       ...INITIAL_VALUE.ACTIVITY,
       id: v4(),
     });
+  };
+
+  const handleUpClick = (index: number) => {
+    swap(index, isTopForm(index) ? index : index - 1);
+  };
+
+  const handleDownClick = (index: number) => {
+    swap(index, isBottomForm(index, fields.length - 1) ? index : index + 1);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -62,20 +75,22 @@ const Page = () => {
           <ul>
             {fields.map((item, index) => (
               <li key={item.id} className="border-b border-gray-200/70 py-6">
-                <div className="mb-3 flex items-end gap-2">
-                  <Input
-                    {...register(`activities.${index}.title`)}
-                    id="title"
-                    className="mr-1"
-                    label={{ text: '수상 및 활동명', isRequired: true }}
-                    placeholder={PLACEHOLDER.ACTIVITY.TITLE}
-                    error={errors.activities?.[index]?.title?.message}
-                    autoFocus
-                  />
-                  <FormRemoveButton
-                    onRemoveForm={() => handleRemoveClick(index)}
-                  />
-                </div>
+                <ButtonGroup
+                  isTop={isTopForm(index)}
+                  isBottom={isBottomForm(index, fields.length - 1)}
+                  onMoveUpForm={() => handleUpClick(index)}
+                  onMoveDownForm={() => handleDownClick(index)}
+                  onRemoveForm={() => handleRemoveClick(index)}
+                />
+                <Input
+                  {...register(`activities.${index}.title`)}
+                  id="title"
+                  className="mb-3"
+                  label={{ text: '수상 및 활동명', isRequired: true }}
+                  placeholder={PLACEHOLDER.ACTIVITY.TITLE}
+                  error={errors.activities?.[index]?.title?.message}
+                  autoFocus
+                />
                 <Input
                   {...register(`activities.${index}.institution`)}
                   id="institution"

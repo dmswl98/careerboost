@@ -8,16 +8,17 @@ import { v4 } from 'uuid';
 import { Button, Input } from '@/components/common';
 import {
   AiSuggestion,
+  ButtonGroup,
   FormCard,
   MarkdownInput,
   PeriodInput,
 } from '@/components/Form';
-import FormRemoveButton from '@/components/Form/FormRemoveButton';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
 import { storage } from '@/utils/storage';
+import { isBottomForm, isTopForm } from '@/utils/form';
 
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -30,7 +31,7 @@ const Page = () => {
     formState: { errors },
   } = useFormContext<ProjectsFormDataSchema>();
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, swap, remove } = useFieldArray({
     name: 'projects',
     control,
   });
@@ -46,6 +47,14 @@ const Page = () => {
     });
 
     setIsSuggest((prev) => [...prev, false]);
+  };
+
+  const handleUpClick = (index: number) => {
+    swap(index, isTopForm(index) ? index : index - 1);
+  };
+
+  const handleDownClick = (index: number) => {
+    swap(index, isBottomForm(index, fields.length - 1) ? index : index + 1);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -96,6 +105,13 @@ const Page = () => {
           <ul>
             {fields.map((item, index) => (
               <li key={item.id} className="border-b border-gray-200/70 py-6">
+                <ButtonGroup
+                  isTop={isTopForm(index)}
+                  isBottom={isBottomForm(index, fields.length - 1)}
+                  onMoveUpForm={() => handleUpClick(index)}
+                  onMoveDownForm={() => handleDownClick(index)}
+                  onRemoveForm={() => handleRemoveClick(index)}
+                />
                 <div className="mb-3 flex items-end gap-1">
                   <Input
                     {...register(`projects.${index}.title`)}
@@ -104,9 +120,6 @@ const Page = () => {
                     label={{ text: '프로젝트명', isRequired: true }}
                     placeholder={PLACEHOLDER.PROJECT.TITLE}
                     error={errors.projects?.[index]?.title?.message}
-                  />
-                  <FormRemoveButton
-                    onRemoveForm={() => handleRemoveClick(index)}
                   />
                   <Button
                     size="icon"
