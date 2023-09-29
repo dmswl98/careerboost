@@ -22,7 +22,7 @@ const ServiceErrorMessage = ({
   title = ERROR_MESSAGE.TITLE,
   description = ERROR_MESSAGE.DESCRIPTION,
   buttonContent = ERROR_MESSAGE.BUTTON_CONTENT,
-  route = ROUTES.HOME,
+  route = ROUTES.BASIC,
 }: ServiceErrorMessageProps) => {
   const router = useRouter();
 
