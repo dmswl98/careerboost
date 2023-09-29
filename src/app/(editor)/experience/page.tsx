@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from '@/components/common/Select';
 import {
+  ButtonGroup,
   FormCard,
-  FormRemoveButton,
   MarkdownInput,
   PeriodInput,
 } from '@/components/Form';
@@ -26,6 +26,7 @@ import {
 import { MENU_INFO } from '@/constants/menu';
 import { type ExperienceFormDataSchema } from '@/types/form';
 import { storage } from '@/utils/storage';
+import { isBottomForm, isTopForm } from '@/utils/form';
 
 const Page = () => {
   const {
@@ -36,7 +37,7 @@ const Page = () => {
     formState: { errors },
   } = useFormContext<ExperienceFormDataSchema>();
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, swap, remove } = useFieldArray({
     name: 'experiences',
     control,
   });
@@ -46,6 +47,14 @@ const Page = () => {
       ...INITIAL_VALUE.EXPERIENCE,
       id: v4(),
     });
+  };
+
+  const handleUpClick = (index: number) => {
+    swap(index, isTopForm(index) ? index : index - 1);
+  };
+
+  const handleDownClick = (index: number) => {
+    swap(index, isBottomForm(index, fields.length - 1) ? index : index + 1);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -78,20 +87,22 @@ const Page = () => {
           <ul>
             {fields.map((item, index) => (
               <li key={item.id} className="border-b border-gray-200/70 py-6">
-                <div className="mb-3 flex items-end gap-2">
-                  <Input
-                    {...register(`experiences.${index}.company`)}
-                    id="title"
-                    className="mr-1"
-                    label={{ text: '회사명', isRequired: true }}
-                    placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
-                    error={errors.experiences?.[index]?.company?.message}
-                    autoFocus
-                  />
-                  <FormRemoveButton
-                    onRemoveForm={() => handleRemoveClick(index)}
-                  />
-                </div>
+                <ButtonGroup
+                  isTop={isTopForm(index)}
+                  isBottom={isBottomForm(index, fields.length - 1)}
+                  onMoveUpForm={() => handleUpClick(index)}
+                  onMoveDownForm={() => handleDownClick(index)}
+                  onRemoveForm={() => handleRemoveClick(index)}
+                />
+                <Input
+                  {...register(`experiences.${index}.company`)}
+                  id="title"
+                  className="mb-3"
+                  label={{ text: '회사명', isRequired: true }}
+                  placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
+                  error={errors.experiences?.[index]?.company?.message}
+                  autoFocus
+                />
                 <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
                   <div className="flex-1">
                     <Label htmlFor="employmentType" isRequired>
