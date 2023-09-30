@@ -2,7 +2,7 @@ import { Github, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Logo from '@/public/logo.png';
+import Logo from '/public/logo.png';
 
 const GITHUB_REPO_LINK = 'https://github.com/dmswl98/careerboost';
 const LINKEDIN_LINK =

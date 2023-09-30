@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import Logo from '/public/logo.png';
+import TextLogo from '/public/text-logo.png';
 import { Button } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
-import Logo from '@/public/logo.png';
-import TextLogo from '@/public/text-logo.png';
 
 const Header = () => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Landing from '@/public/landing.png';
+import Landing from '/public/landing.png';
 
 const Main = () => {
   return (
