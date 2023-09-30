@@ -8,10 +8,10 @@ const Main = () => {
       <div className="relative flex max-w-[1080px] overflow-hidden rounded-2xl border border-gray-200/70 bg-[#F9F9F9] p-8 sm:p-10">
         <Image
           src={Landing}
-          priority
-          alt="서비스 사용 팁 배경"
-          loading="eager"
           className="absolute left-0 top-0 z-0 h-auto w-full"
+          priority
+          loading="eager"
+          alt="서비스 사용 팁 배경"
         />
         <div className="z-10">
           <span className="font-semibold text-gray-400">서비스 사용 팁</span>
