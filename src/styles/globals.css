@@ -54,3 +54,17 @@ a {
 ::selection {
   @apply bg-gray-200;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+  @apply border-2 border-white;
+  border-radius: 12px 12px 12px 12px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
