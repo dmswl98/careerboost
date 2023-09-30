@@ -18,11 +18,11 @@ const ButtonGroup = ({
   onRemoveForm,
 }: ButtonGroupProps) => {
   return (
-    <div className="flex items-center justify-between mb-1">
+    <div className="mb-1 flex items-center justify-between">
       <div>
         <Button
           type="button"
-          className="h-6 w-6 mr-0.5"
+          className="mr-0.5 h-6 w-6"
           disabled={isTop}
           variant="outline"
           size="icon"
@@ -32,7 +32,7 @@ const ButtonGroup = ({
         </Button>
         <Button
           type="button"
-          className="h-6 w-6 mr-1"
+          className="mr-1 h-6 w-6"
           disabled={isBottom}
           variant="outline"
           size="icon"
