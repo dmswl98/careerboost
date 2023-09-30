@@ -13,8 +13,8 @@ import {
 import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ActivitiesFormDataSchema } from '@/types/form';
-import { storage } from '@/utils/storage';
 import { isBottomForm, isTopForm } from '@/utils/form';
+import { storage } from '@/utils/storage';
 
 const Page = () => {
   const {
