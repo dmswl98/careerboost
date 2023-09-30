@@ -3,8 +3,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import Logo from '/public/logo.png';
-import TextLogo from '/public/text-logo.png';
 import { Button } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
 
@@ -14,14 +12,18 @@ const Header = () => {
   return (
     <header className="flex w-full flex-col items-center justify-center px-6 py-[140px] sm:px-10 md:py-[240px]">
       <Image
-        src={Logo}
+        src="/logo.png"
+        width={140}
+        height={140}
         className="mb-10 w-[100px] md:w-[140px]"
         priority
         loading="eager"
         alt="careerboost 이미지 로고"
       />
       <Image
-        src={TextLogo}
+        src="/text-logo.png"
+        width={500}
+        height={38}
         className="mb-6 w-[380px] md:w-[500px]"
         priority
         loading="eager"

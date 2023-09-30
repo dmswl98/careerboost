@@ -1,13 +1,13 @@
 import Image from 'next/image';
 
-import Landing from '/public/landing.png';
-
 const Main = () => {
   return (
     <main className="mb-20 h-fit px-6 sm:mb-10 sm:px-10 md:mb-24">
       <div className="relative flex max-w-[1080px] overflow-hidden rounded-2xl border border-gray-200/70 bg-[#F9F9F9] p-8 sm:p-10">
         <Image
-          src={Landing}
+          src="/landing.png"
+          width={1200}
+          height={300}
           className="absolute left-0 top-0 z-0 h-auto w-full"
           priority
           loading="eager"
