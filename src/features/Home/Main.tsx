@@ -19,7 +19,7 @@ const Main = () => {
             어떻게 하면 이 서비스를 잘 활용할 수 있을까요?
           </p>
           <div className="mt-12 flex flex-col items-center md:mx-10">
-            <div className="flex flex-col gap-6 text-sm md:flex-row md:flex-nowrap">
+            <div className="flex flex-col gap-6 text-sm md:flex-row md:flex-nowrap md:text-base">
               <div className="flex flex-1 items-center rounded-lg bg-white/80 p-5 text-center">
                 경험한 내용을 최대한 자세하게 작성하면 AI 첨삭 퀄리티를 높일 수
                 있어요
