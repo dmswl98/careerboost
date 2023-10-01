@@ -5,6 +5,7 @@ module.exports = {
       numberOfRuns: 1,
       url: [
         'http://localhost:3000',
+        'http://localhost:3000/basic',
         'http://localhost:3000/experience',
         'http://localhost:3000/project',
         'http://localhost:3000/activity',
