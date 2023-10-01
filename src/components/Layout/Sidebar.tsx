@@ -10,7 +10,6 @@ import type {
   ResumeFormDataSchema,
   UserInfoFormDataSchema,
 } from '@/types/form';
-import { calculateProgressValue } from '@/utils/progress';
 
 import DownloadButton from './DownloadButton';
 import MenuLink from './MenuLink';
@@ -20,7 +19,6 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const {
-    getValues,
     formState: { errors },
   } = useFormContext<ResumeFormDataSchema>();
 
@@ -28,14 +26,7 @@ const Sidebar = () => {
     <aside className="flex h-fit min-w-[260px] flex-col">
       <div className="mb-2 rounded-xl border border-gray-200/70 bg-white px-5 py-7 md:mb-6">
         <h1 className="mb-2 text-base font-bold">이력서 완성도</h1>
-        <Progress
-          value={calculateProgressValue(
-            getValues('experiences').length,
-            getValues('projects').length,
-            getValues('activities').length,
-            Object.keys(errors).length
-          )}
-        />
+        <Progress value={30} />
         <ul className="mt-6">
           <MenuLink<UserInfoFormDataSchema>
             isCurrentLocation={pathname === MENU_INFO.BASIC.ROUTE}
