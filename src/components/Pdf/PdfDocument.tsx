@@ -17,13 +17,13 @@ const PdfDocument = ({ resume }: PdfDocumentProps) => {
     <Document>
       <Page size="A4" style={tailwind('font-regular px-8 pt-10 pb-14')} wrap>
         <PdfUserInfo userInfo={resume.userInfo} />
-        {resume.experiences[0] && resume.experiences[0].company && (
+        {resume.experiences.length > 0 && (
           <PdfExperience experiences={resume.experiences} />
         )}
-        {resume.projects[0] && resume.projects[0].title && (
+        {resume.projects.length > 0 && (
           <PdfProject projects={resume.projects} />
         )}
-        {resume.activities[0] && resume.activities[0].title && (
+        {resume.activities.length > 0 && (
           <PdfActivity activities={resume.activities} />
         )}
         <Link

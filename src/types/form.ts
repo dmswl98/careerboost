@@ -23,54 +23,48 @@ export const resumeFormSchema = z.object({
     brief: z.optional(z.string()),
   }),
   experiences: z.array(
-    z
-      .object({
-        id: z.string().uuid(),
-        company: z.string().min(1, { message: NO_ENTERED_DATA }),
-        employmentType: z
-          .string()
-          .min(1, { message: '근무 형태를 선택해주세요' }),
-        jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
-        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
-        endDate: z
-          .string()
-          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
-          .or(z.literal(PLACEHOLDER.PERIOD.WORKING)),
-        content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
-      })
-      .optional()
+    z.object({
+      id: z.string().uuid(),
+      company: z.string().min(1, { message: NO_ENTERED_DATA }),
+      employmentType: z
+        .string()
+        .min(1, { message: '근무 형태를 선택해주세요' }),
+      jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
+      startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
+      endDate: z
+        .string()
+        .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
+        .or(z.literal(PLACEHOLDER.PERIOD.WORKING)),
+      content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
+    })
   ),
   projects: z.array(
-    z
-      .object({
-        id: z.string().uuid(),
-        title: z.string().min(1, { message: NO_ENTERED_DATA }),
-        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
-        endDate: z
-          .string()
-          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
-          .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
-        content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
-        url: z
-          .optional(z.string().url({ message: UNFORMATTED_DATA }))
-          .or(z.literal('')),
-      })
-      .optional()
+    z.object({
+      id: z.string().uuid(),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
+      startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
+      endDate: z
+        .string()
+        .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
+        .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
+      content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
+      url: z
+        .optional(z.string().url({ message: UNFORMATTED_DATA }))
+        .or(z.literal('')),
+    })
   ),
   activities: z.array(
-    z
-      .object({
-        id: z.string().uuid(),
-        title: z.string().min(1, { message: NO_ENTERED_DATA }),
-        institution: z.optional(z.string()),
-        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
-        endDate: z
-          .string()
-          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
-          .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
-        content: z.string().min(1, { message: NO_ENTERED_DATA }),
-      })
-      .optional()
+    z.object({
+      id: z.string().uuid(),
+      title: z.string().min(1, { message: NO_ENTERED_DATA }),
+      institution: z.optional(z.string()),
+      startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
+      endDate: z
+        .string()
+        .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
+        .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
+      content: z.string().min(1, { message: NO_ENTERED_DATA }),
+    })
   ),
 });
 
