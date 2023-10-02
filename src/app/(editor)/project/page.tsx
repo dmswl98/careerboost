@@ -18,7 +18,7 @@ import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type ProjectsFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
-import { storage } from '@/utils/storage';
+import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 const Page = () => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
@@ -84,14 +84,8 @@ const Page = () => {
     complete(getValues(`projects.${index}.content`));
   };
 
-  const handleSaveClick = () => {
-    trigger('projects');
-
-    if (errors.projects) {
-      return;
-    }
-
-    storage.set({ ...storage.get(), projects: getValues('projects') });
+  const handleAutoSave = () => {
+    debouncedUpdateStorage('projects', getValues('projects'));
   };
 
   return (
@@ -101,71 +95,73 @@ const Page = () => {
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
-        <div className="mt-5">
-          <ul>
-            {fields.map((item, index) => (
-              <li key={item.id} className="border-b border-gray-200/70 py-6">
-                <ButtonGroup
-                  isTop={isTopForm(index)}
-                  isBottom={isBottomForm(index, fields.length - 1)}
-                  onMoveUpForm={() => handleUpClick(index)}
-                  onMoveDownForm={() => handleDownClick(index)}
-                  onRemoveForm={() => handleRemoveClick(index)}
-                />
-                <div className="mb-3 flex items-end gap-1">
-                  <Input
-                    {...register(`projects.${index}.title`)}
-                    id="title"
-                    className="mr-1"
-                    label={{ text: '프로젝트명', isRequired: true }}
-                    placeholder={PLACEHOLDER.PROJECT.TITLE}
-                    error={errors.projects?.[index]?.title?.message}
-                  />
-                  <Button
-                    size="icon"
-                    type="button"
-                    className="ml-1"
-                    disabled={isSuggest[index]}
-                    title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
-                    onClick={() => handleSuggestClick(index)}
-                  >
-                    <IconChatGpt />
-                  </Button>
-                </div>
-                <PeriodInput
-                  formName="projects"
-                  index={index}
-                  error={{
-                    startDate: errors.projects?.[index]?.startDate?.message,
-                    endDate: errors.projects?.[index]?.endDate?.message,
+        <ul className="mt-5">
+          {fields.map((item, index) => (
+            <li key={item.id} className="border-b border-gray-200/70 py-6">
+              <ButtonGroup
+                isTop={isTopForm(index)}
+                isBottom={isBottomForm(index, fields.length - 1)}
+                onMoveUpForm={() => handleUpClick(index)}
+                onMoveDownForm={() => handleDownClick(index)}
+                onRemoveForm={() => handleRemoveClick(index)}
+              />
+              <div className="mb-3 flex items-end gap-1">
+                <Input
+                  {...register(`projects.${index}.title`)}
+                  id="title"
+                  className="mr-1"
+                  label={{ text: '프로젝트명', isRequired: true }}
+                  placeholder={PLACEHOLDER.PROJECT.TITLE}
+                  error={errors.projects?.[index]?.title?.message}
+                  onChange={(e) => {
+                    register(`projects.${index}.title`).onChange(e);
+                    handleAutoSave();
                   }}
                 />
-                <Input
-                  {...register(`projects.${index}.url`)}
-                  id="url"
-                  className="mb-3"
-                  label={{ text: '프로젝트 주소' }}
-                  placeholder={PLACEHOLDER.PROJECT.URL}
-                />
-                <MarkdownInput
-                  formName="projects"
-                  index={index}
-                  label="프로젝트 내용"
-                  placeholder={PLACEHOLDER.PROJECT.CONTENT}
-                  error={errors.projects?.[index]?.content?.message}
-                />
-                {isSuggest[index] && completion && (
-                  <AiSuggestion aiSuggestion={completion} />
-                )}
-              </li>
-            ))}
-          </ul>
-          <div className="ml-auto mt-4 w-fit">
-            <Button type="button" onClick={handleSaveClick}>
-              저장
-            </Button>
-          </div>
-        </div>
+                <Button
+                  size="icon"
+                  type="button"
+                  className="ml-1"
+                  disabled={isSuggest[index]}
+                  title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
+                  onClick={() => handleSuggestClick(index)}
+                >
+                  <IconChatGpt />
+                </Button>
+              </div>
+              <PeriodInput
+                formName="projects"
+                index={index}
+                error={{
+                  startDate: errors.projects?.[index]?.startDate?.message,
+                  endDate: errors.projects?.[index]?.endDate?.message,
+                }}
+              />
+              <Input
+                {...register(`projects.${index}.url`)}
+                id="url"
+                className="mb-3"
+                label={{ text: '프로젝트 주소' }}
+                placeholder={PLACEHOLDER.PROJECT.URL}
+                error={errors.projects?.[index]?.url?.message}
+                onChange={(e) => {
+                  register(`projects.${index}.url`).onChange(e);
+                  handleAutoSave();
+                }}
+              />
+              <MarkdownInput
+                formName="projects"
+                index={index}
+                label="프로젝트 내용"
+                placeholder={PLACEHOLDER.PROJECT.CONTENT}
+                error={errors.projects?.[index]?.content?.message}
+              />
+              {isSuggest[index] && completion && (
+                <AiSuggestion aiSuggestion={completion} />
+              )}
+            </li>
+          ))}
+        </ul>
       )}
     </FormCard>
   );

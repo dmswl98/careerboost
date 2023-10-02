@@ -28,9 +28,9 @@ const FormProvider = ({ children }: StrictPropsWithChildren) => {
     const { userInfo, experiences, projects, activities } = storageData;
 
     methods.setValue('userInfo', userInfo);
-    methods.setValue('experiences', experiences);
-    methods.setValue('projects', projects);
-    methods.setValue('activities', activities);
+    methods.setValue('experiences', experiences || []);
+    methods.setValue('projects', projects || []);
+    methods.setValue('activities', activities || []);
 
     methods.trigger();
   }, [methods]);
