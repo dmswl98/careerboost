@@ -6,14 +6,19 @@ const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;
 const DATE_REGEX = /^\d{4}\.\d{2}$/;
 
 const NO_ENTERED_DATA = '내용을 작성해주세요';
+const UNFORMATTED_DATA = '형식에 맞게 작성해주세요';
 
 export const resumeFormSchema = z.object({
   userInfo: z.object({
     name: z.string().min(1, { message: NO_ENTERED_DATA }),
     career: z.string().min(1, { message: NO_ENTERED_DATA }),
-    phone: z.optional(z.string().regex(PHONE_REGEX)).or(z.literal('')),
-    email: z.string().email({ message: '이메일 형식에 맞게 작성해주세요' }),
-    blog: z.optional(z.string().url()).or(z.literal('')),
+    phone: z
+      .optional(z.string().regex(PHONE_REGEX, { message: UNFORMATTED_DATA }))
+      .or(z.literal('')),
+    email: z.string().email({ message: UNFORMATTED_DATA }),
+    blog: z
+      .optional(z.string().url({ message: UNFORMATTED_DATA }))
+      .or(z.literal('')),
     github: z.string().url({ message: NO_ENTERED_DATA }),
     brief: z.optional(z.string()),
   }),
@@ -26,10 +31,10 @@ export const resumeFormSchema = z.object({
           .string()
           .min(1, { message: '근무 형태를 선택해주세요' }),
         jobTitle: z.string().min(1, { message: NO_ENTERED_DATA }),
-        startDate: z.string().regex(DATE_REGEX),
+        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
         endDate: z
           .string()
-          .regex(DATE_REGEX)
+          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
           .or(z.literal(PLACEHOLDER.PERIOD.WORKING)),
         content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
       })
@@ -40,13 +45,15 @@ export const resumeFormSchema = z.object({
       .object({
         id: z.string().uuid(),
         title: z.string().min(1, { message: NO_ENTERED_DATA }),
-        startDate: z.string().regex(DATE_REGEX),
+        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
         endDate: z
           .string()
-          .regex(DATE_REGEX)
+          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
           .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
         content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
-        url: z.string(),
+        url: z
+          .optional(z.string().url({ message: UNFORMATTED_DATA }))
+          .or(z.literal('')),
       })
       .optional()
   ),
@@ -56,12 +63,12 @@ export const resumeFormSchema = z.object({
         id: z.string().uuid(),
         title: z.string().min(1, { message: NO_ENTERED_DATA }),
         institution: z.optional(z.string()),
-        startDate: z.string().regex(DATE_REGEX),
+        startDate: z.string().regex(DATE_REGEX, { message: UNFORMATTED_DATA }),
         endDate: z
           .string()
-          .regex(DATE_REGEX)
+          .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
           .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
-        content: z.string().min(1, { message: '내용을 작성해주세요' }),
+        content: z.string().min(1, { message: NO_ENTERED_DATA }),
       })
       .optional()
   ),
