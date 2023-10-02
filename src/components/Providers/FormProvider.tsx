@@ -31,6 +31,8 @@ const FormProvider = ({ children }: StrictPropsWithChildren) => {
     methods.setValue('experiences', experiences);
     methods.setValue('projects', projects);
     methods.setValue('activities', activities);
+
+    methods.trigger();
   }, [methods]);
 
   const onSubmit = (data: ResumeFormDataSchema) => {

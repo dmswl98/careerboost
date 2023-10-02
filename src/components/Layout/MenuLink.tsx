@@ -23,15 +23,13 @@ const MenuLink = <T extends FieldValues>({
 }: MenuLinkProps<T>) => {
   const { getValues, formState } = useFormContext<T>();
 
-  const isTouched =
-    route === ROUTES.BASIC
-      ? !!formState.touchedFields?.[formName]
-      : formState.touchedFields?.[formName]?.length > 0;
+  const values = getValues(formName as FieldPath<T>);
+
+  const isError = formState.errors[formName];
   const isCreatedForm =
     route === ROUTES.BASIC
-      ? !!getValues(formName as FieldPath<T>)
-      : getValues(formName as FieldPath<T>)?.length > 0;
-  const isError = formState.errors[formName];
+      ? values.name && values.career && values.email && values.github
+      : values?.length > 0;
 
   const currentLocationMenuStyle = isCurrentLocation
     ? 'border-primary font-bold text-primary'
@@ -54,7 +52,7 @@ const MenuLink = <T extends FieldValues>({
           className={`h-5 w-5 text-destructive transition-all ${currentLocationIconStyle}`}
         />
       )}
-      {!isError && isTouched && isCreatedForm && (
+      {!isError && isCreatedForm && (
         <CheckCircle2
           className={`h-5 w-5 text-success transition-all ${currentLocationIconStyle}`}
         />
