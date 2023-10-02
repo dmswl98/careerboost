@@ -2,29 +2,22 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { Button, Input, Label, Textarea } from '@/components/common';
+import { Input, Label, Textarea } from '@/components/common';
 import { FormCard } from '@/components/Form';
 import { PLACEHOLDER } from '@/constants/form';
 import { MENU_INFO } from '@/constants/menu';
 import { type UserInfoFormDataSchema } from '@/types/form';
-import { storage } from '@/utils/storage';
+import { debouncedUpdateStorage } from '@/utils/storage';
 
 const Page = () => {
   const {
     register,
-    trigger,
     getValues,
     formState: { errors },
   } = useFormContext<UserInfoFormDataSchema>();
 
-  const handleSaveClick = () => {
-    trigger('userInfo');
-
-    if (errors.userInfo) {
-      return;
-    }
-
-    storage.set({ ...storage.get(), userInfo: getValues('userInfo') });
+  const handleAutoSave = () => {
+    debouncedUpdateStorage('userInfo', getValues('userInfo'));
   };
 
   return (
@@ -37,6 +30,10 @@ const Page = () => {
           label={{ text: '이름', isRequired: true }}
           placeholder={PLACEHOLDER.USER_INFO.NAME}
           error={errors.userInfo?.name?.message}
+          onChange={(e) => {
+            register('userInfo.name').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Input
           {...register('userInfo.career')}
@@ -45,6 +42,10 @@ const Page = () => {
           label={{ text: '직무', isRequired: true }}
           placeholder={PLACEHOLDER.USER_INFO.CAREER}
           error={errors.userInfo?.career?.message}
+          onChange={(e) => {
+            register('userInfo.career').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Input
           {...register('userInfo.phone')}
@@ -54,6 +55,10 @@ const Page = () => {
           label={{ text: '전화번호' }}
           placeholder={PLACEHOLDER.USER_INFO.PHONE}
           error={errors.userInfo?.phone?.message}
+          onChange={(e) => {
+            register('userInfo.phone').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Input
           {...register('userInfo.email')}
@@ -63,6 +68,10 @@ const Page = () => {
           label={{ text: '이메일', isRequired: true }}
           placeholder={PLACEHOLDER.USER_INFO.EMAIL}
           error={errors.userInfo?.email?.message}
+          onChange={(e) => {
+            register('userInfo.email').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Input
           {...register('userInfo.blog')}
@@ -71,6 +80,10 @@ const Page = () => {
           label={{ text: '블로그' }}
           placeholder={PLACEHOLDER.USER_INFO.URL}
           error={errors.userInfo?.blog?.message}
+          onChange={(e) => {
+            register('userInfo.blog').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Input
           {...register('userInfo.github')}
@@ -79,18 +92,21 @@ const Page = () => {
           label={{ text: '깃허브', isRequired: true }}
           placeholder={PLACEHOLDER.USER_INFO.URL}
           error={errors.userInfo?.github?.message}
+          onChange={(e) => {
+            register('userInfo.github').onChange(e);
+            handleAutoSave();
+          }}
         />
         <Label htmlFor="brief">소개글</Label>
         <Textarea
           {...register('userInfo.brief')}
           id="brief"
           placeholder={PLACEHOLDER.USER_INFO.BRIEF}
+          onChange={(e) => {
+            register('userInfo.brief').onChange(e);
+            handleAutoSave();
+          }}
         />
-      </div>
-      <div className="ml-auto mt-4 w-fit">
-        <Button type="button" onClick={handleSaveClick}>
-          저장
-        </Button>
       </div>
     </FormCard>
   );

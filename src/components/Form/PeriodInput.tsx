@@ -6,6 +6,7 @@ import { Checkbox, Input, Label } from '@/components/common';
 import { FormErrorMessage } from '@/components/Form';
 import { PERIOD_LABEL, PLACEHOLDER } from '@/constants/form';
 import { type ResumeFormDataSchema } from '@/types/form';
+import { debouncedUpdateStorage } from '@/utils/storage';
 
 type PeriodLabelType = (typeof PERIOD_LABEL)[keyof typeof PERIOD_LABEL];
 
@@ -32,7 +33,7 @@ const PeriodInput = ({
       ? PLACEHOLDER.PERIOD.PROGRESS
       : PLACEHOLDER.PERIOD.WORKING;
 
-  const { register, watch, setValue, resetField } =
+  const { register, watch, getValues, setValue, resetField } =
     useFormContext<ResumeFormDataSchema>();
 
   const handleCheckboxClick = (index: number) => {
@@ -44,6 +45,13 @@ const PeriodInput = ({
     } else {
       resetField(endDateField);
     }
+  };
+
+  const handleAutoSave = () => {
+    debouncedUpdateStorage(
+      formName as keyof ResumeFormDataSchema,
+      getValues(formName as keyof ResumeFormDataSchema)
+    );
   };
 
   return (
@@ -65,6 +73,12 @@ const PeriodInput = ({
             )}
             id="startDate"
             placeholder={PLACEHOLDER.DATE}
+            onChange={(e) => {
+              register(
+                `${formName}.${index}.startDate` as FieldPath<ResumeFormDataSchema>
+              ).onChange(e);
+              handleAutoSave();
+            }}
           />
           <Input
             {...register(
@@ -72,6 +86,12 @@ const PeriodInput = ({
             )}
             id="endDate"
             placeholder={PLACEHOLDER.DATE}
+            onChange={(e) => {
+              register(
+                `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
+              ).onChange(e);
+              handleAutoSave();
+            }}
           />
         </div>
         <Checkbox
@@ -82,7 +102,10 @@ const PeriodInput = ({
               `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
             ) === PERIOD_INPUT_PLACEHOLDER
           }
-          onClick={() => handleCheckboxClick(index)}
+          onClick={() => {
+            handleCheckboxClick(index);
+            handleAutoSave();
+          }}
         />
       </div>
     </>

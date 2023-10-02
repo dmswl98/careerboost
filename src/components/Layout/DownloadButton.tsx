@@ -22,8 +22,9 @@ const DownloadButton = () => {
           {({ loading, error }) => (
             <Button
               type="button"
+              variant={!loading && !error ? 'success' : 'default'}
               className="w-full"
-              disabled={!!error || loading}
+              disabled={loading || !!error}
             >
               {loading ? '이력서 생성 중' : '이력서 다운로드'}
             </Button>

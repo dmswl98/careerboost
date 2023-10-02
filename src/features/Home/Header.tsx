@@ -10,7 +10,7 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <header className="flex w-full flex-col items-center justify-center px-6 py-[140px] sm:px-10 md:py-[240px]">
+    <header className="flex w-full flex-col items-center justify-center px-6 py-16 sm:px-10 md:py-20">
       <Image
         src="/logo.png"
         width={140}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 const Main = () => {
   return (
     <main className="mb-20 h-fit px-6 sm:mb-10 sm:px-10 md:mb-24">
-      <div className="relative flex max-w-[1080px] overflow-hidden rounded-2xl border border-gray-200/70 bg-[#F9F9F9] p-8 sm:p-10">
+      <div className="relative flex max-w-[1080px] overflow-hidden rounded-2xl border border-gray-200/70 bg-[#F9F9F9] p-8 sm:p-12">
         <Image
           src="/landing.png"
           width={1200}
@@ -15,11 +15,11 @@ const Main = () => {
         />
         <div className="z-10">
           <span className="font-semibold text-gray-400">서비스 사용 팁</span>
-          <p className="text-2xl font-bold text-primary">
+          <p className="text-xl font-bold text-primary sm:text-2xl">
             어떻게 하면 이 서비스를 잘 활용할 수 있을까요?
           </p>
-          <div className="mt-12 flex flex-col items-center md:mx-10">
-            <div className="flex flex-col gap-6 text-sm md:flex-row md:flex-nowrap md:text-base">
+          <div className="mt-8 flex flex-col items-center sm:mt-14 md:mx-10">
+            <div className="flex flex-col gap-6 text-sm sm:text-base md:flex-row md:flex-nowrap">
               <div className="flex flex-1 items-center rounded-lg bg-white/80 p-5 text-center">
                 경험한 내용을 최대한 자세하게 작성하면 AI 첨삭 퀄리티를 높일 수
                 있어요

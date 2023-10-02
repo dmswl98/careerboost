@@ -11,6 +11,7 @@ import {
   TabsTrigger,
 } from '@/components/common/Tab';
 import { type ResumeFormDataSchema } from '@/types/form';
+import { debouncedUpdateStorage } from '@/utils/storage';
 
 import { FormErrorMessage } from '.';
 
@@ -29,12 +30,20 @@ const MarkdownInput = ({
   placeholder,
   error,
 }: MarkdownInputProps) => {
-  const { control, register } = useFormContext<ResumeFormDataSchema>();
+  const { control, register, getValues } =
+    useFormContext<ResumeFormDataSchema>();
 
   const value = useWatch({
     name: `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>,
     control,
   }) as string;
+
+  const handleAutoSave = () => {
+    debouncedUpdateStorage(
+      formName as keyof ResumeFormDataSchema,
+      getValues(formName as keyof ResumeFormDataSchema)
+    );
+  };
 
   return (
     <Tabs defaultValue="edit" className="w-full">
@@ -60,6 +69,12 @@ const MarkdownInput = ({
           id="content"
           className={`col-span-4 ${error ? 'border-red-300' : ''}`}
           placeholder={placeholder}
+          onChange={(e) => {
+            register(
+              `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
+            ).onChange(e);
+            handleAutoSave();
+          }}
         />
         <div className="mt-1 flex justify-between">
           {error && <FormErrorMessage message={error} />}
