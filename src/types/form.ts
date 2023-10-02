@@ -17,9 +17,9 @@ export const resumeFormSchema = z.object({
     github: z.string().url({ message: NO_ENTERED_DATA }),
     brief: z.optional(z.string()),
   }),
-  experiences: z
-    .array(
-      z.object({
+  experiences: z.array(
+    z
+      .object({
         id: z.string().uuid(),
         company: z.string().min(1, { message: NO_ENTERED_DATA }),
         employmentType: z
@@ -33,11 +33,11 @@ export const resumeFormSchema = z.object({
           .or(z.literal(PLACEHOLDER.PERIOD.WORKING)),
         content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
       })
-    )
-    .optional(),
-  projects: z
-    .array(
-      z.object({
+      .optional()
+  ),
+  projects: z.array(
+    z
+      .object({
         id: z.string().uuid(),
         title: z.string().min(1, { message: NO_ENTERED_DATA }),
         startDate: z.string().regex(DATE_REGEX),
@@ -46,13 +46,13 @@ export const resumeFormSchema = z.object({
           .regex(DATE_REGEX)
           .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
         content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
-        url: z.string().optional(),
+        url: z.string(),
       })
-    )
-    .optional(),
-  activities: z
-    .array(
-      z.object({
+      .optional()
+  ),
+  activities: z.array(
+    z
+      .object({
         id: z.string().uuid(),
         title: z.string().min(1, { message: NO_ENTERED_DATA }),
         institution: z.optional(z.string()),
@@ -63,8 +63,8 @@ export const resumeFormSchema = z.object({
           .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
         content: z.string().min(1, { message: '내용을 작성해주세요' }),
       })
-    )
-    .optional(),
+      .optional()
+  ),
 });
 
 const userInfoFormSchema = resumeFormSchema.pick({ userInfo: true });
