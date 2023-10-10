@@ -88,7 +88,7 @@ const Page = () => {
               />
               <Input
                 {...register(`experiences.${index}.company`)}
-                id="title"
+                id={`title-${index}`}
                 className="mb-3"
                 label={{ text: '회사명', isRequired: true }}
                 placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
@@ -108,11 +108,11 @@ const Page = () => {
                     name={`experiences.${index}.employmentType`}
                     render={({ field: { onChange, value } }) => (
                       <Select
+                        defaultValue={value}
                         onValueChange={(e) => {
                           onChange(e);
                           handleAutoSave();
                         }}
-                        defaultValue={value}
                       >
                         <SelectTrigger
                           error={
@@ -138,7 +138,7 @@ const Page = () => {
                 <div className="flex-1">
                   <Input
                     {...register(`experiences.${index}.jobTitle`)}
-                    id="jobTitle"
+                    id={`jobTitle-${index}`}
                     label={{ text: '직무', isRequired: true }}
                     placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
                     error={errors.experiences?.[index]?.jobTitle?.message}

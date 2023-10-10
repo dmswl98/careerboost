@@ -76,7 +76,7 @@ const Page = () => {
               />
               <Input
                 {...register(`activities.${index}.title`)}
-                id="title"
+                id={`title-${index}`}
                 className="mb-3"
                 label={{ text: '수상 및 활동명', isRequired: true }}
                 placeholder={PLACEHOLDER.ACTIVITY.TITLE}
@@ -88,7 +88,7 @@ const Page = () => {
               />
               <Input
                 {...register(`activities.${index}.institution`)}
-                id="institution"
+                id={`institution-${index}`}
                 className="mb-3"
                 label={{ text: '기관명' }}
                 placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}

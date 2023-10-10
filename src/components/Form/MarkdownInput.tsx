@@ -49,7 +49,7 @@ const MarkdownInput = ({
     <Tabs defaultValue="edit" className="w-full">
       <div className="flex items-end">
         <div className="mb-[-0.55rem]">
-          <Label htmlFor="content" isRequired>
+          <Label htmlFor={`content-${index}`} isRequired>
             {label}
           </Label>
           <span className="mb-2 block text-xs text-gray-300 min-[470px]:mb-1 min-[470px]:ml-2 min-[470px]:inline-block">
@@ -66,7 +66,7 @@ const MarkdownInput = ({
           {...register(
             `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
           )}
-          id="content"
+          id={`content-${index}`}
           className={`col-span-4 ${error ? 'border-red-300' : ''}`}
           placeholder={placeholder}
           aria-errormessage={error}

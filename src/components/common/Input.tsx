@@ -55,7 +55,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }`,
             className
           )}
-          aria-label={id}
           aria-required={label?.isRequired}
           aria-invalid={error ? 'true' : 'false'}
           aria-errormessage={`error-message-${id}`}

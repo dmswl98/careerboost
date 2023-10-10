@@ -108,7 +108,7 @@ const Page = () => {
               <div className="mb-3 flex items-end gap-1">
                 <Input
                   {...register(`projects.${index}.title`)}
-                  id="title"
+                  id={`title-${index}`}
                   className="mr-1"
                   label={{ text: '프로젝트명', isRequired: true }}
                   placeholder={PLACEHOLDER.PROJECT.TITLE}
@@ -139,7 +139,7 @@ const Page = () => {
               />
               <Input
                 {...register(`projects.${index}.url`)}
-                id="url"
+                id={`url-${index}`}
                 className="mb-3"
                 label={{ text: '프로젝트 주소' }}
                 placeholder={PLACEHOLDER.PROJECT.URL}
