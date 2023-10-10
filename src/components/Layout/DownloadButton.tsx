@@ -25,13 +25,18 @@ const DownloadButton = () => {
               variant={!loading && !error ? 'success' : 'default'}
               className="w-full"
               disabled={loading || !!error}
+              aria-label="이력서 다운로드하기"
             >
               {loading ? '이력서 생성 중' : '이력서 다운로드'}
             </Button>
           )}
         </PDFDownloadLink>
       ) : (
-        <Button type="submit" disabled={!!Object.keys(errors).length}>
+        <Button
+          type="submit"
+          disabled={!!Object.keys(errors).length}
+          aria-label="이력서 생성하기"
+        >
           이력서 생성
         </Button>
       )}

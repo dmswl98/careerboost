@@ -6,12 +6,18 @@ interface FormErrorMessageProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const FormErrorMessage = ({
+  id,
   message,
   className,
   ...props
 }: FormErrorMessageProps) => {
   return (
-    <span className={clsx('text-xs text-red-300', className)} {...props}>
+    <span
+      id={`error-message-${id}`}
+      role="alert"
+      className={clsx('text-xs text-red-300', className)}
+      {...props}
+    >
       {message}
     </span>
   );

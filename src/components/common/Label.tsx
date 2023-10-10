@@ -17,7 +17,10 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
         {...props}
       />
       {isRequired && (
-        <span className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5">
+        <span
+          className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5"
+          aria-hidden
+        >
           ✱
         </span>
       )}

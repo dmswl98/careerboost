@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 
 import { Input } from '@/components/common';
 import {
-  ButtonGroup,
+  ControlButtonGroup,
   FormCard,
   MarkdownInput,
   PeriodInput,
@@ -67,7 +67,7 @@ const Page = () => {
         <ul className="mt-5">
           {fields.map((item, index) => (
             <li key={item.id} className="border-b border-gray-200/70 py-6">
-              <ButtonGroup
+              <ControlButtonGroup
                 isTop={isTopForm(index)}
                 isBottom={isBottomForm(index, fields.length - 1)}
                 onMoveUpForm={() => handleUpClick(index)}
@@ -76,7 +76,7 @@ const Page = () => {
               />
               <Input
                 {...register(`activities.${index}.title`)}
-                id="title"
+                id={`title-${index}`}
                 className="mb-3"
                 label={{ text: '수상 및 활동명', isRequired: true }}
                 placeholder={PLACEHOLDER.ACTIVITY.TITLE}
@@ -88,7 +88,7 @@ const Page = () => {
               />
               <Input
                 {...register(`activities.${index}.institution`)}
-                id="institution"
+                id={`institution-${index}`}
                 className="mb-3"
                 label={{ text: '기관명' }}
                 placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}

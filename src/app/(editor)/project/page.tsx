@@ -8,7 +8,7 @@ import { v4 } from 'uuid';
 import { Button, Input } from '@/components/common';
 import {
   AiSuggestion,
-  ButtonGroup,
+  ControlButtonGroup,
   FormCard,
   MarkdownInput,
   PeriodInput,
@@ -98,7 +98,7 @@ const Page = () => {
         <ul className="mt-5">
           {fields.map((item, index) => (
             <li key={item.id} className="border-b border-gray-200/70 py-6">
-              <ButtonGroup
+              <ControlButtonGroup
                 isTop={isTopForm(index)}
                 isBottom={isBottomForm(index, fields.length - 1)}
                 onMoveUpForm={() => handleUpClick(index)}
@@ -108,7 +108,7 @@ const Page = () => {
               <div className="mb-3 flex items-end gap-1">
                 <Input
                   {...register(`projects.${index}.title`)}
-                  id="title"
+                  id={`title-${index}`}
                   className="mr-1"
                   label={{ text: '프로젝트명', isRequired: true }}
                   placeholder={PLACEHOLDER.PROJECT.TITLE}
@@ -139,7 +139,7 @@ const Page = () => {
               />
               <Input
                 {...register(`projects.${index}.url`)}
-                id="url"
+                id={`url-${index}`}
                 className="mb-3"
                 label={{ text: '프로젝트 주소' }}
                 placeholder={PLACEHOLDER.PROJECT.URL}

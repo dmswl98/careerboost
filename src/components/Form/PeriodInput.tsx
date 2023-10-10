@@ -36,6 +36,10 @@ const PeriodInput = ({
   const { register, watch, getValues, setValue, resetField } =
     useFormContext<ResumeFormDataSchema>();
 
+  const isChecked =
+    watch(`${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>) ===
+    PERIOD_INPUT_PLACEHOLDER;
+
   const handleCheckboxClick = (index: number) => {
     const endDateField =
       `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>;
@@ -56,7 +60,7 @@ const PeriodInput = ({
 
   return (
     <>
-      <Label htmlFor="startDate" isRequired>
+      <Label htmlFor={`startDate-${index}`} isRequired>
         기간
       </Label>
       <div className="relative mb-3">
@@ -71,7 +75,7 @@ const PeriodInput = ({
             {...register(
               `${formName}.${index}.startDate` as FieldPath<ResumeFormDataSchema>
             )}
-            id="startDate"
+            id={`startDate-${index}`}
             placeholder={PLACEHOLDER.DATE}
             onChange={(e) => {
               register(
@@ -84,7 +88,7 @@ const PeriodInput = ({
             {...register(
               `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
             )}
-            id="endDate"
+            id={`endDate-${index}`}
             placeholder={PLACEHOLDER.DATE}
             onChange={(e) => {
               register(
@@ -95,13 +99,8 @@ const PeriodInput = ({
           />
         </div>
         <Checkbox
-          id={`isDoing-${index}`}
           label={label}
-          checked={
-            watch(
-              `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
-            ) === PERIOD_INPUT_PLACEHOLDER
-          }
+          checked={isChecked}
           onClick={() => {
             handleCheckboxClick(index);
             handleAutoSave();
