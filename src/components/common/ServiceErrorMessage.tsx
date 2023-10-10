@@ -34,7 +34,9 @@ const ServiceErrorMessage = ({
     <div className="my-10 flex flex-col items-center justify-center">
       <p className="mb-1 text-xl font-bold">{title}</p>
       <p className="mb-4">{description}</p>
-      <Button onClick={handleNavigate}>{buttonContent}</Button>
+      <Button onClick={handleNavigate} aria-label={buttonContent}>
+        {buttonContent}
+      </Button>
     </div>
   );
 };

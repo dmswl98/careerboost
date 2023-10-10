@@ -20,9 +20,10 @@ const FormCard = ({
         <h1 className="bg-white text-lg font-bold md:text-xl">{title}</h1>
         {onAppendForm && (
           <Button
+            type="button"
             variant="ghost"
             size="icon"
-            type="button"
+            aria-label={`${title} 작성 양식 추가`}
             onClick={onAppendForm}
           >
             <PlusCircle className="m-3" />

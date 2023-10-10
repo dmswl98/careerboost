@@ -26,6 +26,7 @@ const ButtonGroup = ({
           disabled={isTop}
           variant="outline"
           size="icon"
+          aria-label="위로 이동"
           onClick={onMoveUpForm}
         >
           <ChevronUp className="m-1 text-gray-500" />
@@ -36,6 +37,7 @@ const ButtonGroup = ({
           disabled={isBottom}
           variant="outline"
           size="icon"
+          aria-label="아래로 이동"
           onClick={onMoveDownForm}
         >
           <ChevronDown className="m-1 text-gray-500" />
@@ -46,6 +48,7 @@ const ButtonGroup = ({
         className="h-6 w-6"
         variant="outline"
         size="icon"
+        aria-label="삭제"
         onClick={onRemoveForm}
       >
         <X className="m-1 text-gray-500" />
