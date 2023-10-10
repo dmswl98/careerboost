@@ -40,23 +40,32 @@ const MenuLink = <T extends FieldValues>({
     : 'opacity-30';
 
   return (
-    <li className="my-3 flex items-center justify-between text-[15px] last:mb-0">
+    <li
+      className="my-3 flex items-center justify-between text-[15px] last:mb-0"
+      aria-current={isCurrentLocation ? 'page' : 'false'}
+    >
       <Link
         href={route}
-        className={`inline-block border-b-[3px] py-1 transition-all hover:border-primary hover:font-bold hover:text-primary ${currentLocationMenuStyle}`}
+        className="flex w-full items-center justify-between hover:[&>span]:border-primary hover:[&>span]:font-bold hover:[&>span]:text-primary"
       >
-        {title}
+        <span
+          className={`border-b-[3px] py-1 transition-all ${currentLocationMenuStyle}`}
+        >
+          {title}
+        </span>
+        {isError && (
+          <AlertCircle
+            className={`h-5 w-5 text-destructive transition-all ${currentLocationIconStyle}`}
+            aria-label="작성 미완료 상태"
+          />
+        )}
+        {!isError && isCreatedForm && (
+          <CheckCircle2
+            className={`h-5 w-5 text-success transition-all ${currentLocationIconStyle}`}
+            aria-label="작성 완료 상태"
+          />
+        )}
       </Link>
-      {isError && (
-        <AlertCircle
-          className={`h-5 w-5 text-destructive transition-all ${currentLocationIconStyle}`}
-        />
-      )}
-      {!isError && isCreatedForm && (
-        <CheckCircle2
-          className={`h-5 w-5 text-success transition-all ${currentLocationIconStyle}`}
-        />
-      )}
     </li>
   );
 };
