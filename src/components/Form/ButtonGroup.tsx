@@ -19,7 +19,7 @@ const ButtonGroup = ({
 }: ButtonGroupProps) => {
   return (
     <div className="mb-1 flex items-center justify-between">
-      <div>
+      <div className="flex items-center">
         <Button
           type="button"
           className="mr-0.5 h-6 w-6"
