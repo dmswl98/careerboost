@@ -2,7 +2,7 @@ import { ChevronDown, ChevronUp, X } from 'lucide-react';
 
 import { Button } from '@/components/common';
 
-interface ButtonGroupProps {
+interface ControlButtonGroupProps {
   isTop: boolean;
   isBottom: boolean;
   onMoveUpForm: () => void;
@@ -10,13 +10,13 @@ interface ButtonGroupProps {
   onRemoveForm: () => void;
 }
 
-const ButtonGroup = ({
+const ControlButtonGroup = ({
   isTop,
   isBottom,
   onMoveUpForm,
   onMoveDownForm,
   onRemoveForm,
-}: ButtonGroupProps) => {
+}: ControlButtonGroupProps) => {
   return (
     <div className="mb-1 flex items-center justify-between">
       <div className="flex items-center">
@@ -57,4 +57,4 @@ const ButtonGroup = ({
   );
 };
 
-export default ButtonGroup;
+export default ControlButtonGroup;

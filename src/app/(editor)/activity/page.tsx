@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 
 import { Input } from '@/components/common';
 import {
-  ButtonGroup,
+  ControlButtonGroup,
   FormCard,
   MarkdownInput,
   PeriodInput,
@@ -67,7 +67,7 @@ const Page = () => {
         <ul className="mt-5">
           {fields.map((item, index) => (
             <li key={item.id} className="border-b border-gray-200/70 py-6">
-              <ButtonGroup
+              <ControlButtonGroup
                 isTop={isTopForm(index)}
                 isBottom={isBottomForm(index, fields.length - 1)}
                 onMoveUpForm={() => handleUpClick(index)}
