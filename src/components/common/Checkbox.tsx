@@ -25,6 +25,7 @@ const Checkbox = forwardRef<
         'peer h-4 w-4 shrink-0 rounded-sm border-[1.5px] border-primary ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
         className
       )}
+      aria-label={label}
       {...props}
     >
       <CheckboxPrimitive.Indicator
@@ -33,12 +34,12 @@ const Checkbox = forwardRef<
         <Check className="h-4 w-4" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-    <label
-      htmlFor={props.id}
+    <span
       className="text-[13px] font-medium text-gray-800 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      aria-hidden
     >
       {label}
-    </label>
+    </span>
   </div>
 ));
 
