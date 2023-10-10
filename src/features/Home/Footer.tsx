@@ -23,10 +23,10 @@ const Footer = () => {
       <div className="flex justify-between">
         <span className="text-sm text-white/80">chej098t@gmail.com</span>
         <div className="flex gap-4">
-          <Link href={GITHUB_REPO_LINK} target="_blank">
+          <Link href={GITHUB_REPO_LINK} target="_blank" aria-label="깃허브">
             <Github className="h-5 w-5 text-white/80 transition-all hover:text-white/60" />
           </Link>
-          <Link href={LINKEDIN_LINK} target="_blank">
+          <Link href={LINKEDIN_LINK} target="_blank" aria-label="링크드인">
             <Linkedin className="h-5 w-5 text-white/80 transition-all hover:text-white/60" />
           </Link>
         </div>
