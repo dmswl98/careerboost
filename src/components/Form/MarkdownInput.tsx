@@ -69,6 +69,7 @@ const MarkdownInput = ({
           id="content"
           className={`col-span-4 ${error ? 'border-red-300' : ''}`}
           placeholder={placeholder}
+          aria-errormessage={error}
           onChange={(e) => {
             register(
               `${formName}.${index}.content` as FieldPath<ResumeFormDataSchema>
@@ -77,7 +78,7 @@ const MarkdownInput = ({
           }}
         />
         <div className="mt-1 flex justify-between">
-          {error && <FormErrorMessage message={error} />}
+          {error && <FormErrorMessage id="content" message={error} />}
           <span className="ml-auto text-xs text-gray-300">
             글자수 {value?.length || 0}
           </span>

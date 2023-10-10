@@ -29,7 +29,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {label.text}
             </label>
             {label.isRequired && (
-              <span className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5">
+              <span
+                className="ml-1 inline-block text-xs text-gray-400 min-[470px]:mb-1.5"
+                aria-hidden
+              >
                 ✱
               </span>
             )}
@@ -37,6 +40,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         {error && (
           <FormErrorMessage
+            id={id}
             className="absolute right-0 top-1.5"
             message={error}
           />
@@ -51,6 +55,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }`,
             className
           )}
+          aria-label={id}
+          aria-required={label?.isRequired}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-errormessage={`error-message-${id}`}
           {...props}
         />
       </div>

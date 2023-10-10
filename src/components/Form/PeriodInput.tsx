@@ -36,6 +36,10 @@ const PeriodInput = ({
   const { register, watch, getValues, setValue, resetField } =
     useFormContext<ResumeFormDataSchema>();
 
+  const isChecked =
+    watch(`${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>) ===
+    PERIOD_INPUT_PLACEHOLDER;
+
   const handleCheckboxClick = (index: number) => {
     const endDateField =
       `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>;
@@ -97,11 +101,7 @@ const PeriodInput = ({
         <Checkbox
           id={`isDoing-${index}`}
           label={label}
-          checked={
-            watch(
-              `${formName}.${index}.endDate` as FieldPath<ResumeFormDataSchema>
-            ) === PERIOD_INPUT_PLACEHOLDER
-          }
+          checked={isChecked}
           onClick={() => {
             handleCheckboxClick(index);
             handleAutoSave();
