@@ -1,0 +1,92 @@
+{
+  "home": {
+    "header": {
+      "description": "Write your resume and receive AI proofreading at the same time.",
+      "navigateButton": "Writing a Resume"
+    },
+    "banner": {
+      "image": "Tips Section Background",
+      "subTitle": "Tips for Using the Service",
+      "title": "How can I best utilize this service?",
+      "tip1": "Writing about your experiences in as much detail as possible can improve the quality of the AI's proofreading",
+      "tip2": "Additionally, if you write about the tech stack used in your project, you can receive proofreading related to the content of your project",
+      "tip3": "Actively incorporate the AI's proofreading feedback and complete your own resume"
+    }
+  },
+  "basic": {
+    "section": {
+      "title": "Basic Information",
+      "guide": "Please double-check to make sure the information you entered is correct"
+    },
+    "label": {
+      "name": "Name",
+      "career": "Career",
+      "phone": "Phone",
+      "email": "Email",
+      "blog": "Blog",
+      "github": "Github",
+      "brief": "Brief Introduction"
+    },
+    "placeholder": {
+      "name": "Your Name",
+      "career": "Front-end Developer",
+      "phone": "010-1234-5678",
+      "email": "choieunji@gmail.com",
+      "url": "https://",
+      "brief": "Write your own introduction"
+    }
+  },
+  "experience": {
+    "section": {
+      "title": "Work Experience",
+      "guide": "Emphasize your expertise and collaboration skills by detailing specific achievements where you led the development of a particular feature"
+    },
+    "label": {
+      "company": "Company Name",
+      "employmentType": "Employment Type",
+      "jobTitle": "Job Title",
+      "content": "Content",
+      "period": "Currently employed"
+    },
+    "placeholder": {
+      "company": "Company Name",
+      "employmentType": "Employment Type",
+      "jobTitle": "Front-end Developer",
+      "content": "Write about the roles you undertook and specific achievements you accomplished"
+    }
+  },
+  "project": {
+    "section": {
+      "title": "Project",
+      "guide": "Rather than simply stating what technology was used, try to emphasize the process of solving problems encountered in the project, what you learned, and the results"
+    },
+    "label": {
+      "title": "Project Name",
+      "url": "Project URL",
+      "content": "Project Content",
+      "period": "Still participating"
+    },
+    "placeholder": {
+      "title": "Project Name",
+      "url": "https://",
+      "content": "Write about the content of the project, your role, and contribution"
+    }
+  },
+  "activity": {
+    "section": {
+      "title": "Awards and Activities",
+      "guide": "Emphasize your continuous will to grow and expertise by detailing your motivation for participating in activities and what skills you were able to develop"
+    },
+    "label": {
+      "title": "Name of Award or Activity",
+      "institution": "Institution Name",
+      "content": "Content",
+      "period": "Still participating"
+    },
+    "placeholder": {
+      "title": "Name of Award or Activity",
+      "institution": "Institution Name",
+      "content": "Write about the lectures, presentations, studies, and external activities you participated in"
+    }
+  }
+}
