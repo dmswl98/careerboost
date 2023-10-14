@@ -88,5 +88,15 @@
       "institution": "Institution Name",
       "content": "Write about the lectures, presentations, studies, and external activities you participated in"
     }
+  },
+  "sidebar": {
+    "title": "Writing a Resume",
+    "previewButton": "Preview Resume",
+    "downloadButton": {
+      "fileName": "_Resume.pdf",
+      "createResume": "Create Resume",
+      "creatingResume": "Creating Resume",
+      "downloadResume": "Download Resume"
+    }
   }
 }

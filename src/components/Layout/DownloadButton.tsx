@@ -3,9 +3,14 @@ import { useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/common';
 import PdfDocument from '@/components/Pdf/PdfDocument';
+import type * as i18n from '@/i18n/ko.json';
 import { type ResumeFormDataSchema } from '@/types/form';
 
-const DownloadButton = () => {
+interface DownloadButtonProps {
+  dictionary: (typeof i18n)['sidebar']['downloadButton'];
+}
+
+const DownloadButton = ({ dictionary }: DownloadButtonProps) => {
   const {
     getValues,
     formState: { errors, isSubmitSuccessful },
@@ -16,7 +21,7 @@ const DownloadButton = () => {
       {isSubmitSuccessful ? (
         <PDFDownloadLink
           document={<PdfDocument resume={getValues()} />}
-          fileName={`${getValues('userInfo.name')}님의_이력서.pdf`}
+          fileName={`${getValues('userInfo.name')}${dictionary.fileName}`}
           style={{ width: '100%' }}
         >
           {({ loading, error }) => (
@@ -25,9 +30,9 @@ const DownloadButton = () => {
               variant={!loading && !error ? 'success' : 'default'}
               className="w-full"
               disabled={loading || !!error}
-              aria-label="이력서 다운로드하기"
+              aria-label={dictionary.downloadResume}
             >
-              {loading ? '이력서 생성 중' : '이력서 다운로드'}
+              {loading ? dictionary.creatingResume : dictionary.downloadResume}
             </Button>
           )}
         </PDFDownloadLink>
@@ -35,9 +40,9 @@ const DownloadButton = () => {
         <Button
           type="submit"
           disabled={!!Object.keys(errors).length}
-          aria-label="이력서 생성하기"
+          aria-label={dictionary.createResume}
         >
-          이력서 생성
+          {dictionary.createResume}
         </Button>
       )}
     </>

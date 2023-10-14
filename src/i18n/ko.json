@@ -88,5 +88,15 @@
       "institution": "소속/기관",
       "content": "참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요"
     }
+  },
+  "sidebar": {
+    "title": "이력서 작성하기",
+    "previewButton": "이력서 미리보기",
+    "downloadButton": {
+      "fileName": "님의_이력서.pdf",
+      "createResume": "이력서 생성",
+      "creatingResume": "이력서 생성 중",
+      "downloadResume": "이력서 다운로드"
+    }
   }
 }

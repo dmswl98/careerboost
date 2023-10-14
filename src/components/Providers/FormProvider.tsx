@@ -1,3 +1,5 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { FormProvider as Provider, useForm } from 'react-hook-form';
@@ -35,9 +37,8 @@ const FormProvider = ({ children }: StrictPropsWithChildren) => {
     methods.trigger();
   }, [methods]);
 
-  const onSubmit = (data: ResumeFormDataSchema) => {
+  const onSubmit = () => {
     methods.trigger();
-    console.log(data);
   };
 
   return (
