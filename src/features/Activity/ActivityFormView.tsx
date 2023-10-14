@@ -10,13 +10,17 @@ import {
   MarkdownInput,
   PeriodInput,
 } from '@/components/Form';
-import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
-import { MENU_INFO } from '@/constants/menu';
+import { INITIAL_VALUE } from '@/constants/form';
+import type * as i18n from '@/i18n/ko.json';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
-const Page = () => {
+interface ActivityFormViewProps {
+  dictionary: (typeof i18n)['activity'];
+}
+
+const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
   const {
     control,
     register,
@@ -59,8 +63,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title={MENU_INFO.ACTIVITY.TITLE}
-      guide={MENU_INFO.ACTIVITY.GUIDE}
+      title={dictionary.section.title}
+      guide={dictionary.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -78,8 +82,8 @@ const Page = () => {
                 {...register(`activities.${index}.title`)}
                 id={`title-${index}`}
                 className="mb-3"
-                label={{ text: '수상 및 활동명', isRequired: true }}
-                placeholder={PLACEHOLDER.ACTIVITY.TITLE}
+                label={{ text: dictionary.label.title, isRequired: true }}
+                placeholder={dictionary.placeholder.title}
                 error={errors.activities?.[index]?.title?.message}
                 onChange={(e) => {
                   register(`activities.${index}.title`).onChange(e);
@@ -90,8 +94,8 @@ const Page = () => {
                 {...register(`activities.${index}.institution`)}
                 id={`institution-${index}`}
                 className="mb-3"
-                label={{ text: '기관명' }}
-                placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
+                label={{ text: dictionary.label.institution }}
+                placeholder={dictionary.placeholder.institution}
                 onChange={(e) => {
                   register(`activities.${index}.institution`).onChange(e);
                   handleAutoSave();
@@ -100,6 +104,7 @@ const Page = () => {
               <PeriodInput
                 formName="activities"
                 index={index}
+                label={dictionary.label.period}
                 error={{
                   startDate: errors.activities?.[index]?.startDate?.message,
                   endDate: errors.activities?.[index]?.endDate?.message,
@@ -108,8 +113,8 @@ const Page = () => {
               <MarkdownInput
                 formName="activities"
                 index={index}
-                label="내용"
-                placeholder={PLACEHOLDER.ACTIVITY.CONTENT}
+                label={dictionary.label.content}
+                placeholder={dictionary.placeholder.content}
                 error={errors.activities?.[index]?.content?.message}
               />
             </li>
@@ -120,4 +125,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ActivityFormView;

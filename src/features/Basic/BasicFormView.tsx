@@ -4,12 +4,15 @@ import { useFormContext } from 'react-hook-form';
 
 import { Input, Label, Textarea } from '@/components/common';
 import { FormCard } from '@/components/Form';
-import { PLACEHOLDER } from '@/constants/form';
-import { MENU_INFO } from '@/constants/menu';
+import type * as i18n from '@/i18n/ko.json';
 import { type UserInfoFormDataSchema } from '@/types/form';
 import { debouncedUpdateStorage } from '@/utils/storage';
 
-const Page = () => {
+interface BasicFormViewProps {
+  dictionary: (typeof i18n)['basic'];
+}
+
+const BasicFormView = ({ dictionary }: BasicFormViewProps) => {
   const {
     register,
     getValues,
@@ -21,14 +24,14 @@ const Page = () => {
   };
 
   return (
-    <FormCard title={MENU_INFO.BASIC.TITLE} guide={MENU_INFO.BASIC.GUIDE}>
+    <FormCard title={dictionary.section.title} guide={dictionary.section.guide}>
       <div className="mt-5">
         <Input
           {...register('userInfo.name')}
           id="name"
           className="mb-3"
-          label={{ text: '이름', isRequired: true }}
-          placeholder={PLACEHOLDER.USER_INFO.NAME}
+          label={{ text: dictionary.label.name, isRequired: true }}
+          placeholder={dictionary.placeholder.name}
           error={errors.userInfo?.name?.message}
           onChange={(e) => {
             register('userInfo.name').onChange(e);
@@ -39,8 +42,8 @@ const Page = () => {
           {...register('userInfo.career')}
           id="career"
           className="mb-3"
-          label={{ text: '직무', isRequired: true }}
-          placeholder={PLACEHOLDER.USER_INFO.CAREER}
+          label={{ text: dictionary.label.career, isRequired: true }}
+          placeholder={dictionary.placeholder.career}
           error={errors.userInfo?.career?.message}
           onChange={(e) => {
             register('userInfo.career').onChange(e);
@@ -52,8 +55,8 @@ const Page = () => {
           id="phone"
           type="tel"
           className="mb-3"
-          label={{ text: '전화번호' }}
-          placeholder={PLACEHOLDER.USER_INFO.PHONE}
+          label={{ text: dictionary.label.phone }}
+          placeholder={dictionary.placeholder.phone}
           error={errors.userInfo?.phone?.message}
           onChange={(e) => {
             register('userInfo.phone').onChange(e);
@@ -65,8 +68,8 @@ const Page = () => {
           id="email"
           type="email"
           className="mb-3"
-          label={{ text: '이메일', isRequired: true }}
-          placeholder={PLACEHOLDER.USER_INFO.EMAIL}
+          label={{ text: dictionary.label.email, isRequired: true }}
+          placeholder={dictionary.placeholder.email}
           error={errors.userInfo?.email?.message}
           onChange={(e) => {
             register('userInfo.email').onChange(e);
@@ -77,8 +80,8 @@ const Page = () => {
           {...register('userInfo.blog')}
           id="blog"
           className="mb-3"
-          label={{ text: '블로그' }}
-          placeholder={PLACEHOLDER.USER_INFO.URL}
+          label={{ text: dictionary.label.blog }}
+          placeholder={dictionary.placeholder.url}
           error={errors.userInfo?.blog?.message}
           onChange={(e) => {
             register('userInfo.blog').onChange(e);
@@ -89,19 +92,19 @@ const Page = () => {
           {...register('userInfo.github')}
           id="github"
           className="mb-3"
-          label={{ text: '깃허브', isRequired: true }}
-          placeholder={PLACEHOLDER.USER_INFO.URL}
+          label={{ text: dictionary.label.github, isRequired: true }}
+          placeholder={dictionary.placeholder.url}
           error={errors.userInfo?.github?.message}
           onChange={(e) => {
             register('userInfo.github').onChange(e);
             handleAutoSave();
           }}
         />
-        <Label htmlFor="brief">소개글</Label>
+        <Label htmlFor="brief">{dictionary.label.brief}</Label>
         <Textarea
           {...register('userInfo.brief')}
           id="brief"
-          placeholder={PLACEHOLDER.USER_INFO.BRIEF}
+          placeholder={dictionary.placeholder.brief}
           onChange={(e) => {
             register('userInfo.brief').onChange(e);
             handleAutoSave();
@@ -112,4 +115,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default BasicFormView;

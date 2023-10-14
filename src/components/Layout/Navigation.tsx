@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ROUTES } from '@/constants/routes';
-
-const Navigation = () => {
+const Navigation = ({ lang }: { lang: string }) => {
   return (
     <header className="flex shrink-0 border border-gray-200/70 bg-white px-6 py-3">
-      <Link href={ROUTES.HOME} className="w-fit">
+      <Link href={`/${lang}`} className="w-fit">
         <Image src="/logo.png" width={36} height={36} alt="careerboost logo" />
       </Link>
     </header>

@@ -17,18 +17,17 @@ import {
   MarkdownInput,
   PeriodInput,
 } from '@/components/Form';
-import {
-  EMPLOYMENT_TYPES,
-  INITIAL_VALUE,
-  PERIOD_LABEL,
-  PLACEHOLDER,
-} from '@/constants/form';
-import { MENU_INFO } from '@/constants/menu';
+import { EMPLOYMENT_TYPES, INITIAL_VALUE } from '@/constants/form';
+import type * as i18n from '@/i18n/ko.json';
 import { type ExperienceFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
-const Page = () => {
+interface ExperienceFormViewProps {
+  dictionary: (typeof i18n)['experience'];
+}
+
+const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
   const {
     control,
     register,
@@ -71,8 +70,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title={MENU_INFO.EXPERIENCE.TITLE}
-      guide={MENU_INFO.EXPERIENCE.GUIDE}
+      title={dictionary.section.title}
+      guide={dictionary.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -90,8 +89,8 @@ const Page = () => {
                 {...register(`experiences.${index}.company`)}
                 id={`title-${index}`}
                 className="mb-3"
-                label={{ text: '회사명', isRequired: true }}
-                placeholder={PLACEHOLDER.EXPERIENCE.COMPANY}
+                label={{ text: dictionary.label.company, isRequired: true }}
+                placeholder={dictionary.placeholder.company}
                 error={errors.experiences?.[index]?.company?.message}
                 onChange={(e) => {
                   register(`experiences.${index}.company`).onChange(e);
@@ -101,7 +100,7 @@ const Page = () => {
               <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
                 <div className="flex-1">
                   <Label htmlFor="employmentType" isRequired>
-                    근무 형태
+                    {dictionary.label.employmentType}
                   </Label>
                   <Controller
                     control={control}
@@ -119,7 +118,9 @@ const Page = () => {
                             errors.experiences?.[index]?.employmentType?.message
                           }
                         >
-                          <SelectValue placeholder="근무 형태" />
+                          <SelectValue
+                            placeholder={dictionary.placeholder.employmentType}
+                          />
                         </SelectTrigger>
                         <SelectContent>
                           {EMPLOYMENT_TYPES.map((employmentType) => (
@@ -139,8 +140,11 @@ const Page = () => {
                   <Input
                     {...register(`experiences.${index}.jobTitle`)}
                     id={`jobTitle-${index}`}
-                    label={{ text: '직무', isRequired: true }}
-                    placeholder={PLACEHOLDER.EXPERIENCE.JOB_TITLE}
+                    label={{
+                      text: dictionary.label.jobTitle,
+                      isRequired: true,
+                    }}
+                    placeholder={dictionary.placeholder.jobTitle}
                     error={errors.experiences?.[index]?.jobTitle?.message}
                     onChange={(e) => {
                       register(`experiences.${index}.jobTitle`).onChange(e);
@@ -152,7 +156,7 @@ const Page = () => {
               <PeriodInput
                 formName="experiences"
                 index={index}
-                label={PERIOD_LABEL.WORKING}
+                label={dictionary.label.period}
                 error={{
                   startDate: errors.experiences?.[index]?.startDate?.message,
                   endDate: errors.experiences?.[index]?.endDate?.message,
@@ -161,8 +165,8 @@ const Page = () => {
               <MarkdownInput
                 formName="experiences"
                 index={index}
-                label="내용"
-                placeholder={PLACEHOLDER.EXPERIENCE.CONTENT}
+                label={dictionary.label.content}
+                placeholder={dictionary.placeholder.content}
                 error={errors.experiences?.[index]?.content?.message}
               />
             </li>
@@ -173,4 +177,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ExperienceFormView;
