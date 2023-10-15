@@ -23,6 +23,19 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  if (
+    [
+      '/landing.png',
+      '/logo.png',
+      '/text-logo.png',
+      '/icons/github.png',
+      '/icons/link.png',
+      '/icons/mail.png',
+      '/icons/phone.png',
+    ].includes(pathname)
+  )
+    return;
+
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
@@ -40,5 +53,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|icons|favicon.ico).*)'],
 };
