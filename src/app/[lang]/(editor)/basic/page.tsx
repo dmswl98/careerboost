@@ -1,5 +1,5 @@
 import BasicFormView from '@/features/Basic/BasicFormView';
-import { type LangParams } from '@/i18n/config';
+import { type LangParams } from '@/i18n/types';
 import { getDictionary } from '@/i18n/utils';
 
 const Page = async ({ params: { lang } }: LangParams) => {

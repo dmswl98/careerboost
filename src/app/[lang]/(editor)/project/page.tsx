@@ -1,5 +1,5 @@
 import ProjectFormView from '@/features/Project/ProjectFormView';
-import { type LangParams } from '@/i18n/config';
+import { type LangParams } from '@/i18n/types';
 import { getDictionary } from '@/i18n/utils';
 
 const Page = async ({ params: { lang } }: LangParams) => {

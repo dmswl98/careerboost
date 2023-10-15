@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 
 interface MainProps {
-  dictionary: (typeof i18n)['home']['banner'];
+  dictionary: Dictionary['home']['banner'];
 }
 
 const Main = ({ dictionary }: MainProps) => {

@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 
 import { ROUTES } from '@/constants/routes';
-import { type Locale } from '@/i18n/config';
+import { type Locale } from '@/i18n/types';
 
 interface MenuLinkProps<T extends FieldValues> {
   formName: FieldPath<T>;

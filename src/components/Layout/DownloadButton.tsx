@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/common';
 import PdfDocument from '@/components/Pdf/PdfDocument';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 import { type ResumeFormDataSchema } from '@/types/form';
 
 interface DownloadButtonProps {
-  dictionary: (typeof i18n)['sidebar']['downloadButton'];
+  dictionary: Dictionary['sidebar']['downloadButton'];
 }
 
 const DownloadButton = ({ dictionary }: DownloadButtonProps) => {

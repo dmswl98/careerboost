@@ -5,10 +5,10 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { Button } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 
 interface HeaderProps {
-  dictionary: (typeof i18n)['home']['header'];
+  dictionary: Dictionary['home']['header'];
 }
 
 const Header = ({ dictionary }: HeaderProps) => {

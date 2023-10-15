@@ -2,12 +2,11 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { Switch } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
-import { type Locale } from '@/i18n/config';
-import type * as i18n from '@/i18n/ko.json';
+import type { Dictionary, Locale } from '@/i18n/types';
 
 interface PreviewButtonProps {
   lang: Locale;
-  dictionary: (typeof i18n)['sidebar']['previewButton'];
+  dictionary: Dictionary['sidebar']['previewButton'];
 }
 
 const PreviewButton = ({ lang, dictionary }: PreviewButtonProps) => {

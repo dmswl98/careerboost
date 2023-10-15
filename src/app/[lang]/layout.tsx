@@ -5,7 +5,8 @@ import type { Metadata } from 'next';
 import { GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import Navigation from '@/components/Layout/Navigation';
 import META from '@/constants/meta';
-import { i18n, type LangParams } from '@/i18n/config';
+import { i18n } from '@/i18n/config';
+import { type LangParams } from '@/i18n/types';
 import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {

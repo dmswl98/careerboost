@@ -15,13 +15,13 @@ import {
 } from '@/components/Form';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
 import { INITIAL_VALUE } from '@/constants/form';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 import { type ProjectsFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ProjectFormViewProps {
-  dictionary: (typeof i18n)['project'];
+  dictionary: Dictionary['project'];
 }
 
 const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {

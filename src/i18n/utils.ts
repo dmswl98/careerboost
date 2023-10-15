@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { Locale } from './config';
+import type { Locale } from './types';
 
 const dictionaries = {
   ko: () => import('./ko.json').then((module) => module.default),

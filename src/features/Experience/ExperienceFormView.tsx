@@ -18,13 +18,13 @@ import {
   PeriodInput,
 } from '@/components/Form';
 import { EMPLOYMENT_TYPES, INITIAL_VALUE } from '@/constants/form';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 import { type ExperienceFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ExperienceFormViewProps {
-  dictionary: (typeof i18n)['experience'];
+  dictionary: Dictionary['experience'];
 }
 
 const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {

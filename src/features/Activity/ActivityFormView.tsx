@@ -11,13 +11,13 @@ import {
   PeriodInput,
 } from '@/components/Form';
 import { INITIAL_VALUE } from '@/constants/form';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ActivityFormViewProps {
-  dictionary: (typeof i18n)['activity'];
+  dictionary: Dictionary['activity'];
 }
 
 const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {

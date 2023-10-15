@@ -1,6 +1,6 @@
 import Sidebar from '@/components/Layout/Sidebar';
 import FormProvider from '@/components/Providers/FormProvider';
-import { type LangParams } from '@/i18n/config';
+import { type LangParams } from '@/i18n/types';
 import { getDictionary } from '@/i18n/utils';
 
 const Layout = async ({

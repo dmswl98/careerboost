@@ -3,8 +3,7 @@
 import { usePathname } from 'next/navigation';
 
 import { ROUTES } from '@/constants/routes';
-import { type Locale } from '@/i18n/config';
-import type * as i18n from '@/i18n/ko.json';
+import type { Dictionary, Locale } from '@/i18n/types';
 import type {
   ActivitiesFormDataSchema,
   ExperienceFormDataSchema,
@@ -18,7 +17,7 @@ import PreviewButton from './PreviewButton';
 
 interface SidebarProps {
   lang: Locale;
-  dictionary: typeof i18n;
+  dictionary: Dictionary;
 }
 
 const Sidebar = ({ lang, dictionary }: SidebarProps) => {

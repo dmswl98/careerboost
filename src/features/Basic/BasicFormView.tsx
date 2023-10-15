@@ -4,12 +4,12 @@ import { useFormContext } from 'react-hook-form';
 
 import { Input, Label, Textarea } from '@/components/common';
 import { FormCard } from '@/components/Form';
-import type * as i18n from '@/i18n/ko.json';
+import { type Dictionary } from '@/i18n/types';
 import { type UserInfoFormDataSchema } from '@/types/form';
 import { debouncedUpdateStorage } from '@/utils/storage';
 
 interface BasicFormViewProps {
-  dictionary: (typeof i18n)['basic'];
+  dictionary: Dictionary['basic'];
 }
 
 const BasicFormView = ({ dictionary }: BasicFormViewProps) => {
