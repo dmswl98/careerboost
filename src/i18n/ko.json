@@ -98,5 +98,17 @@
       "creatingResume": "이력서 생성 중",
       "downloadResume": "이력서 다운로드"
     }
+  },
+  "markdownInput": {
+    "info": "마크다운 문법을 지원해요",
+    "tabContent": "작성된 내용이 없어요",
+    "tabButton": {
+      "edit": "수정",
+      "preview": "미리보기"
+    }
+  },
+  "aiSuggestion": {
+    "title": "AI가 첨삭한 내용은 다음과 같아요",
+    "description": "첨삭 내용을 바탕으로 프로젝트 내용을 수정해보세요"
   }
 }

@@ -17,7 +17,7 @@ import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ActivityFormViewProps {
-  dictionary: Dictionary['activity'];
+  dictionary: Dictionary;
 }
 
 const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
@@ -63,8 +63,8 @@ const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
 
   return (
     <FormCard
-      title={dictionary.section.title}
-      guide={dictionary.section.guide}
+      title={dictionary.activity.section.title}
+      guide={dictionary.activity.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -82,8 +82,11 @@ const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
                 {...register(`activities.${index}.title`)}
                 id={`title-${index}`}
                 className="mb-3"
-                label={{ text: dictionary.label.title, isRequired: true }}
-                placeholder={dictionary.placeholder.title}
+                label={{
+                  text: dictionary.activity.label.title,
+                  isRequired: true,
+                }}
+                placeholder={dictionary.activity.placeholder.title}
                 error={errors.activities?.[index]?.title?.message}
                 onChange={(e) => {
                   register(`activities.${index}.title`).onChange(e);
@@ -94,8 +97,8 @@ const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
                 {...register(`activities.${index}.institution`)}
                 id={`institution-${index}`}
                 className="mb-3"
-                label={{ text: dictionary.label.institution }}
-                placeholder={dictionary.placeholder.institution}
+                label={{ text: dictionary.activity.label.institution }}
+                placeholder={dictionary.activity.placeholder.institution}
                 onChange={(e) => {
                   register(`activities.${index}.institution`).onChange(e);
                   handleAutoSave();
@@ -104,7 +107,7 @@ const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
               <PeriodInput
                 formName="activities"
                 index={index}
-                label={dictionary.label.period}
+                label={dictionary.activity.label.period}
                 error={{
                   startDate: errors.activities?.[index]?.startDate?.message,
                   endDate: errors.activities?.[index]?.endDate?.message,
@@ -113,9 +116,10 @@ const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
               <MarkdownInput
                 formName="activities"
                 index={index}
-                label={dictionary.label.content}
-                placeholder={dictionary.placeholder.content}
+                label={dictionary.activity.label.content}
+                placeholder={dictionary.activity.placeholder.content}
                 error={errors.activities?.[index]?.content?.message}
+                dictionary={dictionary.markdownInput}
               />
             </li>
           ))}

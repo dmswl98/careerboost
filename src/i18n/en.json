@@ -46,7 +46,7 @@
       "employmentType": "Employment Type",
       "jobTitle": "Job Title",
       "content": "Content",
-      "period": "Currently employed"
+      "period": "I currently work here"
     },
     "placeholder": {
       "company": "Company Name",
@@ -98,5 +98,17 @@
       "creatingResume": "Creating Resume",
       "downloadResume": "Download Resume"
     }
+  },
+  "markdownInput": {
+    "info": "Supports markdown syntax",
+    "tabContent": "No content has been written",
+    "tabButton": {
+      "edit": "Edit",
+      "preview": "Preview"
+    }
+  },
+  "aiSuggestion": {
+    "title": "The content corrected by AI is as follows",
+    "description": "Try modifying the project content based on the correction"
   }
 }

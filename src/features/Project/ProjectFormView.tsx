@@ -21,7 +21,7 @@ import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ProjectFormViewProps {
-  dictionary: Dictionary['project'];
+  dictionary: Dictionary;
 }
 
 const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
@@ -94,8 +94,8 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
 
   return (
     <FormCard
-      title={dictionary.section.title}
-      guide={dictionary.section.guide}
+      title={dictionary.project.section.title}
+      guide={dictionary.project.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -114,8 +114,11 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
                   {...register(`projects.${index}.title`)}
                   id={`title-${index}`}
                   className="mr-1"
-                  label={{ text: dictionary.label.title, isRequired: true }}
-                  placeholder={dictionary.placeholder.title}
+                  label={{
+                    text: dictionary.project.label.title,
+                    isRequired: true,
+                  }}
+                  placeholder={dictionary.project.placeholder.title}
                   error={errors.projects?.[index]?.title?.message}
                   onChange={(e) => {
                     register(`projects.${index}.title`).onChange(e);
@@ -135,7 +138,7 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
               <PeriodInput
                 formName="projects"
                 index={index}
-                label={dictionary.label.period}
+                label={dictionary.project.label.period}
                 error={{
                   startDate: errors.projects?.[index]?.startDate?.message,
                   endDate: errors.projects?.[index]?.endDate?.message,
@@ -145,8 +148,8 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
                 {...register(`projects.${index}.url`)}
                 id={`url-${index}`}
                 className="mb-3"
-                label={{ text: dictionary.label.url }}
-                placeholder={dictionary.placeholder.url}
+                label={{ text: dictionary.project.label.url }}
+                placeholder={dictionary.project.placeholder.url}
                 error={errors.projects?.[index]?.url?.message}
                 onChange={(e) => {
                   register(`projects.${index}.url`).onChange(e);
@@ -156,12 +159,16 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
               <MarkdownInput
                 formName="projects"
                 index={index}
-                label={dictionary.label.content}
-                placeholder={dictionary.placeholder.content}
+                label={dictionary.project.label.content}
+                placeholder={dictionary.project.placeholder.content}
                 error={errors.projects?.[index]?.content?.message}
+                dictionary={dictionary.markdownInput}
               />
               {isSuggest[index] && completion && (
-                <AiSuggestion aiSuggestion={completion} />
+                <AiSuggestion
+                  aiSuggestion={completion}
+                  dictionary={dictionary.aiSuggestion}
+                />
               )}
             </li>
           ))}

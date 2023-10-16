@@ -24,7 +24,7 @@ import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
 interface ExperienceFormViewProps {
-  dictionary: Dictionary['experience'];
+  dictionary: Dictionary;
 }
 
 const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
@@ -70,8 +70,8 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
 
   return (
     <FormCard
-      title={dictionary.section.title}
-      guide={dictionary.section.guide}
+      title={dictionary.experience.section.title}
+      guide={dictionary.experience.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -89,8 +89,11 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
                 {...register(`experiences.${index}.company`)}
                 id={`title-${index}`}
                 className="mb-3"
-                label={{ text: dictionary.label.company, isRequired: true }}
-                placeholder={dictionary.placeholder.company}
+                label={{
+                  text: dictionary.experience.label.company,
+                  isRequired: true,
+                }}
+                placeholder={dictionary.experience.placeholder.company}
                 error={errors.experiences?.[index]?.company?.message}
                 onChange={(e) => {
                   register(`experiences.${index}.company`).onChange(e);
@@ -100,7 +103,7 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
               <div className="mb-3 flex flex-col gap-3 md:flex-row md:gap-2">
                 <div className="flex-1">
                   <Label htmlFor="employmentType" isRequired>
-                    {dictionary.label.employmentType}
+                    {dictionary.experience.label.employmentType}
                   </Label>
                   <Controller
                     control={control}
@@ -119,7 +122,9 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
                           }
                         >
                           <SelectValue
-                            placeholder={dictionary.placeholder.employmentType}
+                            placeholder={
+                              dictionary.experience.placeholder.employmentType
+                            }
                           />
                         </SelectTrigger>
                         <SelectContent>
@@ -141,10 +146,10 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
                     {...register(`experiences.${index}.jobTitle`)}
                     id={`jobTitle-${index}`}
                     label={{
-                      text: dictionary.label.jobTitle,
+                      text: dictionary.experience.label.jobTitle,
                       isRequired: true,
                     }}
-                    placeholder={dictionary.placeholder.jobTitle}
+                    placeholder={dictionary.experience.placeholder.jobTitle}
                     error={errors.experiences?.[index]?.jobTitle?.message}
                     onChange={(e) => {
                       register(`experiences.${index}.jobTitle`).onChange(e);
@@ -156,7 +161,7 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
               <PeriodInput
                 formName="experiences"
                 index={index}
-                label={dictionary.label.period}
+                label={dictionary.experience.label.period}
                 error={{
                   startDate: errors.experiences?.[index]?.startDate?.message,
                   endDate: errors.experiences?.[index]?.endDate?.message,
@@ -165,9 +170,10 @@ const ExperienceFormView = ({ dictionary }: ExperienceFormViewProps) => {
               <MarkdownInput
                 formName="experiences"
                 index={index}
-                label={dictionary.label.content}
-                placeholder={dictionary.placeholder.content}
+                label={dictionary.experience.label.content}
+                placeholder={dictionary.experience.placeholder.content}
                 error={errors.experiences?.[index]?.content?.message}
+                dictionary={dictionary.markdownInput}
               />
             </li>
           ))}

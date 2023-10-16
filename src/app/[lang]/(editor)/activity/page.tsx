@@ -5,7 +5,7 @@ import { getDictionary } from '@/i18n/utils';
 const Page = async ({ params: { lang } }: LangParams) => {
   const dictionary = await getDictionary(lang);
 
-  return <ActivityFormView dictionary={dictionary.activity} />;
+  return <ActivityFormView dictionary={dictionary} />;
 };
 
 export default Page;
