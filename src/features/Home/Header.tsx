@@ -1,13 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { Button } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
+import { type Dictionary } from '@/i18n/types';
 
-const Header = () => {
+interface HeaderProps {
+  dictionary: Dictionary['home']['header'];
+}
+
+const Header = ({ dictionary }: HeaderProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <header className="flex w-full flex-col items-center justify-center px-6 py-16 sm:px-10 md:py-20">
@@ -29,15 +35,13 @@ const Header = () => {
         loading="eager"
         alt="careerboost 텍스트 로고"
       />
-      <p className="mb-14 text-center text-lg">
-        이력서 작성과 동시에 AI 첨삭도 받아보세요
-      </p>
+      <p className="mb-14 text-center text-lg">{dictionary.description}</p>
       <Button
         type="button"
-        aria-label="이력서 작성"
-        onClick={() => router.push(ROUTES.BASIC)}
+        aria-label={dictionary.navigateButton}
+        onClick={() => router.push(`${pathname}${ROUTES.BASIC}`)}
       >
-        이력서 작성하기
+        {dictionary.navigateButton}
       </Button>
     </header>
   );

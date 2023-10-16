@@ -14,13 +14,17 @@ import {
   PeriodInput,
 } from '@/components/Form';
 import IconChatGpt from '@/components/Icon/IconChatGpt';
-import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
-import { MENU_INFO } from '@/constants/menu';
+import { INITIAL_VALUE } from '@/constants/form';
+import { type Dictionary } from '@/i18n/types';
 import { type ProjectsFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
-const Page = () => {
+interface ProjectFormViewProps {
+  dictionary: Dictionary;
+}
+
+const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
   const [isSuggest, setIsSuggest] = useState<boolean[]>([]);
 
   const {
@@ -90,8 +94,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title={MENU_INFO.PROJECT.TITLE}
-      guide={MENU_INFO.PROJECT.GUIDE}
+      title={dictionary.project.section.title}
+      guide={dictionary.project.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -110,8 +114,11 @@ const Page = () => {
                   {...register(`projects.${index}.title`)}
                   id={`title-${index}`}
                   className="mr-1"
-                  label={{ text: '프로젝트명', isRequired: true }}
-                  placeholder={PLACEHOLDER.PROJECT.TITLE}
+                  label={{
+                    text: dictionary.project.label.title,
+                    isRequired: true,
+                  }}
+                  placeholder={dictionary.project.placeholder.title}
                   error={errors.projects?.[index]?.title?.message}
                   onChange={(e) => {
                     register(`projects.${index}.title`).onChange(e);
@@ -123,7 +130,6 @@ const Page = () => {
                   type="button"
                   className="ml-1"
                   disabled={isSuggest[index]}
-                  title="프로젝트에 관련된 내용을 자세하게 작성할수록 첨삭 퀄리티가 높아져요."
                   onClick={() => handleSuggestClick(index)}
                 >
                   <IconChatGpt />
@@ -132,6 +138,7 @@ const Page = () => {
               <PeriodInput
                 formName="projects"
                 index={index}
+                label={dictionary.project.label.period}
                 error={{
                   startDate: errors.projects?.[index]?.startDate?.message,
                   endDate: errors.projects?.[index]?.endDate?.message,
@@ -141,8 +148,8 @@ const Page = () => {
                 {...register(`projects.${index}.url`)}
                 id={`url-${index}`}
                 className="mb-3"
-                label={{ text: '프로젝트 주소' }}
-                placeholder={PLACEHOLDER.PROJECT.URL}
+                label={{ text: dictionary.project.label.url }}
+                placeholder={dictionary.project.placeholder.url}
                 error={errors.projects?.[index]?.url?.message}
                 onChange={(e) => {
                   register(`projects.${index}.url`).onChange(e);
@@ -152,12 +159,16 @@ const Page = () => {
               <MarkdownInput
                 formName="projects"
                 index={index}
-                label="프로젝트 내용"
-                placeholder={PLACEHOLDER.PROJECT.CONTENT}
+                label={dictionary.project.label.content}
+                placeholder={dictionary.project.placeholder.content}
                 error={errors.projects?.[index]?.content?.message}
+                dictionary={dictionary.markdownInput}
               />
               {isSuggest[index] && completion && (
-                <AiSuggestion aiSuggestion={completion} />
+                <AiSuggestion
+                  aiSuggestion={completion}
+                  dictionary={dictionary.aiSuggestion}
+                />
               )}
             </li>
           ))}
@@ -167,4 +178,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ProjectFormView;

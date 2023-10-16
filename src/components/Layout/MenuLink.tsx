@@ -7,12 +7,13 @@ import {
 } from 'react-hook-form';
 
 import { ROUTES } from '@/constants/routes';
+import { type Locale } from '@/i18n/types';
 
 interface MenuLinkProps<T extends FieldValues> {
   formName: FieldPath<T>;
   isCurrentLocation: boolean;
   title: string;
-  route: (typeof ROUTES)[keyof typeof ROUTES];
+  route: `/${Locale}${(typeof ROUTES)[keyof typeof ROUTES]}`;
 }
 
 const MenuLink = <T extends FieldValues>({
@@ -26,10 +27,9 @@ const MenuLink = <T extends FieldValues>({
   const values = getValues(formName as FieldPath<T>);
 
   const isError = formState.errors[formName];
-  const isCreatedForm =
-    route === ROUTES.BASIC
-      ? values.name && values.career && values.email && values.github
-      : values?.length > 0;
+  const isCreatedForm = route.includes(ROUTES.BASIC)
+    ? values.name && values.career && values.email && values.github
+    : values?.length > 0;
 
   const currentLocationMenuStyle = isCurrentLocation
     ? 'border-primary font-bold text-primary'

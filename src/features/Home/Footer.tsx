@@ -10,12 +10,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-black px-8 py-12">
       <div className="mb-10 flex">
-        <Image
-          src="/logo.png"
-          width={28}
-          height={24}
-          alt="careerboost 이미지 로고"
-        />
+        <Image src="/logo.png" width={28} height={24} alt="careerboost" />
         <span className="ml-4 text-sm text-white">
           <strong className="text-lg">career</strong>BOOST
         </span>

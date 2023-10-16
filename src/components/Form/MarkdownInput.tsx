@@ -10,6 +10,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/common/Tab';
+import { type Dictionary } from '@/i18n/types';
 import { type ResumeFormDataSchema } from '@/types/form';
 import { debouncedUpdateStorage } from '@/utils/storage';
 
@@ -21,6 +22,7 @@ interface MarkdownInputProps {
   label: string;
   placeholder: string;
   error?: string;
+  dictionary: Dictionary['markdownInput'];
 }
 
 const MarkdownInput = ({
@@ -29,6 +31,7 @@ const MarkdownInput = ({
   label,
   placeholder,
   error,
+  dictionary,
 }: MarkdownInputProps) => {
   const { control, register, getValues } =
     useFormContext<ResumeFormDataSchema>();
@@ -53,12 +56,14 @@ const MarkdownInput = ({
             {label}
           </Label>
           <span className="mb-2 block text-xs text-gray-300 min-[470px]:mb-1 min-[470px]:ml-2 min-[470px]:inline-block">
-            마크다운 문법을 지원해요
+            {dictionary.info}
           </span>
         </div>
         <TabsList className="ml-auto grid w-[150px] grid-cols-2">
-          <TabsTrigger value="edit">수정</TabsTrigger>
-          <TabsTrigger value="preview">미리보기</TabsTrigger>
+          <TabsTrigger value="edit">{dictionary.tabButton.edit}</TabsTrigger>
+          <TabsTrigger value="preview">
+            {dictionary.tabButton.preview}
+          </TabsTrigger>
         </TabsList>
       </div>
       <TabsContent value="edit">
@@ -80,7 +85,7 @@ const MarkdownInput = ({
         <div className="mt-1 flex justify-between">
           {error && <FormErrorMessage id="content" message={error} />}
           <span className="ml-auto text-xs text-gray-300">
-            글자수 {value?.length || 0}
+            {value?.length || 0}
           </span>
         </div>
       </TabsContent>
@@ -91,7 +96,7 @@ const MarkdownInput = ({
           </ReactMarkdown>
         ) : (
           <div className="py-10 text-center text-sm text-gray-500">
-            작성된 내용이 없어요
+            {dictionary.tabContent}
           </div>
         )}
       </TabsContent>

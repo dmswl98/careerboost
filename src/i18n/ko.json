@@ -1,0 +1,114 @@
+{
+  "home": {
+    "header": {
+      "description": "이력서 작성과 동시에 AI 첨삭도 받아보세요",
+      "navigateButton": "이력서 작성하기"
+    },
+    "banner": {
+      "image": "서비스 사용 팁 배경",
+      "subTitle": "서비스 사용 팁",
+      "title": "어떻게 하면 이 서비스를 잘 활용할 수 있을까요?",
+      "tip1": "경험한 내용을 최대한 자세하게 작성하면 AI 첨삭 퀄리티를 높일 수 있어요",
+      "tip2": "추가로 프로젝트에 사용된 기술 스택을 작성하면 프로젝트 내용과 관련하여 첨삭받을 수 있어요",
+      "tip3": "AI 첨삭 내용을 적극적으로 반영해 나만의 이력서를 완성해보세요"
+    }
+  },
+  "basic": {
+    "section": {
+      "title": "기본 정보",
+      "guide": "입력한 정보가 올바른지 다시 한 번 확인해주세요"
+    },
+    "label": {
+      "name": "이름",
+      "career": "직무",
+      "phone": "전화번호",
+      "email": "이메일",
+      "blog": "블로그",
+      "github": "깃허브",
+      "brief": "소개글"
+    },
+    "placeholder": {
+      "name": "이름",
+      "career": "프론트엔드 개발자",
+      "phone": "010-1234-5678",
+      "email": "choieunji@gmail.com",
+      "url": "https://",
+      "brief": "나만의 소개글을 작성해보세요"
+    }
+  },
+  "experience": {
+    "section": {
+      "title": "업무 경력",
+      "guide": "주도적으로 특정 기능 개발을 이끌어 달성한 구체적인 성과를 작성해 전문성과 협업 역량을 강조해보세요"
+    },
+    "label": {
+      "company": "회사명",
+      "employmentType": "근무 형태",
+      "jobTitle": "직무",
+      "content": "내용",
+      "period": "아직 재직 중이에요"
+    },
+    "placeholder": {
+      "company": "회사명",
+      "employmentType": "근무 형태",
+      "jobTitle": "직무",
+      "content": "맡은 역할과 달성한 구체적인 성과를 작성해보세요"
+    }
+  },
+  "project": {
+    "section": {
+      "title": "프로젝트",
+      "guide": "단순히 어떤 기술을 사용했다는 것보다 해당 프로젝트에서 마주친 문제를 해결한 과정과 배운 점, 결과 등을 강조해보세요"
+    },
+    "label": {
+      "title": "프로젝트명",
+      "url": "프로젝트 주소",
+      "content": "프로젝트 내용",
+      "period": "아직 진행 중이에요"
+    },
+    "placeholder": {
+      "title": "프로젝트명",
+      "url": "https://",
+      "content": "프로젝트 내용과 본인의 역할, 기여도를 작성해보세요"
+    }
+  },
+  "activity": {
+    "section": {
+      "title": "수상 및 활동",
+      "guide": "활동에 참여한 동기와 어떤 역량을 키울 수 있었는지 구체적으로 작성하여 지속적인 성장 의지와 전문성을 강조해보세요"
+    },
+    "label": {
+      "title": "수상 및 활동명",
+      "institution": "기관명",
+      "content": "내용",
+      "period": "아직 진행 중이에요"
+    },
+    "placeholder": {
+      "title": "수상 및 활동명",
+      "institution": "소속/기관",
+      "content": "참여한 강연, 발표, 스터디 및 외부 활동에 대해 작성해보세요"
+    }
+  },
+  "sidebar": {
+    "title": "이력서 작성하기",
+    "previewButton": "이력서 미리보기",
+    "downloadButton": {
+      "fileName": "님의_이력서.pdf",
+      "createResume": "이력서 생성",
+      "creatingResume": "이력서 생성 중",
+      "downloadResume": "이력서 다운로드"
+    }
+  },
+  "markdownInput": {
+    "info": "마크다운 문법을 지원해요",
+    "tabContent": "작성된 내용이 없어요",
+    "tabButton": {
+      "edit": "수정",
+      "preview": "미리보기"
+    }
+  },
+  "aiSuggestion": {
+    "title": "AI가 첨삭한 내용은 다음과 같아요",
+    "description": "첨삭 내용을 바탕으로 프로젝트 내용을 수정해보세요"
+  }
+}

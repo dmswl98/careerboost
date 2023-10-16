@@ -10,13 +10,17 @@ import {
   MarkdownInput,
   PeriodInput,
 } from '@/components/Form';
-import { INITIAL_VALUE, PLACEHOLDER } from '@/constants/form';
-import { MENU_INFO } from '@/constants/menu';
+import { INITIAL_VALUE } from '@/constants/form';
+import { type Dictionary } from '@/i18n/types';
 import { type ActivitiesFormDataSchema } from '@/types/form';
 import { isBottomForm, isTopForm } from '@/utils/form';
 import { debouncedUpdateStorage, storage } from '@/utils/storage';
 
-const Page = () => {
+interface ActivityFormViewProps {
+  dictionary: Dictionary;
+}
+
+const ActivityFormView = ({ dictionary }: ActivityFormViewProps) => {
   const {
     control,
     register,
@@ -59,8 +63,8 @@ const Page = () => {
 
   return (
     <FormCard
-      title={MENU_INFO.ACTIVITY.TITLE}
-      guide={MENU_INFO.ACTIVITY.GUIDE}
+      title={dictionary.activity.section.title}
+      guide={dictionary.activity.section.guide}
       onAppendForm={handleAppendClick}
     >
       {fields.length > 0 && (
@@ -78,8 +82,11 @@ const Page = () => {
                 {...register(`activities.${index}.title`)}
                 id={`title-${index}`}
                 className="mb-3"
-                label={{ text: '수상 및 활동명', isRequired: true }}
-                placeholder={PLACEHOLDER.ACTIVITY.TITLE}
+                label={{
+                  text: dictionary.activity.label.title,
+                  isRequired: true,
+                }}
+                placeholder={dictionary.activity.placeholder.title}
                 error={errors.activities?.[index]?.title?.message}
                 onChange={(e) => {
                   register(`activities.${index}.title`).onChange(e);
@@ -90,8 +97,8 @@ const Page = () => {
                 {...register(`activities.${index}.institution`)}
                 id={`institution-${index}`}
                 className="mb-3"
-                label={{ text: '기관명' }}
-                placeholder={PLACEHOLDER.ACTIVITY.INSTITUTION}
+                label={{ text: dictionary.activity.label.institution }}
+                placeholder={dictionary.activity.placeholder.institution}
                 onChange={(e) => {
                   register(`activities.${index}.institution`).onChange(e);
                   handleAutoSave();
@@ -100,6 +107,7 @@ const Page = () => {
               <PeriodInput
                 formName="activities"
                 index={index}
+                label={dictionary.activity.label.period}
                 error={{
                   startDate: errors.activities?.[index]?.startDate?.message,
                   endDate: errors.activities?.[index]?.endDate?.message,
@@ -108,9 +116,10 @@ const Page = () => {
               <MarkdownInput
                 formName="activities"
                 index={index}
-                label="내용"
-                placeholder={PLACEHOLDER.ACTIVITY.CONTENT}
+                label={dictionary.activity.label.content}
+                placeholder={dictionary.activity.placeholder.content}
                 error={errors.activities?.[index]?.content?.message}
+                dictionary={dictionary.markdownInput}
               />
             </li>
           ))}
@@ -120,4 +129,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ActivityFormView;
