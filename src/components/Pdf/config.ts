@@ -3,7 +3,7 @@ import { createTw } from 'react-pdf-tailwind';
 
 const Pretendard = {
   light:
-    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.ttf',
+    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.ttf',
   regular:
     'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf',
   semiBold:

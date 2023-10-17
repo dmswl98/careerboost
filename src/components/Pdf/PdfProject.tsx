@@ -20,15 +20,21 @@ const PdfProject = ({ projects }: PdfProjectProps) => {
       {projects.map((project) => (
         <View
           key={project.id}
-          style={tailwind('border border-x-0 border-gray-200 py-6')}
+          style={tailwind(
+            'flex-row border border-x-0 border-gray-200 py-6 px-2'
+          )}
         >
-          <View style={tailwind('mb-4')}>
-            <PdfSectionInfo
-              title={project.title}
-              date={{ start: project.startDate, end: project.endDate }}
-            />
-            {project.url && <PdfLink url={project.url} />}
-          </View>
+          <PdfSectionInfo
+            title={project.title}
+            date={{ start: project.startDate, end: project.endDate }}
+          >
+            {project.githubUrl && (
+              <PdfLink label="GitHub 링크" url={project.githubUrl} />
+            )}
+            {project.serviceUrl && (
+              <PdfLink label="배포 링크" url={project.serviceUrl} />
+            )}
+          </PdfSectionInfo>
           {project.content && <PdfMarkdown content={project.content} />}
         </View>
       ))}

@@ -62,7 +62,8 @@
     },
     "label": {
       "title": "프로젝트명",
-      "url": "프로젝트 주소",
+      "githubUrl": "프로젝트 주소",
+      "serviceUrl": "서비스 배포 주소",
       "content": "프로젝트 내용",
       "period": "아직 진행 중이에요"
     },

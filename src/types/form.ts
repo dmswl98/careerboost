@@ -48,7 +48,10 @@ export const resumeFormSchema = z.object({
         .regex(DATE_REGEX, { message: UNFORMATTED_DATA })
         .or(z.literal(PLACEHOLDER.PERIOD.PROGRESS)),
       content: z.string().min(50, { message: '50자 이상 작성해주세요' }),
-      url: z
+      githubUrl: z
+        .optional(z.string().url({ message: UNFORMATTED_DATA }))
+        .or(z.literal('')),
+      serviceUrl: z
         .optional(z.string().url({ message: UNFORMATTED_DATA }))
         .or(z.literal('')),
     })

@@ -1,4 +1,4 @@
-import { View } from '@react-pdf/renderer';
+import { Text, View } from '@react-pdf/renderer';
 
 import { MENU_INFO } from '@/constants/menu';
 import { type ExperienceFormDataSchema } from '@/types/form';
@@ -18,14 +18,19 @@ const PdfExperience = ({ experiences }: PdfExperienceProps) => {
       {experiences.map((experience) => (
         <View
           key={experience.id}
-          style={tailwind('border border-x-0 border-gray-200 py-6')}
+          style={tailwind(
+            'flex-row border border-x-0 border-gray-200 py-6 px-2'
+          )}
         >
-          <View style={tailwind('mb-4')}>
-            <PdfSectionInfo
-              title={experience.company}
-              date={{ start: experience.startDate, end: experience.endDate }}
-            />
-          </View>
+          <PdfSectionInfo
+            title={experience.company}
+            date={{ start: experience.startDate, end: experience.endDate }}
+          >
+            <View style={tailwind('text-sm font-semiBold leading-normal')}>
+              <Text>{experience.employmentType}</Text>
+              <Text>{experience.jobTitle}</Text>
+            </View>
+          </PdfSectionInfo>
           {experience.content && <PdfMarkdown content={experience.content} />}
         </View>
       ))}

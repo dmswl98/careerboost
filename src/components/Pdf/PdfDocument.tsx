@@ -15,7 +15,7 @@ interface PdfDocumentProps {
 const PdfDocument = ({ resume }: PdfDocumentProps) => {
   return (
     <Document>
-      <Page size="A4" style={tailwind('font-regular px-8 pt-10 pb-14')} wrap>
+      <Page size="A4" style={tailwind('font-regular px-14 pt-14 pb-16')} wrap>
         <PdfUserInfo userInfo={resume.userInfo} />
         {resume.experiences.length > 0 && (
           <PdfExperience experiences={resume.experiences} />
@@ -28,10 +28,12 @@ const PdfDocument = ({ resume }: PdfDocumentProps) => {
         )}
         <Link
           src="https://github.com/dmswl98"
-          style={tailwind('absolute bottom-4 left-0 right-0 text-center')}
+          style={tailwind('absolute bottom-4 left-0 right-0 mt-10 text-center')}
           fixed
         >
-          <Text style={tailwind('text-gray-300 text-xs')}>@dmswl98</Text>
+          <Text style={tailwind('text-gray-300 text-xs')}>
+            Powered by careerBoost
+          </Text>
         </Link>
       </Page>
     </Document>
