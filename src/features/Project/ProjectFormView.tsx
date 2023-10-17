@@ -145,14 +145,26 @@ const ProjectFormView = ({ dictionary }: ProjectFormViewProps) => {
                 }}
               />
               <Input
-                {...register(`projects.${index}.url`)}
+                {...register(`projects.${index}.githubUrl`)}
                 id={`url-${index}`}
                 className="mb-3"
-                label={{ text: dictionary.project.label.url }}
+                label={{ text: dictionary.project.label.githubUrl }}
                 placeholder={dictionary.project.placeholder.url}
-                error={errors.projects?.[index]?.url?.message}
+                error={errors.projects?.[index]?.githubUrl?.message}
                 onChange={(e) => {
-                  register(`projects.${index}.url`).onChange(e);
+                  register(`projects.${index}.githubUrl`).onChange(e);
+                  handleAutoSave();
+                }}
+              />
+              <Input
+                {...register(`projects.${index}.serviceUrl`)}
+                id={`url-${index}`}
+                className="mb-3"
+                label={{ text: dictionary.project.label.serviceUrl }}
+                placeholder={dictionary.project.placeholder.url}
+                error={errors.projects?.[index]?.serviceUrl?.message}
+                onChange={(e) => {
+                  register(`projects.${index}.serviceUrl`).onChange(e);
                   handleAutoSave();
                 }}
               />

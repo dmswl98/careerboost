@@ -24,7 +24,7 @@
       "phone": "Phone",
       "email": "Email",
       "blog": "Blog",
-      "github": "Github",
+      "github": "GitHub",
       "brief": "Brief Introduction"
     },
     "placeholder": {
@@ -62,7 +62,8 @@
     },
     "label": {
       "title": "Project Name",
-      "url": "Project URL",
+      "githubUrl": "Project URL",
+      "serviceUrl": "Service URL",
       "content": "Project Content",
       "period": "Still participating"
     },
