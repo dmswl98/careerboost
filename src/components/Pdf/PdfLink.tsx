@@ -1,17 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Image, Link, Text } from '@react-pdf/renderer';
+import { Link } from '@react-pdf/renderer';
 
 import { tailwind } from './config';
 
 interface PdfLinkProps {
+  label: string;
   url: string;
 }
 
-const PdfLink = ({ url }: PdfLinkProps) => {
+const PdfLink = ({ label, url }: PdfLinkProps) => {
   return (
-    <Link src={url} style={tailwind('flex-row items-center')}>
-      <Image style={tailwind('w-3 mr-2')} src={'/icons/link.png'} />
-      <Text style={tailwind('text-xs text-gray-500 mb-0.5')}>{url}</Text>
+    <Link
+      src={url}
+      style={tailwind(
+        'flex-row items-center text-sm text-gray-500 leading-relaxed'
+      )}
+    >
+      {label}
     </Link>
   );
 };
