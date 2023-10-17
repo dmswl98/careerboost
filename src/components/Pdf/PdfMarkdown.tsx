@@ -10,15 +10,30 @@ interface PdfMarkdownProps {
 
 const PdfMarkdown = ({ content }: PdfMarkdownProps) => {
   return (
-    <ReactMarkdown components={markdownComponents}>{content}</ReactMarkdown>
+    <View style={tailwind('flex-col w-full')}>
+      <ReactMarkdown components={markdownComponents}>{content}</ReactMarkdown>
+    </View>
   );
 };
 
 const markdownComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
+  h1: ({ children }) => (
+    <Text style={tailwind('font-bold text-[1.2rem] py-1')}>{children}</Text>
+  ),
+  h2: ({ children }) => (
+    <Text style={tailwind('font-bold text-[1.1rem] py-1')}>{children}</Text>
+  ),
+  h3: ({ children }) => (
+    <Text style={tailwind('font-bold text-base py-1')}>{children}</Text>
+  ),
   p: ({ children }) => <Text style={tailwind('text-sm py-1')}>{children}</Text>,
-  ul: ({ children }) => <View style={tailwind('text-sm')}>{children}</View>,
+  ul: ({ children }) => (
+    <View style={tailwind('text-sm leading-relaxed')}>{children}</View>
+  ),
   li: ({ children }) => (
-    <View style={tailwind('flex-row text-sm py-0.5 pr-3')}>
+    <View
+      style={tailwind('flex-row flex-nowrap text-sm py-px pr-3 leading-normal')}
+    >
       <Text style={tailwind('mr-1.5')}>•</Text>
       <Text>{children}</Text>
     </View>
@@ -35,11 +50,7 @@ const markdownComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
     <Text style={tailwind('text-sm font-bold')}>{children}</Text>
   ),
   code: ({ children }) => (
-    <Text style={tailwind('text-xs font-regular text-gray-500 bg-gray-100')}>
-      <Text style={tailwind('bg-gray-100')}> </Text>
-      {children}
-      <Text style={tailwind('bg-gray-100')}> </Text>
-    </Text>
+    <Text style={tailwind('font-light text-xs text-gray-700')}>{children}</Text>
   ),
 };
 

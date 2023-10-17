@@ -20,6 +20,25 @@ a {
   text-decoration: none;
 }
 
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-weight: 600;
+  line-height: 2;
+}
+
+.markdown h1 {
+  font-size: 1.2rem;
+}
+
+.markdown h2 {
+  font-size: 1.1rem;
+}
+
+.markdown h3 {
+  font-size: 1rem;
+}
+
 .markdown ul,
 .markdown ol {
   margin-left: 1.4rem;
