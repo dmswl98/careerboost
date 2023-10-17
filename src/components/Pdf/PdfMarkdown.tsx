@@ -18,24 +18,23 @@ const PdfMarkdown = ({ content }: PdfMarkdownProps) => {
 
 const markdownComponents: ComponentProps<typeof ReactMarkdown>['components'] = {
   h1: ({ children }) => (
-    <Text style={tailwind('font-bold text-[1.2rem] py-1')}>{children}</Text>
+    <Text style={tailwind('font-bold text-[1.1rem] py-1.5')}>{children}</Text>
   ),
   h2: ({ children }) => (
-    <Text style={tailwind('font-bold text-[1.1rem] py-1')}>{children}</Text>
+    <Text style={tailwind('font-bold text-[1rem] py-1.5')}>{children}</Text>
   ),
   h3: ({ children }) => (
-    <Text style={tailwind('font-bold text-base py-1')}>{children}</Text>
+    <Text style={tailwind('font-bold text-[0.9rem] py-1')}>{children}</Text>
   ),
   p: ({ children }) => <Text style={tailwind('text-sm py-1')}>{children}</Text>,
   ul: ({ children }) => (
-    <View style={tailwind('text-sm leading-relaxed')}>{children}</View>
+    <View style={tailwind('pb-2 text-sm leading-relaxed')}>{children}</View>
   ),
   li: ({ children }) => (
     <View
       style={tailwind('flex-row flex-nowrap text-sm py-px pr-3 leading-normal')}
     >
-      <Text style={tailwind('mr-1.5')}>•</Text>
-      <Text>{children}</Text>
+      <Text>• {children}</Text>
     </View>
   ),
   a: ({ children, href }) =>
