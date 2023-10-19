@@ -4,31 +4,17 @@ import type { Metadata } from 'next';
 
 import { GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import Navigation from '@/components/Layout/Navigation';
-import META from '@/constants/meta';
+import { METADATA, METADATA_KO } from '@/constants/meta';
 import { i18n } from '@/i18n/config';
 import { type LangParams } from '@/i18n/types';
 import { pretendard, sourceCode } from '@/styles/font';
 
 export const metadata: Metadata = {
+  ...METADATA_KO,
   metadataBase: new URL('https://careerboost-bmt142ael-dmswl98.vercel.app'),
-  title: META.TITLE,
-  description: META.DESCRIPTION,
-  keywords: [...META.KEYWORD],
-  openGraph: {
-    title: META.TITLE,
-    description: META.DESCRIPTION,
-    siteName: META.SITE_NAME,
-    locale: META.LOCALE,
-    type: META.TYPE,
-    url: META.URL,
-  },
-  creator: META.CREATOR,
-  generator: META.GENERATOR,
-  viewport: META.VIEWPORT,
-  twitter: {
-    title: META.TITLE,
-    description: META.DESCRIPTION,
-  },
+  creator: METADATA.CREATOR,
+  generator: METADATA.GENERATOR,
+  viewport: METADATA.VIEWPORT,
 };
 
 export default function RootLayout({
