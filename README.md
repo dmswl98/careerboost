@@ -47,6 +47,7 @@
 
 ## 서비스 활용 예시
 
-![image](https://github.com/dmswl98/careerboost/assets/76807107/02d0d524-3278-4901-aca4-41f94640e392)
+![careerBoost](https://github.com/dmswl98/careerboost/assets/76807107/f310282e-766e-4afc-923e-3100b27c8d73)
 
-https://github.com/dmswl98/careerboost/assets/76807107/c2854359-ff2a-4455-a01a-863bdfa8500d
+https://github.com/dmswl98/careerboost/assets/76807107/9ad1a42c-0981-4d55-9300-77131d0e22df
+
