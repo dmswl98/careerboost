@@ -6,3 +6,8 @@ export const ROUTES = {
   ACTIVITY: '/activity',
   PREVIEW: '/preview',
 } as const;
+
+export const LOCALE_ROUTES = {
+  KO: '/ko',
+  EN: '/en',
+};
