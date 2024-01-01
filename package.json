@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.2",
-    "@hookform/resolvers": "^3.2.0",
+    "@hookform/resolvers": "^3.3.3",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-switch": "^1.0.3",
