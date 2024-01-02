@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.4.2
     version: 0.4.2
   '@hookform/resolvers':
-    specifier: ^3.2.0
-    version: 3.2.0(react-hook-form@7.45.2)
+    specifier: ^3.3.3
+    version: 3.3.3(react-hook-form@7.45.2)
   '@radix-ui/react-checkbox':
     specifier: ^1.0.4
     version: 1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
@@ -438,8 +438,8 @@ packages:
       - '@types/react'
     dev: true
 
-  /@hookform/resolvers@3.2.0(react-hook-form@7.45.2):
-    resolution: {integrity: sha512-skXQHhLxq0Sz2xDwCyv5dygBCtXJe1GmWwxDzfdtl0X6agD6qcyTG8HrZWkjJoy8AkiLARqYvSYJ8z7+Nwmi7w==}
+  /@hookform/resolvers@3.3.3(react-hook-form@7.45.2):
+    resolution: {integrity: sha512-bOMxKkSD3zWcS11TKoUQ8O0ZqKslFohvUsPKSrdCHiuEuMjRo/u3cq9YRJD/+xtNGYup++XD2LkjhegP5XENiw==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
