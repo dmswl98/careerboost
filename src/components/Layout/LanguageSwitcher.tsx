@@ -3,7 +3,7 @@
 import { Languages } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { i18n } from '@/i18n/config';
+import { i18n, LANGUAGES } from '@/i18n/config';
 import { type Locale } from '@/i18n/types';
 
 import {
@@ -12,11 +12,6 @@ import {
   SelectItem,
   SelectTrigger,
 } from '../common/Select';
-
-const LANGUAGE = {
-  ko: '한국어',
-  en: 'English',
-};
 
 interface LanguageSwitcherProps {
   lang: Locale;
@@ -47,7 +42,7 @@ const LanguageSwitcher = ({ lang }: LanguageSwitcherProps) => {
         <SelectContent>
           {i18n.locales.map((locale) => (
             <SelectItem key={locale} value={locale} className="text-[16px]">
-              {LANGUAGE[locale]}
+              {LANGUAGES[locale]}
             </SelectItem>
           ))}
         </SelectContent>
