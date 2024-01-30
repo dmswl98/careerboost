@@ -28,7 +28,7 @@ const MenuLink = <T extends FieldValues>({
 
   const isError = formState.errors[formName];
   const isCreatedForm = route.includes(ROUTES.BASIC)
-    ? values.name && values.career && values.email && values.github
+    ? values?.name && values?.career && values?.email && values?.github
     : values?.length > 0;
 
   const currentLocationMenuStyle = isCurrentLocation
