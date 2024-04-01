@@ -22,7 +22,7 @@
     "axios": "^1.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "lucide-react": "^0.263.1",
+    "lucide-react": "^0.364.0",
     "negotiator": "^0.6.3",
     "next": "13.5.2",
     "openai-edge": "^1.2.2",
