@@ -40,7 +40,7 @@
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
     "@lhci/cli": "^0.12.0",
-    "@types/lodash": "^4.17.5",
+    "@types/lodash": "^4.17.6",
     "@types/negotiator": "^0.6.1",
     "@types/node": "^20.4.5",
     "@types/react": "^18.2.18",
