@@ -3,12 +3,12 @@ import { createTw } from 'react-pdf-tailwind';
 
 const Pretendard = {
   light:
-    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.ttf',
+    'https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff',
   regular:
-    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf',
+    'https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff',
   semiBold:
-    'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf',
-  bold: 'https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.ttf',
+    'https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff',
+  bold: 'https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff',
 };
 
 Font.register({ family: 'PretendardLight', src: Pretendard.light });
