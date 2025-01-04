@@ -92,7 +92,7 @@ const BasicFormView = ({ dictionary }: BasicFormViewProps) => {
           {...register('userInfo.github')}
           id="github"
           className="mb-3"
-          label={{ text: dictionary.label.github, isRequired: true }}
+          label={{ text: dictionary.label.github }}
           placeholder={dictionary.placeholder.url}
           error={errors.userInfo?.github?.message}
           onChange={(e) => {

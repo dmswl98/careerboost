@@ -19,7 +19,9 @@ export const resumeFormSchema = z.object({
     blog: z
       .optional(z.string().url({ message: UNFORMATTED_DATA }))
       .or(z.literal('')),
-    github: z.string().url({ message: NO_ENTERED_DATA }),
+    github: z
+      .optional(z.string().url({ message: UNFORMATTED_DATA }))
+      .or(z.literal('')),
     brief: z.optional(z.string()),
   }),
   experiences: z.array(
