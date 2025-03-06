@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { View } from '@react-pdf/renderer';
 
 import { MENU_INFO } from '@/constants/menu';

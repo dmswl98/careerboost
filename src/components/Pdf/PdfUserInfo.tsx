@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Text, View } from '@react-pdf/renderer';
 
 import { type UserInfoFormDataSchema } from '@/types/form';

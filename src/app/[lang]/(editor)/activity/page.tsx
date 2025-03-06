@@ -6,7 +6,7 @@ import { type LangParams } from '@/i18n/types';
 import { getDictionary } from '@/i18n/utils';
 
 export async function generateMetadata({
-  params
+  params,
 }: LangParams): Promise<Metadata> {
   const { lang } = await params;
 

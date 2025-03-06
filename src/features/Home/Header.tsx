@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/common';
 import { ROUTES } from '@/constants/routes';
 import { type Dictionary } from '@/i18n/types';
-
 interface HeaderProps {
   dictionary: Dictionary['home']['header'];
 }

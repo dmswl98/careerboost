@@ -16,7 +16,11 @@ const PreviewButton = ({ lang, dictionary }: PreviewButtonProps) => {
   const isChecked = pathname.includes(ROUTES.PREVIEW);
 
   const handlePreviewNavigate = (isChecked: boolean) => {
-    isChecked ? router.push(`/${lang}${ROUTES.PREVIEW}`) : router.back();
+    if (isChecked) {
+      router.push(`/${lang}${ROUTES.PREVIEW}`);
+    } else {
+      router.back();
+    }
   };
 
   return (

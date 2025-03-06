@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Link } from '@react-pdf/renderer';
 
 import { tailwind } from './config';

@@ -1,7 +1,7 @@
 'use client';
 
 import { type FieldPath, useFormContext, useWatch } from 'react-hook-form';
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown';
 
 import { Label, Textarea } from '@/components/common';
 import {
