@@ -1,7 +1,7 @@
 'use client';
 
 import { type FieldPath, useFormContext, useWatch } from 'react-hook-form';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown'
 
 import { Label, Textarea } from '@/components/common';
 import {
@@ -59,7 +59,7 @@ const MarkdownInput = ({
             {dictionary.info}
           </span>
         </div>
-        <TabsList className="ml-auto grid w-[150px] grid-cols-2">
+        <TabsList className="ml-auto grid grid-cols-2">
           <TabsTrigger value="edit">{dictionary.tabButton.edit}</TabsTrigger>
           <TabsTrigger value="preview">
             {dictionary.tabButton.preview}
@@ -91,9 +91,9 @@ const MarkdownInput = ({
       </TabsContent>
       <TabsContent value="preview">
         {value ? (
-          <ReactMarkdown className="markdown min-h-[100px] px-[0.8rem] py-[0.57rem] text-sm">
-            {value as string}
-          </ReactMarkdown>
+          <div className="markdown min-h-[100px] px-[0.8rem] py-[0.57rem] text-sm px-3 py-2 border border-border rounded-md">
+            <Markdown>{value}</Markdown>
+          </div>
         ) : (
           <div className="py-10 text-center text-sm text-gray-500">
             {dictionary.tabContent}

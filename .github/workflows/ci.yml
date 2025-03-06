@@ -15,28 +15,30 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16.0'
+          node-version: '22'
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
+      - name: 'Get pnpm version from package.json'
+        id: pnpm-version
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "pnpm_version=$(node -p 'require(`../../package.json`).engines.pnpm')" >> $GITHUB_OUTPUT
 
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
+      - name: 'Install pnpm'
+        uses: pnpm/action-setup@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          version: ${{ steps.pnpm-version.outputs.pnpm_version }}
+
+      - name: 'Get pnpm store directory'
+        id: pnpm-cache-dir-path
+        run: |
+          echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: 'Cache pnpm intermediate products'
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-pnpm-
 
       - name: Install Dependency
         run: pnpm install -no-frozen-lockfile

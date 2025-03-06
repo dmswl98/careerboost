@@ -17,14 +17,16 @@ export const metadata: Metadata = {
   viewport: METADATA.VIEWPORT,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: StrictPropsWithChildren<LangParams>) {
+  const { lang } = await params;
+
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <body className={`${pretendard.className} ${sourceCode.variable}`}>
-        <Navigation lang={params.lang} />
+        <Navigation lang={lang} />
         {children}
         {process.env.NODE_ENV === 'production' && (
           <>

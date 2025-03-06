@@ -4,7 +4,7 @@ import type * as dictionary from './ko.json';
 export type Locale = (typeof i18n)['locales'][number];
 
 export interface LangParams {
-  params: { lang: Locale };
+  params: Promise<{lang: Locale}>;
 }
 
 export type Dictionary = typeof dictionary;

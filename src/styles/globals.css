@@ -1,11 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f172aff;
+  --color-primary-foreground: #f8fafc;
+  --color-destructive: #ef4444ff;
+  --color-destructive-foreground: #f8fafc;
+  --color-muted: #f3f4f6ff;
+  --color-muted-foreground: #817f84ff;
+  --color-warning: #fbbf24ff;
+  --color-success: #22c55eff;
+  --color-accents: #f3f4f6ff;
+  --color-border: #e8eaedff;
+  --color-ring: #d1d5dbff;
+  --color-background: #ffffff;
+  --color-ai: #75ac9d;
+
+  --animate-rotate: rotate 0.3s ease-out;
+  @keyframes rotate {
+    0% { transform: rotate(0deg) }
+    50% { transform: rotate(180deg) }
+    100% { transform: rotate(360deg) }
+  }
+}
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html,
