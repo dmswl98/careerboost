@@ -1,7 +1,6 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import jsxA11Y from 'eslint-plugin-jsx-a11y';
-import tailwindcss from 'eslint-plugin-tailwindcss';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import _import from 'eslint-plugin-import';
@@ -27,7 +26,6 @@ export default [
       'eslint:recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:import/recommended',
-      'plugin:tailwindcss/recommended',
       'plugin:prettier/recommended',
       'prettier'
     )
@@ -36,7 +34,6 @@ export default [
     plugins: {
       '@typescript-eslint': fixupPluginRules(typescriptEslint),
       'jsx-a11y': jsxA11Y,
-      tailwindcss: fixupPluginRules(tailwindcss),
       prettier: fixupPluginRules(prettier),
       'simple-import-sort': simpleImportSort,
       import: fixupPluginRules(_import),
