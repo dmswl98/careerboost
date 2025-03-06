@@ -91,6 +91,12 @@ devDependencies:
   '@eslint/compat':
     specifier: ^1.2.7
     version: 1.2.7(eslint@9.21.0)
+  '@eslint/eslintrc':
+    specifier: ^3.3.0
+    version: 3.3.0
+  '@eslint/js':
+    specifier: ^9.21.0
+    version: 9.21.0
   '@hookform/devtools':
     specifier: ^4.3.3
     version: 4.3.3(@types/react@19.0.10)(react-dom@19.0.0)(react@19.0.0)
@@ -154,6 +160,9 @@ devDependencies:
   eslint-plugin-tailwindcss:
     specifier: ^3.18.0
     version: 3.18.0(tailwindcss@4.0.9)
+  globals:
+    specifier: ^16.0.0
+    version: 16.0.0
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -4696,6 +4705,11 @@ packages:
 
   /globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+    dev: true
+
+  /globals@16.0.0:
+    resolution: {integrity: sha512-iInW14XItCXET01CQFqudPOWP2jYMl7T+QRQT+UNcR/iQncN/F0UNpgd76iFkBPgNQb4+X3LV9tLJYzwh+Gl3A==}
     engines: {node: '>=18'}
     dev: true
 
