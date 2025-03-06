@@ -5,8 +5,9 @@ import { getDictionary } from '@/i18n/utils';
 
 const Layout = async ({
   children,
-  params: { lang },
+  params,
 }: StrictPropsWithChildren<LangParams>) => {
+  const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
   return (

@@ -6,8 +6,10 @@ import { type LangParams } from '@/i18n/types';
 import { getDictionary } from '@/i18n/utils';
 
 export async function generateMetadata({
-  params: { lang },
+  params,
 }: LangParams): Promise<Metadata> {
+  const { lang } = await params;
+
   return lang === 'ko'
     ? {
         ...METADATA_KO,
@@ -19,7 +21,8 @@ export async function generateMetadata({
       };
 }
 
-const Page = async ({ params: { lang } }: LangParams) => {
+const Page = async ({ params }: LangParams) => {
+  const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
   return <ProjectFormView dictionary={dictionary} />;

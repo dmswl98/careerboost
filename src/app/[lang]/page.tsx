@@ -10,10 +10,13 @@ import { getDictionary } from '@/i18n/utils';
 export async function generateMetadata({
   params,
 }: LangParams): Promise<Metadata> {
-  return params.lang === 'ko' ? METADATA_KO : METADATA_EN;
+  const { lang } = await params;
+
+  return lang === 'ko' ? METADATA_KO : METADATA_EN;
 }
 
-export default async function Home({ params: { lang } }: LangParams) {
+export default async function Home({ params }: LangParams) {
+  const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
   return (
